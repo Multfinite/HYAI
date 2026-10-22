@@ -1,0 +1,27 @@
+version: "1.0"
+domain: docs
+read_first:
+  - "HYAI/meta/project.md"
+  - "HYAI/meta/architecture/docs.md"
+  - "HYAI/core/domains/docs/policy.md"
+documents:
+  - id: doc.text
+    path: "HYAI/core/domains/docs/text.md"
+    type: policy
+    authority: contract
+    why: "правила чистки документов: требование, читатель, вода"
+  - id: doc.policy
+    path: "HYAI/core/domains/docs/policy.md"
+    type: policy
+    authority: contract
+    why: "правила DOC-POL-01..14"
+  - id: doc.authority
+    path: "HYAI/core/domains/docs/authority.md"
+    type: meta
+    authority: invariant
+    why: "чем normative отличается от descriptive"
+  - id: doc.templates
+    path: "HYAI/core/domains/docs/templates/README.md"
+    type: meta
+    authority: none
+    why: "какая форма у ТЗ, спецификации, руководства и схемы"

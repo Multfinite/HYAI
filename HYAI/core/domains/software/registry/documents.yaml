@@ -1,0 +1,24 @@
+# Документы, которые агент читает первыми при работе в домене software.
+version: "2.0"
+domain: software
+read_first:
+  - "HYAI/meta/project.md"
+  - "HYAI/meta/architecture/software.md"
+  - "HYAI/core/domains/software/policy.md"
+  - "HYAI/meta/terminology/software.md"
+documents:
+  - id: sw.arch
+    path: "HYAI/meta/architecture/software.md"
+    type: architecture
+    authority: contract
+    why: "границы, инварианты и анти-паттерны домена"
+  - id: sw.policy
+    path: "HYAI/core/domains/software/policy.md"
+    type: policy
+    authority: contract
+    why: "правила SW-POL-01..13"
+  - id: sw.access
+    path: "HYAI/core/domains/software/access.md"
+    type: meta
+    authority: invariant
+    why: "контуры доступа к коду и документации"

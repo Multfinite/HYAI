@@ -1,0 +1,109 @@
+# Система доступа домена narrative: роль × призма.
+# Читается generic-движками HYAI/tools/resolve_access.py, lint_scopes.py, build_export.py.
+# Ни одно имя роли, призмы или контура не зашито в Python.
+version: "2.0"
+domain: narrative
+model: role_prism
+
+visibility:
+  values: [public, internal, restricted, spoiler, author, system]
+  default: internal
+  order: [system, author, restricted, spoiler, internal, public]   # от строгого к открытому
+
+knowledge:
+  values: [common, secret, hidden, meta]
+  default: common
+
+competence:
+  catalog: "HYAI/core/domains/narrative/schema/competence.yaml"
+  scale:
+    prefix: "У"
+    min: 0
+    max: 14
+    unknown: "УН"
+  default_threshold: 5
+
+roles:
+  creator:
+    prisms: [omniscient, scenario, characters, audience]
+    may_write: true
+  master:
+    prisms: [scenario, characters, audience]
+    may_write: true
+  player:
+    prisms: [characters, audience]
+    may_write: false
+    require_owner_match: true
+  reader:
+    prisms: [audience]
+    may_write: false
+
+prisms:
+  omniscient:
+    deny_visibility: [system]
+  scenario:
+    deny_visibility: [author, system]
+  characters:
+    deny_visibility: [author, system]
+    require_owner: true
+    competence_gate: true
+  audience:
+    deny_visibility: [author, restricted, spoiler, system]
+
+rules:
+  default_deny: true
+  inherit_strictest: true
+  secret_requires_known_by: [secret, hidden]
+  competence_field: requires
+  competence_op: ">="
+  strip_fields: [known_by, requires, role, prism]
+
+# Выгрузка: проекция доступа. `status_floor` — минимальный статус документа для пресета;
+# `strip_*` — что вычищается из собранного текста. Порядок статусов — от черновика к принятому.
+status_order: [draft, review, approved, superseded, deprecated, archived, merged]
+
+export:
+  presets:
+    public:
+      allow_visibility: [public]
+      status_floor: approved
+      strip_frontmatter: true
+      strip_internal_links: true
+      strip_markers: true
+      strip_internal_ids: true
+      strip_comments: true
+      strip_repo_paths: true
+      out_dir: "Exports/public"
+    reader:
+      allow_visibility: [public, internal]
+      status_floor: review
+      strip_frontmatter: true
+      strip_internal_links: true
+      strip_markers: true
+      strip_internal_ids: true
+      strip_comments: true
+      strip_repo_paths: true
+      out_dir: "Exports/reader"
+    master:
+      allow_visibility: [public, internal, restricted, spoiler]
+      status_floor: review
+      strip_frontmatter: true
+      strip_internal_links: false
+      strip_markers: false
+      strip_internal_ids: true
+      strip_comments: false
+      strip_repo_paths: false
+      out_dir: "Exports/master"
+
+checks:
+  - id: acc.secret_without_known_by
+    severity: error
+    kind: secret_without_known_by
+  - id: acc.unknown_visibility
+    severity: error
+    kind: unknown_visibility
+  - id: acc.open_visibility_with_secret
+    severity: error
+    kind: open_visibility_with_secret
+    params:
+      preset: public

@@ -1,0 +1,23 @@
+version: "1.0"
+domain: docs
+
+authority:
+  values: [normative, descriptive, illustrative, informative, none]
+  default: descriptive
+  order: [normative, descriptive, illustrative, informative, none]
+  approval_required: [normative]
+
+status:
+  values: [draft, review, approved, superseded, archived]
+  default: draft
+  transitions:
+    draft: [review, archived]
+    review: [approved, draft, archived]
+    approved: [superseded, archived]
+    superseded: []
+    archived: []
+  owner_only: [approved]
+
+provenance:
+  markers: ["[А]", "[И]", "[В]", "[Г]", "[?]"]
+  owner_source: "решение DOC-*/P-* или явное указание владельца"

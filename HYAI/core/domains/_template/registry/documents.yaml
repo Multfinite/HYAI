@@ -1,0 +1,11 @@
+version: "0.1"
+domain: "<domain>"
+read_first:
+  - "HYAI/meta/project.md"
+  - "HYAI/core/domains/<domain>/policy.md"
+documents:
+  - id: "<domain>.policy"
+    path: "HYAI/core/domains/<domain>/policy.md"
+    type: policy
+    authority: contract
+    why: "<зачем читать>"

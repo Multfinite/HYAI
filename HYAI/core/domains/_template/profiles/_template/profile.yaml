@@ -1,0 +1,30 @@
+apiVersion: hyai/v1
+kind: AgentProfile
+metadata:
+  name: "<profile>"
+  domain: "<domain>"
+  title: "<Тема профиля>"
+  status: draft
+  updated: "<YYYY-MM-DD>"
+
+topic: "<Одна строка: что делает профиль>"
+thought_process: >
+  <Чем мышление этого профиля отличается от соседних: короткий цикл исполнения
+  или длинная цепочка с вариантами и проверками?>
+
+scope_primary:
+  - "<путь>/**"
+scope_secondary:
+  - "<путь>/**"
+
+produced_artifacts:
+  - "<артефакт>"
+
+workflow: "<domain>/<process>"
+definition_of_done:
+  - "<Проверяемое условие завершения>"
+checklist:
+  - "<Вопрос, на который профиль обязан ответить себе>"
+
+includes: []
+checks: []

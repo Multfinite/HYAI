@@ -1,0 +1,27 @@
+# Машинные контуры домена software. Плагинов и ролей нет: домен плоский.
+version: "2.0"
+domain: software
+
+visibility:
+  values: [public, internal, restricted]
+  default: internal
+  order: [restricted, internal, public]   # от строгого к открытому
+
+rules:
+  default_deny: true
+  inherit_strictest: true
+  forbidden_values: [spoiler, author, system, draft]
+  require_known_by_for: []                # в software привязки к субъектам нет
+
+export:
+  presets:
+    public:
+      allow_visibility: [public]
+      strip_frontmatter: true
+      strip_internal_links: true
+      out_dir: "Exports/public"
+    internal:
+      allow_visibility: [public, internal]
+      strip_frontmatter: true
+      strip_internal_links: false
+      out_dir: "Exports/internal"

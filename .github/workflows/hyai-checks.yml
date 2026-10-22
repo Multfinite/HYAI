@@ -1,0 +1,25 @@
+# Единый конвейер: те же проверки, что локально (`python3 HYAI/tools/run_checks.py`).
+# Список проверок не дублируется в YAML — он живёт в HYAI/meta/manifest.yaml.
+name: hyai-checks
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Зависимости движков
+        run: python3 -m pip install --quiet pyyaml
+      - name: Сборка AGENTS.md не дрейфует
+        run: python3 HYAI/tools/assemble_agents.py --check
+      - name: Конвейер проверок
+        run: python3 HYAI/tools/run_checks.py --skip-project
+      - name: Тесты каркаса
+        run: python3 -m unittest discover -s HYAI/tools/tests -v

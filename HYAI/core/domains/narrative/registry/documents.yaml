@@ -1,0 +1,38 @@
+version: "2.0"
+domain: narrative
+read_first:
+  - "HYAI/meta/project.md"
+  - "HYAI/meta/architecture/narrative.md"
+  - "HYAI/core/domains/narrative/policy.md"
+  - "HYAI/core/domains/narrative/access.md"
+documents:
+  - id: nr.levels
+    path: "HYAI/core/domains/narrative/levels.md"
+    type: reference
+    authority: contract
+    why: "шкала компетенции УН–У14 и как её читать"
+  - id: nr.competence
+    path: "HYAI/core/domains/narrative/schema/competence.yaml"
+    type: tool
+    authority: contract
+    why: "каталог доменов знания и формулировки «знает до …»"
+  - id: nr.text
+    path: "HYAI/core/domains/narrative/text.md"
+    type: policy
+    authority: contract
+    why: "правила чистки текста: вода, голос, вайб"
+  - id: nr.policy
+    path: "HYAI/core/domains/narrative/policy.md"
+    type: policy
+    authority: contract
+    why: "правила NR-POL-01..13"
+  - id: nr.access
+    path: "HYAI/core/domains/narrative/access.md"
+    type: meta
+    authority: invariant
+    why: "роли, призмы, компетенции, выгрузки"
+  - id: nr.authority
+    path: "HYAI/core/domains/narrative/authority.md"
+    type: meta
+    authority: invariant
+    why: "уровни core/setting/detail/presentation"

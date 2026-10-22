@@ -1,0 +1,36 @@
+apiVersion: hyai/v1
+kind: AgentDomain
+metadata:
+  name: kit
+  title: "Каркас: создание доменов и профилей"
+  status: approved
+  updated: "2026-10-22"
+  owner: maintainer
+
+root_paths:
+  - "HYAI/core/domains"
+  - "HYAI/meta/schema"
+
+authority:
+  doc: "HYAI/core/domains/kit/authority.md"
+  schema: "HYAI/core/domains/kit/schema/authority.yaml"
+access:
+  doc: "HYAI/core/domains/kit/access.md"
+  schema: "HYAI/core/domains/kit/schema/access.yaml"
+
+schema: "HYAI/meta/schema/domains/kit.yaml"
+lint: []
+policy: "HYAI/core/domains/kit/policy.md"
+agents: "HYAI/core/domains/kit/agents.md"
+registry: "HYAI/core/domains/kit/registry/documents.yaml"
+workflows_dir: "HYAI/core/domains/kit/workflows/"
+templates_dir: "HYAI/core/domains/kit/templates/"
+decisions_scope: kit
+
+profiles:
+  domain-builder: "HYAI/core/domains/kit/profiles/domain-builder/profile.yaml"
+  profile-builder: "HYAI/core/domains/kit/profiles/profile-builder/profile.yaml"
+
+checks:
+  - "python3 HYAI/tools/check_domains.py"
+  - "python3 HYAI/tools/check_manifest.py"

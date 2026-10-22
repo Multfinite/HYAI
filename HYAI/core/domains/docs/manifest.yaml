@@ -1,0 +1,41 @@
+apiVersion: hyai/v1
+kind: AgentDomain
+metadata:
+  name: docs
+  title: "Документы: ТЗ, спецификации, документация, диаграммы"
+  status: approved
+  updated: "2026-10-22"
+  owner: maintainer
+
+root_paths:
+  - "docs"
+  - "specs"
+  - "diagrams"
+
+# Строгая зона домена: профили не переопределяют.
+authority:
+  doc: "HYAI/core/domains/docs/authority.md"
+  schema: "HYAI/core/domains/docs/schema/authority.yaml"
+access:
+  doc: "HYAI/core/domains/docs/access.md"
+  schema: "HYAI/core/domains/docs/schema/access.yaml"
+
+schema: "HYAI/meta/schema/domains/docs.yaml"
+lint:
+  - "HYAI/meta/lint/terms/docs.json"
+policy: "HYAI/core/domains/docs/policy.md"
+agents: "HYAI/core/domains/docs/agents.md"
+registry: "HYAI/core/domains/docs/registry/documents.yaml"
+workflows_dir: "HYAI/core/domains/docs/workflows/"
+templates_dir: "HYAI/core/domains/docs/templates/"
+decisions_scope: docs
+
+profiles:
+  spec-author: "HYAI/core/domains/docs/profiles/spec-author/profile.yaml"
+  tech-writer: "HYAI/core/domains/docs/profiles/tech-writer/profile.yaml"
+  diagrams: "HYAI/core/domains/docs/profiles/diagrams/profile.yaml"
+  analysis: "HYAI/core/domains/docs/profiles/analysis/profile.yaml"
+
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain docs"
+  - "python3 HYAI/tools/lint_scopes.py --domain docs"

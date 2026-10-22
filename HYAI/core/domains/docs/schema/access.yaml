@@ -1,0 +1,26 @@
+version: "1.0"
+domain: docs
+model: flat
+
+visibility:
+  values: [public, internal, restricted]
+  default: internal
+  order: [restricted, internal, public]
+
+rules:
+  default_deny: true
+  inherit_strictest: true
+  forbidden_values: [spoiler, author, system]
+
+checks:
+  - id: doc.unknown_visibility
+    severity: error
+    kind: unknown_visibility
+
+export:
+  presets:
+    public:
+      allow_visibility: [public]
+      strip_frontmatter: true
+      strip_internal_links: true
+      out_dir: "HYAI/meta/exports/docs-public"

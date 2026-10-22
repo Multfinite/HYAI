@@ -1,0 +1,46 @@
+apiVersion: hyai/v1
+kind: AgentDomain
+metadata:
+  name: narrative
+  title: "Литература: мир, хронология, текст"
+  status: approved
+  updated: "2026-10-22"
+  owner: maintainer
+
+root_paths:
+  - "world"
+  - "chapters"
+  - "drafts"
+  - "styles"
+
+# Строгая зона: профили не переопределяют. У литературы своя система доступа —
+# та, что была в «Эйдолоне»: роль × призма, шкала компетенций, карта понимания.
+authority:
+  doc: "HYAI/core/domains/narrative/authority.md"
+  schema: "HYAI/core/domains/narrative/schema/authority.yaml"
+access:
+  doc: "HYAI/core/domains/narrative/access.md"
+  schema: "HYAI/core/domains/narrative/schema/access.yaml"
+
+schema: "HYAI/meta/schema/domains/narrative.yaml"
+lint:
+  - "HYAI/meta/lint/terms/narrative.json"
+policy: "HYAI/core/domains/narrative/policy.md"
+agents: "HYAI/core/domains/narrative/agents.md"
+registry: "HYAI/core/domains/narrative/registry/documents.yaml"
+workflows_dir: "HYAI/core/domains/narrative/workflows/"
+templates_dir: "HYAI/core/domains/narrative/templates/"
+styles_dir: "styles"
+decisions_scope: narrative
+
+profiles:
+  lore: "HYAI/core/domains/narrative/profiles/lore/profile.yaml"
+  history: "HYAI/core/domains/narrative/profiles/history/profile.yaml"
+  prose: "HYAI/core/domains/narrative/profiles/prose/profile.yaml"
+  analysis: "HYAI/core/domains/narrative/profiles/analysis/profile.yaml"
+
+
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain narrative"
+  - "python3 HYAI/tools/lint_scopes.py --domain narrative"
+  - "python3 HYAI/tools/build_export.py --domain narrative --preset public --dry-run"

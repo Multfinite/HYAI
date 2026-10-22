@@ -1,0 +1,22 @@
+version: "2.0"
+domain: kit
+read_first:
+  - "HYAI/core/domains/kit/policy.md"
+  - "HYAI/core/kernel/spec/manifest-v2.md"
+  - "HYAI/core/kernel/spec/merge-rules.md"
+documents:
+  - id: kit.policy
+    path: "HYAI/core/domains/kit/policy.md"
+    type: policy
+    authority: contract
+    why: "правила KIT-POL-01..12"
+  - id: kit.spec.manifest
+    path: "HYAI/core/kernel/spec/manifest-v2.md"
+    type: spec
+    authority: contract
+    why: "поля манифеста и что чем проверяется"
+  - id: kit.spec.merge
+    path: "HYAI/core/kernel/spec/merge-rules.md"
+    type: spec
+    authority: contract
+    why: "что можно переопределить, что нельзя"

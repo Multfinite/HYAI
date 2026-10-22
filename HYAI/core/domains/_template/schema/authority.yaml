@@ -1,0 +1,19 @@
+version: "0.1"
+domain: "<domain>"
+authority:
+  values: [invariant, contract, implementation, convention, none]
+  default: implementation
+  order: [invariant, contract, implementation, convention, none]
+  approval_required: [invariant, contract]
+status:
+  values: [draft, review, approved, superseded, archived]
+  default: draft
+  transitions:
+    draft: [review, archived]
+    review: [approved, draft, archived]
+    approved: [superseded, archived]
+    superseded: []
+    archived: []
+  owner_only: [approved]
+provenance:
+  markers: ["[А]", "[И]", "[В]", "[Г]", "[?]"]

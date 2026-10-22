@@ -1,0 +1,41 @@
+apiVersion: hyai/v1
+kind: AgentProfile
+metadata:
+  name: domain-builder
+  domain: kit
+  title: "Создание и перестройка домена"
+  status: approved
+  updated: "2026-10-22"
+
+topic: "Новые домены: границы, нормативная база, система доступа, подключение к манифесту."
+thought_process: >
+  Сначала границы, потом файлы. Домен определяется тем, чего он не делает и какой
+  у него словарь нормативности. Если два домена описывают одно и то же разными словами —
+  это не два домена, а один с двумя профилями.
+
+scope_primary:
+  - "HYAI/core/domains/**"
+  - "HYAI/meta/schema/**"
+  - "HYAI/meta/architecture/**"
+scope_secondary:
+  - "HYAI/meta/manifest.yaml"
+  - "HYAI/meta/terminology/**"
+
+produced_artifacts:
+  - "domain"
+  - "decision"
+  - "report:task"
+
+workflow: "kit/domain-authoring"
+definition_of_done:
+  - "Новый домен проходит check_domains.py и check_manifest.py без правок ядра."
+  - "Записано решение KIT-NNNN с границами и обоснованием «почему не профиль»."
+  - "Обновлены path_map, decisions.scopes, оверлей схемы и мета-документы домена."
+checklist:
+  - "Какая у домена своя нормативность и своя система доступа?"
+  - "Чего домен не делает?"
+  - "Не пересекаются ли root_paths с другим доменом?"
+  - "Сможет ли новый домен пройти проверки, не тронув HYAI/core/tools?"
+
+includes: []
+checks: ["python3 HYAI/tools/check_domains.py"]

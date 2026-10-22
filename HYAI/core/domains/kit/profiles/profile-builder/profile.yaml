@@ -1,0 +1,38 @@
+apiVersion: hyai/v1
+kind: AgentProfile
+metadata:
+  name: profile-builder
+  domain: kit
+  title: "Создание и уточнение профиля"
+  status: approved
+  updated: "2026-10-22"
+
+topic: "Профили внутри домена: тема, мыслительный процесс, зона, критерий готовности."
+thought_process: >
+  Профиль определяется разницей в мышлении и артефакте, а не в теме разговора.
+  Если два профиля отличаются только словами — это один профиль. Если профиль
+  не может назвать, чего он не делает, — он не определён.
+
+scope_primary:
+  - "HYAI/core/domains/*/profiles/**"
+scope_secondary:
+  - "HYAI/meta/terminology/**"
+
+produced_artifacts:
+  - "profile"
+  - "decision"
+  - "report:task"
+
+workflow: "kit/profile-authoring"
+definition_of_done:
+  - "profile.yaml полон, README содержит раздел «чего не делает»."
+  - "Профиль включён в матричный тест; run_checks.py зелёный."
+  - "Нет поля permissions: ограничения выражены зоной и cross_scope."
+checklist:
+  - "Чем мыслительный процесс отличается от соседнего профиля?"
+  - "Какой артефакт остаётся после профиля?"
+  - "Что профиль не делает?"
+  - "Как проверить, что он готов?"
+
+includes: []
+checks: ["python3 HYAI/tools/check_domains.py"]

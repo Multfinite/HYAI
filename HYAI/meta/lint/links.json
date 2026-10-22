@@ -1,0 +1,19 @@
+{
+  "$comment": "Настройки check_links.py. Пути указаны от корня репозитория.",
+  "extensions": [
+    ".md"
+  ],
+  "check_code_targets": true,
+  "placeholder_patterns": [
+    "<[^>]*>",
+    "\\{\\{[^}]*\\}\\}",
+    "…",
+    "\\*"
+  ],
+  "exclude": [
+    ".git/**",
+    "HYAI/meta/intermediate/**",
+    "Exports/**",
+    "__pycache__/**"
+  ]
+}

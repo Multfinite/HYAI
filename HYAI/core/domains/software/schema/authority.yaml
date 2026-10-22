@@ -1,0 +1,47 @@
+# Машинный словарь нормативности домена software.
+# Читается frontmatter.py и check_report.py. Прозаическое объяснение — ../../authority.md.
+version: "2.0"
+domain: software
+
+authority:
+  values:
+    - invariant
+    - contract
+    - implementation
+    - convention
+    - experimental
+    - none
+  default: implementation
+  # Чем выше в списке, тем строже. Используется при наследовании (HYAI-PROV-05, HYAI-PROV-06).
+  order:
+    - invariant
+    - contract
+    - implementation
+    - convention
+    - experimental
+    - none
+  approval_required:
+    - invariant
+    - contract
+
+status:
+  values:
+    - draft
+    - review
+    - approved
+    - superseded
+    - deprecated
+  default: draft
+  transitions:
+    draft: [review, deprecated]
+    review: [approved, draft, deprecated]
+    approved: [superseded, deprecated]
+    superseded: []
+    deprecated: [superseded]
+  owner_only:
+    - approved
+
+# Маркеры провенанса — алфавит ядра; домен уточняет только источник [А].
+provenance:
+  markers: ["[А]", "[И]", "[В]", "[Г]", "[?]"]
+  owner_source: "решение SW-*/P-* или явное указание в задаче"

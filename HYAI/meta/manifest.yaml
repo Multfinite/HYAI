@@ -1,0 +1,240 @@
+# HYAI — машинная конфигурация проекта (Help Your AI).
+# Здесь только данные: активные домены и профили, пути, решения по областям, проверки.
+# Смысл правил — в HYAI/core/kernel/*.md и HYAI/core/domains/*/.
+apiVersion: hyai/v1
+kind: HyaiManifest
+metadata:
+  name: project-template
+  version: "1.0.0"
+  status: released
+  updated: "2026-10-22"
+  language: ru
+  owner: maintainer
+  license: "GPL-3.0-only"
+
+entrypoint: "AGENTS.md"
+entrypoints:
+  - "AGENTS.md"
+  - "CLAUDE.md"
+
+# Активная конфигурация: домен + профиль. Профиль без своего домена не активируется.
+# Несколько пар — это несколько доменов сразу; отдельного «гибридного» профиля нет.
+active:
+  - domain: kit
+    profile: domain-builder
+  - domain: software
+    profile: code
+  - domain: docs
+    profile: spec-author
+  - domain: narrative
+    profile: prose
+
+domains:
+  kit: "HYAI/core/domains/kit/manifest.yaml"
+  software: "HYAI/core/domains/software/manifest.yaml"
+  docs: "HYAI/core/domains/docs/manifest.yaml"
+  narrative: "HYAI/core/domains/narrative/manifest.yaml"
+
+paths:
+  core: "HYAI/core/"
+  kernel: "HYAI/core/kernel/"
+  domains: "HYAI/core/domains/"
+  shared: "HYAI/core/shared/"
+  tools: "HYAI/tools/"
+  tests: "HYAI/tools/tests/"
+  meta: "HYAI/meta/"
+  reports: "HYAI/meta/reports/"
+  plans: "HYAI/meta/reports/plans/"
+  archive: "HYAI/meta/reports/archive/"
+  intermediate: "HYAI/meta/intermediate/"
+  exports: "HYAI/meta/exports/"
+  registry: "HYAI/meta/registry/documents.yaml"
+  architecture: "HYAI/meta/architecture.md"
+  architecture_dir: "HYAI/meta/architecture/"
+  terminology: "HYAI/meta/terminology.md"
+  terminology_dir: "HYAI/meta/terminology/"
+  questions: "HYAI/meta/questions.md"
+  questions_dir: "HYAI/meta/questions/"
+  decisions: "HYAI/meta/decisions/"
+  schema: "HYAI/meta/schema/"
+  lint: "HYAI/meta/lint/"
+  frontmatter_schema: "HYAI/meta/schema/frontmatter.yaml"
+  frontmatter_overlay: "HYAI/meta/schema/domains/{domain}.yaml"
+
+# Зоны, изменение которых требует одобрения владельца (HYAI-PERM-G05).
+# Список — данные: check_manifest.py сверяет его с permissions.write.require_approval_for
+# и не содержит ни одного пути в коде. Остальные домены и HYAI/tools меняются без ворот.
+protected_zones:
+  - "HYAI/core/kernel/"
+  - "HYAI/core/domains/kit/"
+  - "HYAI/meta/schema/"
+  - "HYAI/meta/manifest.yaml"
+
+optional_paths:
+  - "HYAI/meta/intermediate/"
+  - "HYAI/meta/exports/"
+
+# Карта «путь → область». Файл вне карты — ошибка: домен должен быть известен.
+path_map:
+  "*.md": project
+  "HYAI/core/**": kit
+  "HYAI/tools/**": kit
+  "HYAI/meta/**": project
+  "src/**": software
+  "tests/**": software
+  "docs/**": docs
+  "specs/**": docs
+  "diagrams/**": docs
+  "world/**": narrative
+  "chapters/**": narrative
+  "drafts/**": narrative
+  "styles/**": narrative
+
+report:
+  naming: "YYYY-MM-DD-<slug>.md"
+  dir_pattern: "HYAI/meta/reports/{scope}/"
+  allowed_scopes: [project, kit, software, docs, narrative]
+  index: "HYAI/meta/reports/README.md"
+  required_fields: [id, title, type, report_kind, domain, profile, status, date, workflow]
+  optional_fields: [cross_scope, decisions, role, prism, characters, supersedes]
+  cross_scope_field: cross_scope
+  kinds:
+    task:
+      required_sections: ["Задача", "Что сделано", "Проверка", "Открытые вопросы"]
+    audit:
+      required_sections: ["Рамка и источники", "Находки", "Предложения", "Открытые вопросы"]
+    analysis:
+      required_sections: ["Вопрос", "Разбор", "Варианты", "Рекомендация", "Открытые вопросы"]
+  templates:
+    task: "HYAI/core/kernel/templates/report.md"
+    audit: "HYAI/core/kernel/templates/audit-report.md"
+    analysis: "HYAI/core/shared/templates/analysis-report.md"
+
+decisions:
+  id_format: "{prefix}-NNNN"
+  filename: "{id}-{slug}.md"
+  index: "HYAI/meta/decisions/README.md"
+  max_lines: 120
+  scopes:
+    project:
+      prefix: "P"
+      dir: "HYAI/meta/decisions/project"
+      title: "Проектные решения (касаются всех доменов)"
+    kit:
+      prefix: "KIT"
+      dir: "HYAI/meta/decisions/kit"
+      title: "Решения о формате HYAI"
+    software:
+      prefix: "SW"
+      dir: "HYAI/meta/decisions/software"
+      title: "Решения домена software"
+    docs:
+      prefix: "DOC"
+      dir: "HYAI/meta/decisions/docs"
+      title: "Решения домена docs"
+    narrative:
+      prefix: "NR"
+      dir: "HYAI/meta/decisions/narrative"
+      title: "Решения домена narrative"
+
+task_contract:
+  required_fields: [goal, non_goals, domain, profile, sources, outputs, acceptance, contour, stop_conditions]
+  approval_required_for:
+    - invariant
+    - contract
+    - new_dependency
+    - schema_migration
+    - public_api_break
+    - mass_rename
+    - new_domain
+    - new_profile
+
+precedence:
+  - non_overridable
+  - user_explicit_task
+  - task_contract
+  - kernel_policies
+  - domain_policies
+  - profile_policies
+  - manifest
+  - defaults
+
+non_overridable:
+  - data_integrity
+  - secret_protection
+  - no_malware
+  - no_source_exfiltration
+  - owner_approves_norms
+  - access_default_deny
+  - user_data_local
+  - no_environment_damage
+  - no_history_rewrite
+
+permissions:
+  read:
+    scope: repo
+    exclude:
+      - ".git/**"
+      - ".env"
+      - ".env.*"
+      - "**/*.pem"
+      - "**/*.key"
+      - "HYAI/meta/intermediate/**"
+  write:
+    scope: repo
+    require_approval_for:
+      - "HYAI/core/kernel/**"
+      - "HYAI/core/domains/kit/**"
+      - "HYAI/meta/manifest.yaml"
+      - "HYAI/meta/schema/**"
+      - "HYAI/meta/decisions/project/**"
+      - "HYAI/core/domains/*/schema/**"
+      - ".github/workflows/**"
+  execute:
+    allow: [python3, pytest, git, node, npm]
+    require_approval_for: [rm, mv, curl, wget, pip]
+  network:
+    allow: [github.com, api.github.com, pypi.org, registry.npmjs.org]
+    require_approval_for_other: true
+  secrets: deny
+
+validation:
+  assemble:
+    - "python3 HYAI/tools/assemble_agents.py --check"
+  core:
+    - "python3 HYAI/tools/frontmatter.py --check"
+    - "python3 HYAI/tools/check_links.py"
+    - "python3 HYAI/tools/lint_terms.py"
+    - "python3 HYAI/tools/check_decisions.py"
+    - "python3 HYAI/tools/check_report.py"
+    - "python3 HYAI/tools/check_domains.py"
+    - "python3 HYAI/tools/check_manifest.py"
+    - "python3 HYAI/tools/check_indexes.py"
+    - "python3 HYAI/tools/check_rules.py"
+    - "python3 HYAI/tools/whitespace.py"
+  project:
+    - "python3 -m unittest discover -s HYAI/tools/tests"
+  data:
+    frontmatter_schema: "HYAI/meta/schema/frontmatter.yaml"
+    links: "HYAI/meta/lint/links.json"
+    whitespace: "HYAI/meta/lint/whitespace.json"
+    terms_dir: "HYAI/meta/lint/terms/"
+    rule_ids: "HYAI/meta/schema/rule-ids.yaml"
+  ci: ".github/workflows/hyai-checks.yml"
+
+bootstrap:
+  require_domain_and_profile: true
+  max_questions: 2
+
+interaction:
+  language: ru
+  question_tool_max: 4
+  spa_threshold: 6
+  spa_dir: "HYAI/meta/intermediate/"
+  spa_entrypoint: "index.html"
+
+artifacts:
+  intermediate_dir: "HYAI/meta/intermediate/"
+  ignore_in_git: true
+  exports_dir: "HYAI/meta/exports/"
+  no_binaries_over_mb: 10

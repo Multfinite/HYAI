@@ -1,0 +1,33 @@
+# Репозиторный реестр: что читать первым независимо от домена.
+# Доменные реестры — HYAI/core/domains/<domain>/registry/documents.yaml.
+version: "2.0"
+read_first:
+  - "AGENTS.md"
+  - "HYAI/meta/project.md"
+  - "HYAI/meta/manifest.yaml"
+documents:
+  - id: repo.agents
+    path: "AGENTS.md"
+    type: meta
+    authority: invariant
+    why: "протокол старта: домен, профиль, ворота"
+  - id: repo.changelog
+    path: "CHANGELOG.md"
+    type: meta
+    authority: contract
+    why: "состав релиза и его ограничения"
+  - id: repo.project
+    path: "HYAI/meta/project.md"
+    type: meta
+    authority: invariant
+    why: "паспорт проекта и иерархия источников истины"
+  - id: repo.manifest
+    path: "HYAI/meta/manifest.yaml"
+    type: tool
+    authority: contract
+    why: "активная конфигурация доменов и профилей"
+  - id: repo.routing
+    path: "HYAI/core/kernel/routing.md"
+    type: meta
+    authority: invariant
+    why: "как выбрать домен и профиль"

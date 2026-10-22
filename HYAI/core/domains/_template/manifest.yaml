@@ -1,0 +1,31 @@
+apiVersion: hyai/v1
+kind: AgentDomain
+metadata:
+  name: "<domain>"
+  title: "<Название домена>"
+  status: draft
+  updated: "<YYYY-MM-DD>"
+  owner: maintainer
+
+root_paths: ["<каталог продукта>"]
+
+authority:
+  doc: "HYAI/core/domains/<domain>/authority.md"
+  schema: "HYAI/core/domains/<domain>/schema/authority.yaml"
+access:
+  doc: "HYAI/core/domains/<domain>/access.md"
+  schema: "HYAI/core/domains/<domain>/schema/access.yaml"
+
+schema: "HYAI/meta/schema/domains/<domain>.yaml"
+lint: ["HYAI/meta/lint/terms/<domain>.json"]
+policy: "HYAI/core/domains/<domain>/policy.md"
+agents: "HYAI/core/domains/<domain>/agents.md"
+registry: "HYAI/core/domains/<domain>/registry/documents.yaml"
+workflows_dir: "HYAI/core/domains/<domain>/workflows/"
+templates_dir: "HYAI/core/domains/<domain>/templates/"
+decisions_scope: "<domain>"
+
+profiles:
+  "<profile>": "HYAI/core/domains/<domain>/profiles/<profile>/profile.yaml"
+
+checks: []

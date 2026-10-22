@@ -1,0 +1,40 @@
+apiVersion: hyai/v1
+kind: AgentDomain
+metadata:
+  name: software
+  title: "Разработка программного обеспечения"
+  status: approved
+  updated: "2026-10-22"
+  owner: maintainer
+
+# Каталоги продукта, принадлежащие домену. Используется резолвером путь → домен.
+root_paths:
+  - "src"
+  - "tests"
+
+# Строгая зона домена: профили не могут переопределить эти два словаря.
+authority:
+  doc: "HYAI/core/domains/software/authority.md"
+  schema: "HYAI/core/domains/software/schema/authority.yaml"
+access:
+  doc: "HYAI/core/domains/software/access.md"
+  schema: "HYAI/core/domains/software/schema/access.yaml"
+
+# Общая зона, специализируемая доменом (оверлей frontmatter живёт в HYAI/meta/).
+schema: "HYAI/meta/schema/domains/software.yaml"
+lint:
+  - "HYAI/meta/lint/terms/software.json"
+policy: "HYAI/core/domains/software/policy.md"
+agents: "HYAI/core/domains/software/agents.md"
+registry: "HYAI/core/domains/software/registry/documents.yaml"
+workflows_dir: "HYAI/core/domains/software/workflows/"
+templates_dir: "HYAI/core/domains/software/templates/"
+decisions_scope: software
+
+profiles:
+  code: "HYAI/core/domains/software/profiles/code/profile.yaml"
+  architect: "HYAI/core/domains/software/profiles/architect/profile.yaml"
+  analysis: "HYAI/core/domains/software/profiles/analysis/profile.yaml"
+
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain software"

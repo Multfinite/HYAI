@@ -1,0 +1,25 @@
+# Промежуточные артефакты работы агента
+HYAI/meta/intermediate/*
+!HYAI/meta/intermediate/README.md
+HYAI/meta/reports/plans/*.tmp
+
+# Выгрузки проекций и экспортов
+Exports/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Окружение и секреты (PERM-N02)
+.env
+.env.*
+*.pem
+*.key
+
+# Редакторы и ОС
+.obsidian/
+.idea/
+.vscode/
+.DS_Store

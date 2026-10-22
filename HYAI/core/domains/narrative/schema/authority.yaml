@@ -1,0 +1,23 @@
+version: "2.0"
+domain: narrative
+
+authority:
+  values: [core, setting, detail, presentation, non-canon, none]
+  default: detail
+  order: [core, setting, detail, presentation, non-canon, none]
+  approval_required: [core, setting]
+
+status:
+  values: [draft, review, approved, superseded, archived]
+  default: draft
+  transitions:
+    draft: [review, archived]
+    review: [approved, draft, archived]
+    approved: [superseded, archived]
+    superseded: []
+    archived: []
+  owner_only: [approved]
+
+provenance:
+  markers: ["[А]", "[И]", "[В]", "[Г]", "[?]"]
+  owner_source: "решение NR-*/P-* или явное указание владельца"

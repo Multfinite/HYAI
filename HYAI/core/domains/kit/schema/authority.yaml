@@ -1,0 +1,26 @@
+version: "2.0"
+domain: kit
+
+authority:
+  values: [invariant, contract, convention, none]
+  default: convention
+  order: [invariant, contract, convention, none]
+  approval_required: [invariant, contract]
+
+status:
+  values: [draft, review, approved, superseded, archived]
+  default: draft
+  transitions:
+    draft: [review, archived]
+    review: [approved, draft, archived]
+    approved: [superseded, archived]
+    superseded: []
+    archived: []
+  owner_only: [approved]
+
+provenance:
+  markers: ["[А]", "[И]", "[В]", "[Г]", "[?]"]
+  owner_source: "решение KIT-*/P-* или явное указание владельца"
+
+# Единственный домен, чьи файлы правятся только владельцем: см. permissions.write.require_approval_for.
+locked: true
