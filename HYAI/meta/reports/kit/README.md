@@ -13,4 +13,4 @@ updated: "2026-10-22"
 
 | Отчёт | Профиль | Вид |
 | --- | --- | --- |
-| — | — | — |
+| [`2026-10-26-agent-token-optimization.md`](2026-10-26-agent-token-optimization.md) | `kit/domain-builder` | `analysis` |
