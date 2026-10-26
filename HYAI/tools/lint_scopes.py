@@ -75,7 +75,7 @@ def main() -> int:
     man = sh.manifest(root)
     cfg = sh.domain_configs(root, man).get(args.domain) or {}
     rel = ((cfg.get("data") or {}).get("access") or {}).get("schema")
-    model = sh.load_yaml(root / str(rel)) if rel else {}
+    model = sh.load_yaml(sh.fw(root, str(rel))) if rel else {}
     if not model:
         print(f"нет модели доступа для домена {args.domain!r}", file=sys.stderr)
         return 2

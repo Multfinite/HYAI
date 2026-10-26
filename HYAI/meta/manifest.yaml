@@ -35,6 +35,13 @@ domains:
   docs: "HYAI/core/domains/docs/manifest.yaml"
   narrative: "HYAI/core/domains/narrative/manifest.yaml"
 
+# Где лежит сам каркас относительно корня репозитория.
+# В проекте, использующем HYAI, каркас ставится каталогом `HYAI/` — отсюда префикс
+# `HYAI/` в путях ниже. Данные и инструменты ПРОЕКТА при этом живут в `./meta` и `./tools`
+# (этот манифест — шаблон: его копируют в `./meta` проекта и поправляют `paths` под себя).
+framework:
+  root: "HYAI/"
+
 paths:
   core: "HYAI/core/"
   kernel: "HYAI/core/kernel/"
@@ -42,6 +49,8 @@ paths:
   shared: "HYAI/core/shared/"
   tools: "HYAI/tools/"
   tests: "HYAI/tools/tests/"
+  hyai_tools: "HYAI/tools/"
+  hyai_tests: "HYAI/tools/tests/"
   meta: "HYAI/meta/"
   reports: "HYAI/meta/reports/"
   plans: "HYAI/meta/reports/plans/"

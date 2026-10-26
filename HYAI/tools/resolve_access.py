@@ -24,7 +24,7 @@ def load_model(root: Path, domain: str, man: dict | None = None) -> dict:
     rel = ((cfg.get("data") or {}).get("access") or {}).get("schema")
     if not rel:
         return {}
-    return sh.load_yaml(root / str(rel))
+    return sh.load_yaml(sh.fw(root, str(rel)))
 
 
 def competence_catalog(root: Path, model: dict) -> dict:

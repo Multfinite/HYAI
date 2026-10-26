@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-only
-"""Общие функции движков. Никаких доменных имён: всё читается из HYAI/meta/manifest.yaml.
+"""Общие функции движков. Никаких доменных имён: всё читается из манифеста проекта (meta/manifest.yaml).
 
 Модуль намеренно маленький: он не «фреймворк», а набор из пяти функций, которые
 иначе пришлось бы копировать в каждый скрипт.
@@ -16,7 +16,7 @@ from typing import Any, Iterable
 
 import yaml
 
-DEFAULT_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_ROOT = Path.cwd().resolve()
 
 
 # ---------- чтение конфигурации ----------
@@ -36,11 +36,50 @@ def load_json(path: Path) -> dict:
 
 
 HYAI_DIR = "HYAI"
-MANIFEST_REL = "HYAI/meta/manifest.yaml"
+# Данные проекта живут в ./meta проекта, а не в каталоге каркаса:
+# HYAI/meta — шаблон, HYAI/tools — встроенные движки самого HYAI.
+# Для каркаса, установленного «сам в себя» (его собственный репозиторий),
+# манифест остаётся в HYAI/meta/ — это второй кандидат.
+MANIFEST_RELS = ("meta/manifest.yaml", "HYAI/meta/manifest.yaml")
 
 
 def manifest(root: Path) -> dict:
-    return load_yaml(root / MANIFEST_REL)
+    for rel in MANIFEST_RELS:
+        man = load_yaml(root / rel)
+        if man:
+            return man
+    return {}
+
+
+_FW_ROOT_CACHE: dict[str, Path] = {}
+
+
+def fw_root(root: Path) -> Path:
+    """Корень каркаса: каталог, внутри которого лежит `HYAI/` с `core/`, `meta/` (шаблон), `tools/`.
+
+    Это не корень проекта: данные проекта (`meta/`, `tools/`) живут от корня проекта,
+    а пути самого каркаса (`HYAI/core/...`, `HYAI/tools/...`) — от корня каркаса.
+    `framework.root` в манифесте задаёт, где каркас установлен (`""` — каркас сам себе проект).
+    """
+    key = str(root)
+    if key not in _FW_ROOT_CACHE:
+        rel = str(((manifest(root).get("framework") or {}).get("root")) or "").strip("/")
+        _FW_ROOT_CACHE[key] = (root / rel) if rel else root
+    return _FW_ROOT_CACHE[key]
+
+
+def fw(root: Path, rel: str) -> Path:
+    """Резолв пути: сначала от корня проекта, затем от корня каркаса.
+
+    Пути проекта (`meta/...`, `src/...`) находятся сразу; пути каркаса (`HYAI/core/...`)
+    в установленном виде находятся от корня каркаса. Так один и тот же код работает и в
+    репозитории каркаса, и в проекте, куда каркас поставлен каталогом `HYAI/`.
+    """
+    rel = str(rel or "")
+    direct = root / rel
+    if direct.exists():
+        return direct
+    return fw_root(root) / rel
 
 
 def active_pairs(man: dict) -> list[tuple[str, str]]:
@@ -55,7 +94,7 @@ def domain_configs(root: Path, man: dict) -> dict[str, dict]:
     """Все домены из манифеста: имя -> {path, data}."""
     result: dict[str, dict] = {}
     for name, rel in (man.get("domains") or {}).items():
-        path = root / str(rel)
+        path = fw(root, str(rel))
         result[str(name)] = {"path": path, "rel": str(rel), "data": load_yaml(path)}
     return result
 
@@ -87,12 +126,12 @@ def load_profile(root: Path, rel: str, depth: int = 0) -> dict:
     """Профиль вместе с общими участками из `includes` (HYAI/core/shared/...)."""
     if depth > 5:
         return {}
-    data = load_yaml(root / rel)
+    data = load_yaml(fw(root, rel))
     if not data:
         return {}
     merged: dict = {}
     for include in data.get("includes") or []:
-        target = root / str(include)
+        target = fw(root, str(include))
         include_rel = str(target / "profile.yaml") if target.is_dir() else str(include)
         merged = merge_dicts(merged, load_profile(root, include_rel, depth + 1))
     return merge_dicts(merged, data)

@@ -38,20 +38,20 @@ def check_domain(root: Path, name: str, cfg: dict) -> list[str]:
 
     for key in ("policy", "agents"):
         rel = data.get(key)
-        if rel and not (root / str(rel)).exists():
+        if rel and not sh.fw(root, str(rel)).exists():
             problems.append(f"{base}: {key} указывает на несуществующий файл: {rel}")
     for group in ("authority", "access"):
         rel = (data.get(group) or {}).get("doc")
         schema = (data.get(group) or {}).get("schema")
-        if rel and not (root / str(rel)).exists():
+        if rel and not sh.fw(root, str(rel)).exists():
             problems.append(f"{base}: {group}.doc не найден: {rel}")
-        if schema and not (root / str(schema)).exists():
+        if schema and not sh.fw(root, str(schema)).exists():
             problems.append(f"{base}: {group}.schema не найден: {schema}")
     overlay = data.get("schema")
-    if overlay and not (root / str(overlay)).exists():
+    if overlay and not sh.fw(root, str(overlay)).exists():
         problems.append(f"{base}: schema-оверлей не найден: {overlay}")
     for rel in data.get("lint") or []:
-        if not (root / str(rel)).exists():
+        if not sh.fw(root, str(rel)).exists():
             problems.append(f"{base}: правило терминов не найдено: {rel}")
 
     profiles = data.get("profiles") or {}
@@ -60,7 +60,7 @@ def check_domain(root: Path, name: str, cfg: dict) -> list[str]:
 
     zones: dict[tuple[str, ...], str] = {}
     for profile, rel in profiles.items():
-        p_cfg_path = root / str(rel)
+        p_cfg_path = sh.fw(root, str(rel))
         if not p_cfg_path.exists():
             problems.append(f"{base}: профиль {profile!r} — файл не найден: {rel}")
             continue
@@ -96,11 +96,11 @@ def check_profile(root: Path, domain: str, profile: str, p: dict, path: Path) ->
     if workflow and "/" in workflow:
         wf_domain, wf_name = workflow.split("/", 1)
         dom = sh.domain_configs(root, man).get(wf_domain) or {}
-        wf_dir = root / str((dom.get("data") or {}).get("workflows_dir") or "")
+        wf_dir = sh.fw(root, str((dom.get("data") or {}).get("workflows_dir") or ""))
         if not (wf_dir / f"{wf_name}.md").exists():
             problems.append(f"{rel}: процесс {workflow!r} не найден")
     elif workflow:
-        kernel_dir = root / str((man.get("paths") or {}).get("kernel") or "HYAI/core/kernel/")
+        kernel_dir = sh.fw(root, str((man.get("paths") or {}).get("kernel") or "HYAI/core/kernel/"))
         if not (kernel_dir / "workflows" / f"{workflow}.md").exists():
             problems.append(f"{rel}: ядерный процесс {workflow!r} не найден")
 
@@ -116,7 +116,9 @@ def check_purity(root: Path, man: dict) -> list[str]:
     """Движки не должны знать имён доменов (KIT-INV-01)."""
     problems: list[str] = []
     names = [n for n in (man.get("domains") or {}) if len(n) > 2]
-    tools_dir = root / str((man.get("paths") or {}).get("tools") or "HYAI/tools/")
+    paths = man.get("paths") or {}
+    tools_rel = paths.get("hyai_tools") or paths.get("tools") or "HYAI/tools/"
+    tools_dir = sh.fw(root, str(tools_rel))
     for path in sorted(tools_dir.glob("*.py")):
         text = path.read_text(encoding="utf-8")
         for name in names:
