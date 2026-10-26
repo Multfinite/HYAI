@@ -15,6 +15,15 @@ cross_scope:
   - path: "HYAI/core/kernel/agents.md"
     why: "Перегруппировка общего входа по одобренному владельцем draft"
     profile: "project/maintainer"
+  - path: "HYAI/core/domains/docs/agents.md"
+    why: "Сокращение доменной сводки; полные правила остаются в политике docs"
+    profile: "project/maintainer"
+  - path: "HYAI/core/domains/software/agents.md"
+    why: "Сокращение доменной сводки; полные правила остаются в политике software"
+    profile: "project/maintainer"
+  - path: "HYAI/core/domains/narrative/agents.md"
+    why: "Сокращение доменной сводки; полные правила остаются в политике narrative"
+    profile: "project/maintainer"
   - path: "HYAI/meta/decisions/project/P-0001-shared-agent-bootstrap.md"
     why: "Фиксация требований общего входа для всех активных доменов"
     profile: "project/maintainer"
@@ -28,9 +37,11 @@ cross_scope:
 
 ## Что сделано
 
-- `HYAI/core/kernel/agents.md` — сгруппированы домен/профиль, источники, ограничения, общение, провенанс, ворота и результат; уточнены сокращённые формулировки, чтобы сохранить обязательные детали.
-- `AGENTS.md` — пересобран из обновлённого источника и прежней активной конфигурации/доменных фрагментов.
-- `HYAI/meta/decisions/kit/KIT-0001-agent-entrypoint-structure.md` — зафиксировано решение о структуре общего входа (`status: review`).
+- `HYAI/core/kernel/agents.md` — сгруппированы домен/профиль, источники, ограничения, общение, провенанс, ворота и результат; сокращены повторы с сохранением обязательных деталей.
+- `HYAI/core/domains/docs/agents.md`, `HYAI/core/domains/software/agents.md`, `HYAI/core/domains/narrative/agents.md` — оставлены краткое назначение, ключевые отличия и ссылки на полные политики/профили/workflow.
+- `HYAI/core/domains/kit/agents.md` — сокращён по одобренному владельцем draft; сохранены границы, ключевые условия и ссылка на политику/workflow.
+- `AGENTS.md` — пересобран из обновлённых источников, активной конфигурации и доменных фрагментов.
+- `HYAI/meta/decisions/kit/KIT-0001-agent-entrypoint-structure.md` — уточнено решение о структуре общего входа (`status: review`).
 - `HYAI/meta/decisions/project/P-0001-shared-agent-bootstrap.md` — зафиксированы общие требования для активных доменов (`status: review`).
 - Обновлены индексы решений и отчётов.
 
@@ -39,7 +50,7 @@ cross_scope:
 | Проверка | Команда | Результат |
 | --- | --- | --- |
 | Формат патча | `git diff --check` | Успешно (`rc=0`) |
-| Сборка entrypoint | Ручная сверка источника и генерации | Префикс `AGENTS.md` совпадает с `kernel/agents.md`; хвост активной конфигурации и доменов сохранён. Автопроверка недоступна: отсутствует `PyYAML`. |
+| Сборка entrypoint | Ручная сверка алгоритма сборки | Ручная сборка воспроизводит закоммиченный `AGENTS.md` по исходному алгоритму, а новый `AGENTS.md` содержит ядро и все активные доменные фрагменты в порядке конфигурации. Официальный `--check` недоступен: отсутствует `PyYAML`. |
 | Полный конвейер | `python3 HYAI/tools/run_checks.py` | Не запущен: `ModuleNotFoundError: No module named 'yaml'` при импорте `PyYAML`. Аналогично заблокированы `assemble_agents.py --check`, `check_decisions.py` и `check_report.py`. |
 
 ## Открытые вопросы
