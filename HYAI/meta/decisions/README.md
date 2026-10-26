@@ -25,7 +25,8 @@ updated: "2026-10-22"
 
 | ID | Область | Название | Статус |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| [`P-0001`](project/P-0001-shared-agent-bootstrap.md) | project | Единые требования общего входа агента | review |
+| [`KIT-0001`](kit/KIT-0001-agent-entrypoint-structure.md) | kit | Структура общего входа агента | review |
 
 ## Правила
 
