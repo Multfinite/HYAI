@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Навигация и реестры: README в каталогах, индексы, уникальность id, пути манифеста.
 
-Проверяются только слои `HYAI/core/` и `meta/` (там навигация — часть контракта, HYAI-ART-09..11).
+Проверяются управляемые слои: инструкции каркаса (`paths.core`), данные проекта (`paths.meta`)
+и встроенные движки (`paths.hyai_tools`) — там навигация — часть контракта, HYAI-ART-09..11.
 Каталоги продукта (`src/`, `world/`, …) не обязаны иметь README в каждом подкаталоге.
 """
 
@@ -18,15 +19,25 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import _shared as sh
 
-GOVERNED_ROOTS = ("HYAI/core", "HYAI/meta", "HYAI/tools")
 SKIP_PARTS = {".git", "__pycache__", "node_modules", ".venv", "venv", "dist", "build", "Exports", "_backups"}
-SKIP_PREFIXES = {"HYAI/core/intermediate"}
+SKIP_PREFIXES = {"HYAI/core/intermediate", "HYAI/HYAI/core/intermediate"}
 
 
-def governed_dirs(root: Path) -> list[Path]:
+def governed_bases(man: dict) -> list[str]:
+    """Управляемые корни берутся из манифеста, а не из кода (`3D`)."""
+    paths = man.get("paths") or {}
+    bases: list[str] = []
+    for key in ("core", "meta", "hyai_tools"):
+        value = str(paths.get(key) or "").rstrip("/")
+        if value and value not in bases:
+            bases.append(value)
+    return bases or ["HYAI/core", "HYAI/meta", "HYAI/tools"]
+
+
+def governed_dirs(root: Path, man: dict) -> list[Path]:
     result: list[Path] = []
-    for base in GOVERNED_ROOTS:
-        for path in sorted((root / base).rglob("*")):
+    for base in governed_bases(man):
+        for path in sorted(sh.fw(root, base).rglob("*")):
             if not path.is_dir():
                 continue
             if path.name.startswith((".", "__")):
@@ -41,9 +52,9 @@ def governed_dirs(root: Path) -> list[Path]:
     return result
 
 
-def check_readmes(root: Path) -> list[str]:
+def check_readmes(root: Path, man: dict) -> list[str]:
     problems: list[str] = []
-    for directory in governed_dirs(root):
+    for directory in governed_dirs(root, man):
         rel = sh.rel_posix(root, directory)
         readme = directory / "README.md"
         if not readme.exists():
@@ -79,12 +90,12 @@ def check_index_files(root: Path) -> list[str]:
 def registry_files(root: Path, man: dict) -> list[Path]:
     files: list[Path] = []
     repo_registry = (man.get("paths") or {}).get("registry")
-    if repo_registry and (root / str(repo_registry)).exists():
-        files.append(root / str(repo_registry))
+    if repo_registry and sh.fw(root, str(repo_registry)).exists():
+        files.append(sh.fw(root, str(repo_registry)))
     for cfg in sh.domain_configs(root, man).values():
         rel = cfg["data"].get("registry")
-        if rel and (root / str(rel)).exists():
-            files.append(root / str(rel))
+        if rel and sh.fw(root, str(rel)).exists():
+            files.append(sh.fw(root, str(rel)))
     return files
 
 
@@ -95,7 +106,7 @@ def check_registries(root: Path, man: dict) -> list[str]:
         data = sh.load_yaml(path)
         rel = sh.rel_posix(root, path)
         for doc_rel in data.get("read_first") or []:
-            if not (root / str(doc_rel)).exists():
+            if not sh.fw(root, str(doc_rel)).exists():
                 problems.append(f"{rel}: read_first указывает на несуществующий файл: {doc_rel}")
         for entry in data.get("documents") or []:
             doc_id = str(entry.get("id") or "")
@@ -106,7 +117,7 @@ def check_registries(root: Path, man: dict) -> list[str]:
             if doc_id in seen:
                 problems.append(f"{rel}: дубль id={doc_id!r} (уже в {seen[doc_id]}) (HYAI-ART-12)")
             seen[doc_id] = rel
-            if doc_path and not (root / doc_path).exists():
+            if doc_path and not sh.fw(root, doc_path).exists():
                 problems.append(f"{rel}: путь для {doc_id} не найден: {doc_path}")
     return problems
 
@@ -143,16 +154,20 @@ def check_manifest_paths(root: Path, man: dict) -> list[str]:
             if target in seen:
                 continue
             seen.add(target)
-            if not (root / target).exists():
+            if not sh.fw(root, target).exists():
                 problems.append(f"HYAI/meta/manifest.yaml: путь не найден: {target}")
     return problems
 
 
 def check_domain_roots(root: Path, man: dict) -> list[str]:
     problems: list[str] = []
+    optional = [str(p).rstrip("/") for p in man.get("optional_paths") or []]
     for name, cfg in sh.domain_configs(root, man).items():
         for rel in cfg["data"].get("root_paths") or []:
-            if not (root / str(rel)).exists():
+            base = str(rel).rstrip("/")
+            if base in optional:
+                continue
+            if not sh.fw(root, str(rel)).exists():
                 problems.append(f"HYAI/core/domains/{name}/manifest.yaml: каталог домена не найден: {rel}")
     return problems
 
@@ -166,7 +181,7 @@ def main() -> int:
     root = Path(args.root).resolve()
     man = sh.manifest(root)
     problems = (
-        check_readmes(root)
+        check_readmes(root, man)
         + check_index_files(root)
         + check_registries(root, man)
         + check_manifest_paths(root, man)

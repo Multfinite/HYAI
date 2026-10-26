@@ -103,7 +103,7 @@ def main() -> int:
     man = sh.manifest(root)
     cfg = sh.domain_configs(root, man).get(args.domain) or {}
     rel = ((cfg.get("data") or {}).get("access") or {}).get("schema")
-    model = sh.load_yaml(root / str(rel)) if rel else {}
+    model = sh.load_yaml(sh.fw(root, str(rel))) if rel else {}
     presets = (model.get("export") or {}).get("presets") or {}
     preset_cfg = presets.get(args.preset)
     if not preset_cfg:

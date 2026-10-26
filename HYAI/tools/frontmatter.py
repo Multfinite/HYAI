@@ -61,13 +61,13 @@ def schema_for_scope(root: Path, man: dict, scope: str | None) -> tuple[dict, li
     """Возвращает (схема, предупреждения)."""
     warns: list[str] = []
     base_rel = (man.get("validation", {}).get("data") or {}).get("frontmatter_schema") or "meta/schema/frontmatter.yaml"
-    base = sh.load_yaml(root / str(base_rel))
+    base = sh.load_yaml(sh.fw(root, str(base_rel)))
     if not base:
         warns.append(f"схема не найдена: {base_rel}")
     if not scope or scope in ("project", "kernel"):
         return base, warns
     overlay_rel = str((man.get("paths") or {}).get("frontmatter_overlay") or "").format(domain=scope)
-    overlay = sh.load_yaml(root / overlay_rel) if overlay_rel else {}
+    overlay = sh.load_yaml(sh.fw(root, overlay_rel)) if overlay_rel else {}
     if not overlay:
         warns.append(f"нет оверлея схемы для области {scope!r}: {overlay_rel}")
         return base, warns
@@ -76,8 +76,8 @@ def schema_for_scope(root: Path, man: dict, scope: str | None) -> tuple[dict, li
     dom = (sh.domain_configs(root, man).get(scope) or {}).get("data") or {}
     auth_schema_rel = (dom.get("authority") or {}).get("schema")
     access_schema_rel = (dom.get("access") or {}).get("schema")
-    auth = sh.load_yaml(root / str(auth_schema_rel)) if auth_schema_rel else {}
-    access = sh.load_yaml(root / str(access_schema_rel)) if access_schema_rel else {}
+    auth = sh.load_yaml(sh.fw(root, str(auth_schema_rel))) if auth_schema_rel else {}
+    access = sh.load_yaml(sh.fw(root, str(access_schema_rel))) if access_schema_rel else {}
 
     if auth.get("authority", {}).get("values"):
         merged.setdefault("enums", {})["authority"] = list(auth["authority"]["values"])
@@ -167,7 +167,7 @@ def main() -> int:
         print("HYAI/meta/manifest.yaml не найден", file=sys.stderr)
         return 2
 
-    base_schema = sh.load_yaml(root / str((man.get("validation", {}).get("data") or {}).get("frontmatter_schema") or ""))
+    base_schema = sh.load_yaml(sh.fw(root, str((man.get("validation", {}).get("data") or {}).get("frontmatter_schema") or "")))
     extensions = [".md"]
     files = sh.iter_files(
         root, extensions,

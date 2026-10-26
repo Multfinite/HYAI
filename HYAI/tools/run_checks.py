@@ -43,10 +43,15 @@ def build_plan(root: Path, man: dict, include_project: bool) -> list[dict]:
     return plan
 
 
-def argv_of(command: str) -> list[str]:
+def argv_of(command: str, root: Path) -> list[str]:
     parts = shlex.split(command)
     if parts and parts[0] in ("python", "python3"):
         parts[0] = sys.executable
+        if len(parts) > 1:
+            # Скрипт может быть записан от корня каркаса (`HYAI/tools/...`), а запускаться
+            # от корня проекта: тогда находим его через корень каркаса.
+            script = root / parts[1]
+            parts[1] = str(script if script.exists() else sh.fw_root(root) / parts[1])
     return parts
 
 
@@ -70,7 +75,7 @@ def main() -> int:
     results: list[dict] = []
     failed = 0
     for step in plan:
-        proc = subprocess.run(argv_of(step["command"]), cwd=str(root), env=env, capture_output=True, text=True, encoding="utf-8")
+        proc = subprocess.run(argv_of(step["command"], root), cwd=str(root), env=env, capture_output=True, text=True, encoding="utf-8")
         ok = proc.returncode == 0
         failed += 0 if ok else 1
         results.append({"layer": step["layer"], "command": step["command"], "returncode": proc.returncode,

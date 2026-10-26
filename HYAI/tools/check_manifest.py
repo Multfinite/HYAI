@@ -60,7 +60,7 @@ def main() -> int:
             problems.append(f"{cfg['rel']}: decisions_scope={scope!r} отсутствует в decisions.scopes")
 
         for profile, rel in (cfg["data"].get("profiles") or {}).items():
-            path = root / str(rel)
+            path = sh.fw(root, str(rel))
             if path.exists() and "permissions" in (sh.load_yaml(path) or {}):
                 problems.append(f"{rel}: профиль не задаёт права (MERGE-04, KIT-POL-09)")
 

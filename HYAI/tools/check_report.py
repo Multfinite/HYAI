@@ -24,14 +24,14 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 def known_workflows(root: Path, man: dict) -> set[str]:
     names: set[str] = set()
-    kernel_dir = root / str((man.get("paths") or {}).get("kernel") or "HYAI/core/kernel/") / "workflows"
+    kernel_dir = sh.fw(root, str((man.get("paths") or {}).get("kernel") or "HYAI/core/kernel/")) / "workflows"
     if kernel_dir.exists():
         names.update(p.stem for p in kernel_dir.glob("*.md") if p.stem.lower() != "readme")
     for domain, cfg in sh.domain_configs(root, man).items():
         wf_rel = cfg["data"].get("workflows_dir")
         if not wf_rel:
             continue
-        wf_dir = root / str(wf_rel)
+        wf_dir = sh.fw(root, str(wf_rel))
         if wf_dir.exists():
             for path in wf_dir.glob("*.md"):
                 if path.stem.lower() != "readme":
@@ -148,14 +148,14 @@ def main() -> int:
     root = Path(args.root).resolve()
     man = sh.manifest(root)
     report_cfg = man.get("report") or {}
-    index_rel = str(report_cfg.get("index") or "HYAI/meta/reports/README.md")
+    index_rel = str(report_cfg.get("index") or "meta/reports/README.md")
     index_text = (root / index_rel).read_text(encoding="utf-8") if (root / index_rel).exists() else ""
 
     skip_dirs = {(man.get("paths") or {}).get("plans"), (man.get("paths") or {}).get("archive")}
     if args.paths:
         paths = [Path(p) for p in args.paths]
     else:
-        reports_root = root / str((man.get("paths") or {}).get("reports") or "HYAI/meta/reports/")
+        reports_root = root / str((man.get("paths") or {}).get("reports") or "meta/reports/")
         paths = []
         for scope in report_cfg.get("allowed_scopes") or []:
             directory = reports_root / str(scope)

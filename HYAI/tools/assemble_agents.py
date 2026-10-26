@@ -19,23 +19,30 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import _shared as sh
 
 HEADER = """<!-- generated: true -->
-<!-- source: HYAI/core/kernel/agents.md + HYAI/core/domains/<domain>/agents.md -->
-<!-- правки вносятся в источники; проверка: python3 HYAI/tools/assemble_agents.py --check -->
+<!-- source: {{HYAI}}core/kernel/agents.md + {{HYAI}}core/domains/<domain>/agents.md -->
+<!-- правки вносятся в источники; проверка: assemble_agents.py --check -->
 """
+
+
+def framework_prefix(man: dict) -> str:
+    """Префикс каталогов каркаса для инструкций агенту: `framework.prefix` (иначе `framework.root`)."""
+    cfg = man.get("framework") or {}
+    return str(cfg.get("prefix") or cfg.get("root") or "")
 
 
 def render(root: Path, man: dict) -> tuple[str, list[str]]:
     problems: list[str] = []
+    prefix = framework_prefix(man)
     kernel_rel = (man.get("paths") or {}).get("kernel") or "HYAI/core/kernel/"
     kernel_fragment = root / str(kernel_rel) / "agents.md"
     if not kernel_fragment.exists():
         problems.append(f"нет фрагмента ядра: {sh.rel_posix(root, kernel_fragment)}")
         kernel_text = ""
     else:
-        kernel_text = kernel_fragment.read_text(encoding="utf-8").strip()
+        kernel_text = kernel_fragment.read_text(encoding="utf-8").strip().replace("{{HYAI}}", prefix)
 
     configs = sh.domain_configs(root, man)
-    parts = [HEADER, kernel_text, ""]
+    parts = [HEADER.replace("{{HYAI}}", prefix), kernel_text, ""]
     active = sh.active_pairs(man)
     listing = ", ".join(f"`{d}/{p}`" for d, p in active) or "—"
     parts.append("## Активная конфигурация\n")
@@ -58,11 +65,11 @@ def render(root: Path, man: dict) -> tuple[str, list[str]]:
         if not rel:
             problems.append(f"домен {domain!r}: не указан agents в манифесте домена")
             continue
-        path = root / str(rel)
+        path = sh.fw(root, str(rel))
         if not path.exists():
             problems.append(f"домен {domain!r}: фрагмент не найден: {rel}")
             continue
-        parts.append(path.read_text(encoding="utf-8").strip())
+        parts.append(path.read_text(encoding="utf-8").strip().replace("{{HYAI}}", prefix))
         parts.append("")
 
     text = "\n".join(parts).rstrip() + "\n"
@@ -99,7 +106,7 @@ def main() -> int:
         diff = list(difflib.unified_diff(current.splitlines(), text.splitlines(), "репозиторий", "сборка", lineterm="", n=1))
         for line in diff[:40]:
             print(line)
-        print(f"\n{entry}: дрейф сборки — запустите `python3 HYAI/tools/assemble_agents.py --write`")
+        print(f"\n{entry}: дрейф сборки — запустите `assemble_agents.py --write`")
         return 1
 
     print(f"{entry}: актуален ({len(text.splitlines())} строк)")
