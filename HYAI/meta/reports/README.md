@@ -31,5 +31,6 @@ updated: "2026-10-22"
 | Отчёт | Домен | Профиль | Вид |
 | --- | --- | --- | --- |
 | [`2026-10-26-agent-token-optimization.md`](kit/2026-10-26-agent-token-optimization.md) | `kit` | `kit/domain-builder` | `analysis` |
+| [`2026-10-26-compact-agent-bootstrap.md`](kit/2026-10-26-compact-agent-bootstrap.md) | `kit` | `kit/domain-builder` | `task` |
 
 Новый отчёт обязан появиться в этой таблице (`HYAI-ART-13`): `check_report.py` сверяет индекс с файловой системой.
