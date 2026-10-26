@@ -25,8 +25,8 @@ TOKEN_RE = re.compile(rf"\b({TOKEN})(?:\.\.(\d{{2}}))?\b")
 TICKED_RE = re.compile(rf"`({TOKEN})`")
 DEF_RE = re.compile(rf"^[\s|>*+-]*`({TOKEN})`")
 # Номер без класса (`NR-<NN>` из первого выпуска): формат не распознаётся как ID,
-# и правило молча выпадает из учёта.
-LEGACY_RE = re.compile(r"\b([A-Z]{2,6})-\d{2}\b")
+# и правило молча выпадает из учёта. `Q-<DOMAIN>-<NN>` — ID вопроса, не legacy-правило.
+LEGACY_RE = re.compile(r"(?<!Q-)\b([A-Z]{2,6})-\d{2}\b")
 
 
 def load_registry(root: Path) -> tuple[dict, list[str]]:

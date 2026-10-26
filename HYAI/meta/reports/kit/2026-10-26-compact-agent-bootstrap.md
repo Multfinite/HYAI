@@ -27,6 +27,39 @@ cross_scope:
   - path: "HYAI/meta/decisions/project/P-0001-shared-agent-bootstrap.md"
     why: "Фиксация требований общего входа для всех активных доменов"
     profile: "project/maintainer"
+  - path: "HYAI/tools/check_rules.py"
+    why: "Устранение ложного срабатывания: ID вопроса Q-KIT-01 ошибочно распознавался как legacy-номер правила"
+    profile: "project/maintainer"
+  - path: "HYAI/tools/tests/test_rules.py"
+    why: "Регрессионный тест для различения идентификаторов вопросов и правил"
+    profile: "project/maintainer"
+  - path: "src/.gitkeep"
+    why: "Восстановление пустого корня, объявленного root_paths; продуктовые данные не добавлялись"
+    profile: "project/maintainer"
+  - path: "tests/.gitkeep"
+    why: "Восстановление пустого корня, объявленного root_paths; продуктовые данные не добавлялись"
+    profile: "project/maintainer"
+  - path: "docs/.gitkeep"
+    why: "Восстановление пустого корня, объявленного root_paths; продуктовые данные не добавлялись"
+    profile: "project/maintainer"
+  - path: "specs/.gitkeep"
+    why: "Восстановление пустого корня, объявленного root_paths; продуктовые данные не добавлялись"
+    profile: "project/maintainer"
+  - path: "diagrams/.gitkeep"
+    why: "Восстановление пустого корня, объявленного root_paths; продуктовые данные не добавлялись"
+    profile: "project/maintainer"
+  - path: "world/.gitkeep"
+    why: "Восстановление пустого корня, объявленного root_paths; продуктовые данные не добавлялись"
+    profile: "project/maintainer"
+  - path: "chapters/.gitkeep"
+    why: "Восстановление пустого корня, объявленного root_paths; продуктовые данные не добавлялись"
+    profile: "project/maintainer"
+  - path: "drafts/.gitkeep"
+    why: "Восстановление пустого корня, объявленного root_paths; продуктовые данные не добавлялись"
+    profile: "project/maintainer"
+  - path: "styles/.gitkeep"
+    why: "Восстановление пустого корня, объявленного root_paths; продуктовые данные не добавлялись"
+    profile: "project/maintainer"
 ---
 
 # Перегруппировка общего входа агента
@@ -43,6 +76,8 @@ cross_scope:
 - `AGENTS.md` — пересобран из обновлённых источников, активной конфигурации и доменных фрагментов.
 - `HYAI/meta/decisions/kit/KIT-0001-agent-entrypoint-structure.md` — уточнено решение о структуре общего входа (`status: review`).
 - `HYAI/meta/decisions/project/P-0001-shared-agent-bootstrap.md` — зафиксированы общие требования для активных доменов (`status: review`).
+- `HYAI/tools/check_rules.py` — исправлено ложное распознавание `Q-KIT-01` как legacy-ID правила; добавлен регрессионный тест.
+- В девяти объявленных `root_paths` добавлены пустые `.gitkeep`-заполнители. Продуктовое содержимое не добавлялось; каталоги отсутствовали и в исходном commit, из-за чего `check_indexes.py` падал независимо от изменений.
 - Обновлены индексы решений и отчётов.
 
 ## Проверка
@@ -50,8 +85,10 @@ cross_scope:
 | Проверка | Команда | Результат |
 | --- | --- | --- |
 | Формат патча | `git diff --check` | Успешно (`rc=0`) |
-| Сборка entrypoint | Ручная сверка алгоритма сборки | Ручная сборка воспроизводит закоммиченный `AGENTS.md` по исходному алгоритму, а новый `AGENTS.md` содержит ядро и все активные доменные фрагменты в порядке конфигурации. Официальный `--check` недоступен: отсутствует `PyYAML`. |
-| Полный конвейер | `python3 HYAI/tools/run_checks.py` | Не запущен: `ModuleNotFoundError: No module named 'yaml'` при импорте `PyYAML`. Аналогично заблокированы `assemble_agents.py --check`, `check_decisions.py` и `check_report.py`. |
+| Сборка entrypoint | `/tmp/hyai-token-check-venv/bin/python HYAI/tools/assemble_agents.py --check` | Успешно; `AGENTS.md` актуален (125 строк). |
+| Конвейер | `/tmp/hyai-token-check-venv/bin/python HYAI/tools/run_checks.py --skip-project` | Успешно после восстановления объявленных product-root каталогов: 19 проверок, упало 0. |
+| Набор тестов | `/tmp/hyai-token-check-venv/bin/python -m unittest discover -s HYAI/tools/tests` | 68 тестов, успешно. |
+| Окружение | PyYAML 6.0.3 во временном `/tmp/hyai-token-check-venv` | Только для диагностики; зависимости проекта не менялись. |
 
 ## Открытые вопросы
 

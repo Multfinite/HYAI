@@ -80,6 +80,12 @@ class RuleIdsTest(unittest.TestCase):
         self.assertEqual(res.returncode, 1)
         self.assertIn("номер без класса", res.stdout)
 
+    def test_question_id_is_not_a_legacy_rule_reference(self) -> None:
+        """Идентификатор вопроса `Q-KIT-01` не является правилом `KIT-01`."""
+        self.kit.append("HYAI/meta/questions/kit.md", "\nСм. `Q-KIT-01`.\n")
+        res = self.kit.run("check_rules.py")
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+
     def test_migration_note_is_allowed(self) -> None:
         """Строка «старый → новый» законна: это карта переименования, а не действующее правило."""
         self.kit.append("CHANGELOG.md", "\n`NR-09` → `NR-POL-09`.\n")
