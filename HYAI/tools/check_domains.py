@@ -64,7 +64,7 @@ def check_domain(root: Path, name: str, cfg: dict) -> list[str]:
         if not p_cfg_path.exists():
             problems.append(f"{base}: профиль {profile!r} — файл не найден: {rel}")
             continue
-        p = sh.load_profile(root, str(rel))
+        p = sh.profile_config(root, cfg, profile)
         problems.extend(check_profile(root, name, profile, p, p_cfg_path))
         key = tuple(sorted(p.get("scope_primary") or []))
         if key and key in zones:
@@ -141,7 +141,7 @@ def collect_keys(data, found: set[str]) -> set[str]:
 def check_flags(root: Path, man: dict) -> list[str]:
     """Поля-флаги запрещены (KIT-0001); список читается из схемы frontmatter."""
     schema_rel = str(((man.get("validation") or {}).get("data") or {}).get("frontmatter_schema") or "")
-    schema = sh.load_yaml(root / schema_rel) if schema_rel else {}
+    schema = sh.load_yaml(sh.fw(root, schema_rel)) if schema_rel else {}
     forbidden = {str(item) for item in (schema.get("forbidden_fields") or [])}
     if not forbidden:
         return []
@@ -155,6 +155,28 @@ def check_flags(root: Path, man: dict) -> list[str]:
     return problems
 
 
+def check_consumer_separation(root: Path, man: dict, configs: dict[str, dict]) -> list[str]:
+    """В проекте-потребителе активные домены не направляют данные внутрь подмодуля каркаса."""
+    if not sh.is_consumer_project(root):
+        return []
+    problems: list[str] = []
+    seen: set[str] = set()
+    for domain, _profile in sh.active_pairs(man):
+        if domain in seen:
+            continue
+        seen.add(domain)
+        cfg = configs.get(domain)
+        if not cfg:
+            continue
+        for root_path in cfg["data"].get("root_paths") or []:
+            if sh.in_submodule(root, man, str(root_path)):
+                problems.append(
+                    f"{cfg['rel']}: активный домен {domain!r} в проекте-потребителе указывает root_paths внутрь "
+                    f"подмодуля ({root_path!r}); задайте собственный корень данных проекта в манифесте активного домена"
+                )
+    return problems
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Проверка структуры доменов")
     parser.add_argument("--root", default=str(sh.DEFAULT_ROOT))
@@ -163,11 +185,12 @@ def main() -> int:
 
     root = Path(args.root).resolve()
     man = sh.manifest(root)
+    man_rel = sh.rel_posix(root, sh.manifest_path(root))
     configs = sh.domain_configs(root, man)
     problems: list[str] = []
 
     if not configs:
-        problems.append("HYAI/meta/manifest.yaml: не объявлено ни одного домена")
+        problems.append(f"{man_rel}: не объявлено ни одного домена")
 
     roots_seen: dict[str, str] = {}
     for name, cfg in configs.items():
@@ -175,7 +198,7 @@ def main() -> int:
         for root_path in cfg["data"].get("root_paths") or []:
             base = str(root_path).rstrip("/")
             if base in roots_seen and roots_seen[base] != name:
-                problems.append(f"HYAI/core/domains/{name}/manifest.yaml: каталог {base!r} уже принадлежит домену {roots_seen[base]!r} (KIT-POL-06)")
+                problems.append(f"{cfg['rel']}: каталог {base!r} уже принадлежит домену {roots_seen[base]!r} (KIT-POL-06)")
             roots_seen[base] = name
 
     # Границы расширения заданы политикой домена-редактора и permissions манифеста,
@@ -183,15 +206,16 @@ def main() -> int:
 
     active = sh.active_pairs(man)
     if man.get("bootstrap", {}).get("require_domain_and_profile") and not active:
-        problems.append("HYAI/meta/manifest.yaml: active пуст, но bootstrap требует домен и профиль")
+        problems.append(f"{man_rel}: active пуст, но bootstrap требует домен и профиль")
     for domain, profile in active:
         cfg = configs.get(domain)
         if not cfg:
-            problems.append(f"HYAI/meta/manifest.yaml: active ссылается на незаявленный домен {domain!r}")
+            problems.append(f"{man_rel}: active ссылается на незаявленный домен {domain!r}")
             continue
         if profile not in (cfg["data"].get("profiles") or {}):
-            problems.append(f"HYAI/meta/manifest.yaml: у домена {domain!r} нет профиля {profile!r}")
+            problems.append(f"{man_rel}: у домена {domain!r} нет профиля {profile!r}")
 
+    problems.extend(check_consumer_separation(root, man, configs))
     problems.extend(check_purity(root, man))
     problems.extend(check_flags(root, man))
     return sh.emit(problems, "домены и профили", args.json)

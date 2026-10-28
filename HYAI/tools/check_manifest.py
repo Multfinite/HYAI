@@ -70,15 +70,26 @@ def main() -> int:
         problems.append(f"HYAI/meta/manifest.yaml: report.allowed_scopes содержит {scope!r} без области решений")
 
     declared = set(man.get("domains") or {})
+    configs = sh.domain_configs(root, man)
+    active = sh.active_pairs(man)
+    active_names = {d for d, _ in active}
+    man_rel = sh.rel_posix(root, sh.manifest_path(root))
     for pattern, domain in (man.get("path_map") or {}).items():
         if domain not in declared | RESERVED_SCOPES:
-            problems.append(f"HYAI/meta/manifest.yaml: path_map[{pattern!r}] указывает на незаявленный домен {domain!r}")
+            problems.append(f"{man_rel}: path_map[{pattern!r}] указывает на незаявленный домен {domain!r}")
+            continue
+        if sh.is_consumer_project(root) and domain in active_names and sh.in_submodule(root, man, str(pattern)):
+            dom_roots = (configs.get(str(domain)) or {}).get("data", {}).get("root_paths") or []
+            if any(not sh.in_submodule(root, man, str(r)) for r in dom_roots):
+                problems.append(
+                    f"{man_rel}: path_map[{pattern!r}] направляет путь внутри подмодуля в активный домен "
+                    f"проекта {domain!r}; используйте собственный путь проекта"
+                )
 
-    active = sh.active_pairs(man)
     if len({d for d, _ in active}) != len(active) and man.get("bootstrap", {}).get("require_domain_and_profile"):
         duplicates = [d for d in {d for d, _ in active} if sum(1 for x, _ in active if x == d) > 1]
         if duplicates:
-            problems.append(f"HYAI/meta/manifest.yaml: несколько профилей одного домена в active: {', '.join(duplicates)}")
+            problems.append(f"{man_rel}: несколько профилей одного домена в active: {', '.join(duplicates)}")
 
     return sh.emit(problems, "контракт манифеста", args.json)
 

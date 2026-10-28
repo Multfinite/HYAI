@@ -26,4 +26,4 @@ forbidden_values:
   visibility: [spoiler, author, system]
 
 defaults_by_dir:
-  pictures: {type: asset-card, authority: stage, visibility: internal}
+  "HYAI/core/domains/picture/pictures": {type: asset-card, authority: stage, visibility: internal}

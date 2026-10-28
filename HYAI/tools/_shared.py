@@ -43,6 +43,14 @@ HYAI_DIR = "HYAI"
 MANIFEST_RELS = ("meta/manifest.yaml", "HYAI/meta/manifest.yaml")
 
 
+def manifest_path(root: Path) -> Path:
+    for rel in MANIFEST_RELS:
+        candidate = root / rel
+        if candidate.exists():
+            return candidate
+    return root / MANIFEST_RELS[-1]
+
+
 def manifest(root: Path) -> dict:
     for rel in MANIFEST_RELS:
         man = load_yaml(root / rel)
@@ -51,7 +59,9 @@ def manifest(root: Path) -> dict:
     return {}
 
 
-_FW_ROOT_CACHE: dict[str, Path] = {}
+def is_consumer_project(root: Path) -> bool:
+    """True, когда каркас подключён к внешнему проекту (манифест лежит в ./meta/manifest.yaml)."""
+    return (root / MANIFEST_RELS[0]).exists()
 
 
 def fw_root(root: Path) -> Path:
@@ -61,11 +71,31 @@ def fw_root(root: Path) -> Path:
     а пути самого каркаса (`HYAI/core/...`, `HYAI/tools/...`) — от корня каркаса.
     `framework.root` в манифесте задаёт, где каркас установлен (`""` — каркас сам себе проект).
     """
-    key = str(root)
-    if key not in _FW_ROOT_CACHE:
-        rel = str(((manifest(root).get("framework") or {}).get("root")) or "").strip("/")
-        _FW_ROOT_CACHE[key] = (root / rel) if rel else root
-    return _FW_ROOT_CACHE[key]
+    rel = str(((manifest(root).get("framework") or {}).get("root")) or "").strip("/")
+    return (root / rel) if rel and rel != "." else root
+
+
+def submodule_prefixes(root: Path, man: dict) -> list[str]:
+    """Префиксы каталога каркаса/подмодуля во внешнем проекте-потребителе."""
+    if not is_consumer_project(root):
+        return []
+    out: list[str] = [HYAI_DIR]
+    cfg = man.get("framework") or {}
+    for key in ("root", "prefix"):
+        val = str(cfg.get(key) or "").replace("\\", "/").strip("/")
+        if val and val != ".":
+            if val not in out:
+                out.append(val)
+    return out
+
+
+def in_submodule(root: Path, man: dict, rel: str) -> bool:
+    """Проверяет, ведёт ли путь или глоб во внутреннее дерево подмодуля каркаса."""
+    clean = str(rel or "").replace("\\", "/").lstrip("./").rstrip("/")
+    for prefix in submodule_prefixes(root, man):
+        if clean == prefix or clean.startswith(prefix + "/"):
+            return True
+    return False
 
 
 def fw(root: Path, rel: str) -> Path:
@@ -90,12 +120,90 @@ def active_pairs(man: dict) -> list[tuple[str, str]]:
     return pairs
 
 
+def rebase_globs(patterns: Iterable[str], template_roots: Iterable[str], effective_roots: Iterable[str]) -> list[str]:
+    """Переносит глобы и пути с шаблонного корня домена каркаса на фактический root_paths домена."""
+    src_list = [str(r).replace("\\", "/").strip("/") for r in (template_roots or []) if str(r).strip("/")]
+    dst_list = [str(r).replace("\\", "/").strip("/") for r in (effective_roots or []) if str(r).strip("/")]
+    raw = [str(p) for p in (patterns or [])]
+    if not src_list or not dst_list or src_list == dst_list:
+        return raw
+    out: list[str] = []
+    for pat in raw:
+        norm = pat.replace("\\", "/").lstrip("./")
+        replaced = False
+        for idx, src in enumerate(src_list):
+            targets = [dst_list[idx]] if idx < len(dst_list) else dst_list
+            if norm == src or norm.startswith(src + "/"):
+                suffix = norm[len(src):]
+                for dst in targets:
+                    candidate = dst + suffix
+                    if candidate not in out:
+                        out.append(candidate)
+                replaced = True
+                break
+        if not replaced and pat not in out:
+            out.append(pat)
+    return out
+
+
+def merge_domain_dicts(base: dict, overlay: dict) -> dict:
+    """Слияние манифеста домена (`includes`): `root_paths` оверлея заменяет шаблонный путь подмодуля."""
+    out = merge_dicts(base, overlay)
+    if "root_paths" in overlay and overlay.get("root_paths") is not None:
+        out["root_paths"] = [str(item) for item in (overlay.get("root_paths") or [])]
+    return out
+
+
+def load_domain(root: Path, rel: str, depth: int = 0) -> tuple[dict, list[str]]:
+    """Загружает манифест домена с поддержкой `includes`; возвращает `(data, template_root_paths)`."""
+    if depth > 5:
+        return {}, []
+    data = load_yaml(fw(root, rel))
+    if not data:
+        return {}, []
+    merged: dict = {}
+    template_roots: list[str] = []
+    for include in data.get("includes") or []:
+        target = fw(root, str(include))
+        include_rel = str(target / "manifest.yaml") if target.is_dir() else str(include)
+        inc_data, inc_roots = load_domain(root, include_rel, depth + 1)
+        for item in inc_roots or inc_data.get("root_paths") or []:
+            if str(item) not in template_roots:
+                template_roots.append(str(item))
+        merged = merge_domain_dicts(merged, inc_data)
+    merged = merge_domain_dicts(merged, data)
+    return merged, template_roots
+
+
 def domain_configs(root: Path, man: dict) -> dict[str, dict]:
-    """Все домены из манифеста: имя -> {path, data}."""
+    """Все домены из манифеста: имя -> {path, rel, data, template_root_paths}."""
+    active_roots: dict[str, list[str]] = {}
+    for item in man.get("active") or []:
+        if isinstance(item, dict) and item.get("domain") and item.get("root_paths"):
+            active_roots[str(item["domain"])] = [str(p) for p in (item.get("root_paths") or [])]
+
     result: dict[str, dict] = {}
     for name, rel in (man.get("domains") or {}).items():
+        dname = str(name)
         path = fw(root, str(rel))
-        result[str(name)] = {"path": path, "rel": str(rel), "data": load_yaml(path)}
+        data, template_roots = load_domain(root, str(rel))
+        if not template_roots:
+            fw_manifest = fw_root(root) / HYAI_DIR / "core" / "domains" / dname / "manifest.yaml"
+            if fw_manifest.exists() and (not path.exists() or fw_manifest.resolve() != path.resolve()):
+                fw_data = load_yaml(fw_manifest)
+                template_roots = [str(r) for r in (fw_data.get("root_paths") or [])]
+        if dname in active_roots:
+            if not template_roots:
+                template_roots = [str(r) for r in (data.get("root_paths") or [])]
+            data = {**data, "root_paths": list(active_roots[dname])}
+        if not template_roots:
+            template_roots = [str(r) for r in (data.get("root_paths") or [])]
+        result[dname] = {
+            "path": path,
+            "rel": str(rel),
+            "data": data,
+            "template_root_paths": template_roots,
+        }
     return result
 
 
@@ -141,7 +249,15 @@ def profile_config(root: Path, dom: dict, profile: str) -> dict:
     rel = (dom.get("data", {}).get("profiles") or {}).get(profile)
     if not rel:
         return {}
-    return load_profile(root, str(rel))
+    loaded = load_profile(root, str(rel))
+    if not loaded:
+        return {}
+    template_roots = dom.get("template_root_paths") or []
+    effective_roots = (dom.get("data") or {}).get("root_paths") or []
+    for scope_key in ("scope_primary", "scope_secondary"):
+        if loaded.get(scope_key):
+            loaded[scope_key] = rebase_globs(loaded[scope_key], template_roots, effective_roots)
+    return loaded
 
 
 def profile_paths_by_name(root: Path, man: dict) -> dict[str, list[str]]:

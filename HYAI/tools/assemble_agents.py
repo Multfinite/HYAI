@@ -34,7 +34,7 @@ def render(root: Path, man: dict) -> tuple[str, list[str]]:
     problems: list[str] = []
     prefix = framework_prefix(man)
     kernel_rel = (man.get("paths") or {}).get("kernel") or "HYAI/core/kernel/"
-    kernel_fragment = root / str(kernel_rel) / "agents.md"
+    kernel_fragment = sh.fw(root, str(kernel_rel)) / "agents.md"
     if not kernel_fragment.exists():
         problems.append(f"нет фрагмента ядра: {sh.rel_posix(root, kernel_fragment)}")
         kernel_text = ""

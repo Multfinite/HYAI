@@ -25,7 +25,7 @@ documents:
     path: "HYAI/meta/architecture/picture.md"
     type: architecture
     authority: contract
-    why: "Раскладка продуктового каталога pictures/, жизненный цикл звеньев и инварианты хранения"
+    why: "Раскладка рабочего корня <picture_root>/, изоляция подмодуля и инварианты хранения"
   - id: picture.terminology
     path: "HYAI/meta/terminology/picture.md"
     type: meta

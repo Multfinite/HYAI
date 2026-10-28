@@ -38,5 +38,6 @@ updated: "2026-10-22"
 | [`2026-10-28-process-step-narration.md`](kit/2026-10-28-process-step-narration.md) | `kit` | `kit/domain-builder` | `task` |
 | [`2026-10-28-picture-domain-analysis.md`](kit/2026-10-28-picture-domain-analysis.md) | `kit` | `kit/domain-builder` | `analysis` |
 | [`2026-10-28-picture-domain-implementation.md`](kit/2026-10-28-picture-domain-implementation.md) | `kit` | `kit/domain-builder` | `task` |
+| [`2026-10-28-picture-data-root-separation.md`](kit/2026-10-28-picture-data-root-separation.md) | `kit` | `kit/domain-builder` | `task` |
 
 Новый отчёт обязан появиться в этой таблице (`HYAI-ART-13`): `check_report.py` сверяет индекс с файловой системой.

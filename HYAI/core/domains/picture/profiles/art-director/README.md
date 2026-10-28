@@ -18,7 +18,7 @@ updated: "2026-10-28"
 
 ## Зона
 
-Основная — `pictures/briefs/**`. Вторичная — `pictures/prompts/**`, `pictures/assets/**` (проверка соответствия серии эталону).
+Основная — `<picture_root>/briefs/**` (в самом HYAI — `HYAI/core/domains/picture/pictures/briefs/**`; в проекте-потребителе — собственный `root_paths` активного домена `picture` вне подмодуля). Вторичная — `<picture_root>/prompts/**`, `<picture_root>/assets/**` (проверка соответствия серии эталону).
 
 ## Что делает
 

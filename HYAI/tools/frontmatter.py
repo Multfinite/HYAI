@@ -73,7 +73,18 @@ def schema_for_scope(root: Path, man: dict, scope: str | None) -> tuple[dict, li
         return base, warns
     merged = deep_merge(base, overlay)
 
-    dom = (sh.domain_configs(root, man).get(scope) or {}).get("data") or {}
+    dom_cfg = sh.domain_configs(root, man).get(scope) or {}
+    dom = dom_cfg.get("data") or {}
+    rows = dict(merged.get("defaults_by_dir") or {})
+    template_roots = dom_cfg.get("template_root_paths") or []
+    effective_roots = dom.get("root_paths") or []
+    for idx, src in enumerate(template_roots):
+        src_clean = str(src).rstrip("/")
+        if src_clean in rows:
+            targets = [effective_roots[idx]] if idx < len(effective_roots) else effective_roots
+            for dst in targets:
+                rows.setdefault(str(dst).rstrip("/"), rows[src_clean])
+    merged["defaults_by_dir"] = rows
     auth_schema_rel = (dom.get("authority") or {}).get("schema")
     access_schema_rel = (dom.get("access") or {}).get("schema")
     auth = sh.load_yaml(sh.fw(root, str(auth_schema_rel))) if auth_schema_rel else {}
