@@ -1,0 +1,35 @@
+# Плоская модель доступа для домена picture.
+# Исполняется generic-движками HYAI/tools/resolve_access.py, lint_scopes.py, build_export.py.
+version: "1.0"
+domain: picture
+model: flat
+
+visibility:
+  values: [public, internal, restricted]
+  default: internal
+  order: [restricted, internal, public]
+
+status_order: [draft, review, approved, superseded, deprecated, archived]
+
+rules:
+  default_deny: true
+  inherit_strictest: true
+  strip_fields: [internal_notes]
+
+checks:
+  - id: acc.unknown_visibility
+    severity: error
+    kind: unknown_visibility
+
+export:
+  presets:
+    public:
+      allow_visibility: [public]
+      status_floor: approved
+      strip_frontmatter: true
+      strip_internal_links: true
+      strip_markers: true
+      strip_internal_ids: true
+      strip_comments: true
+      strip_repo_paths: true
+      out_dir: "Exports/public"

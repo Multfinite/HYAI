@@ -18,6 +18,7 @@ updated: "2026-10-22"
 | [`software.md`](software.md) | `software` |
 | [`docs.md`](docs.md) | `docs` |
 | [`narrative.md`](narrative.md) | `narrative` |
+| [`picture.md`](picture.md) | `picture` |
 | [`kit.md`](kit.md) | `kit` |
 
 Требование: каждый раздел верхнего уровня содержит либо правило с ID, либо ссылку на решение, либо `[?]`. Архитектура без норм превращается в статью, которую никто не обновляет.

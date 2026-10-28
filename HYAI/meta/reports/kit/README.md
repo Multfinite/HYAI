@@ -18,3 +18,5 @@ updated: "2026-10-22"
 | [`2026-10-26-followup-agent-optimization.md`](2026-10-26-followup-agent-optimization.md) | `kit/domain-builder` | `analysis` |
 | [`2026-10-26-bootstrap-pointer-consolidation.md`](2026-10-26-bootstrap-pointer-consolidation.md) | `kit/domain-builder` | `task` |
 | [`2026-10-28-process-step-narration.md`](2026-10-28-process-step-narration.md) | `kit/domain-builder` | `task` |
+| [`2026-10-28-picture-domain-analysis.md`](2026-10-28-picture-domain-analysis.md) | `kit/domain-builder` | `analysis` |
+| [`2026-10-28-picture-domain-implementation.md`](2026-10-28-picture-domain-implementation.md) | `kit/domain-builder` | `task` |

@@ -84,7 +84,7 @@ cross_scope:
 
 ## Активная конфигурация
 
-Домены и профили этого репозитория: `kit/domain-builder`, `software/code`, `docs/spec-author`, `narrative/prose`.
+Домены и профили этого репозитория: `kit/domain-builder`, `software/code`, `docs/spec-author`, `narrative/prose`, `picture/instant`.
 
 | Домен | Профили | Когда выбирать |
 | --- | --- | --- |
@@ -92,6 +92,7 @@ cross_scope:
 | `software` | `software/code`, `software/architect`, `software/analysis` | Разработка программного обеспечения |
 | `docs` | `docs/spec-author`, `docs/tech-writer`, `docs/diagrams`, `docs/analysis` | Документы: ТЗ, спецификации, документация, диаграммы |
 | `narrative` | `narrative/lore`, `narrative/history`, `narrative/prose`, `narrative/analysis` | Литература: мир, хронология, текст |
+| `picture` | `picture/instant`, `picture/pipeline`, `picture/art-director`, `picture/analysis` | Генерация изображений и визуальных серий через промпт |
 
 ## Домен `kit`
 
@@ -130,3 +131,11 @@ cross_scope:
 **Доступ:** секрет требует `known_by`; проекция определяется ролью × призмой и компетенцией носителя. Для призмы `characters` добавляй карту понимания.
 
 Подробности: `HYAI/core/domains/narrative/policy.md`, `access.md` и выбранный профиль/workflow.
+
+## Домен `picture`
+
+Генерация изображений, конвейеров промежуточных звеньев и визуальных серий исключительно через промпт в каталоге `pictures/`.
+
+**Критерий:** до начала работы пользователь обязан явно задать все 4 правила безопасности (`NSFW`, `Copyright`, `Person`, `Violence`, `PIC-SAF-01`); генерация ведётся всегда только через моноязычный промпт каркаса «5+3» (`subject`, `environment`, `lighting`, `camera`, `style` + динамический `negative` и `weights`, `PIC-POL-01..02`, `PIC-PRM-01..05`); каждый шаг проходит VLM-проверку (`Resolution`, `Aspect Ratio`, артефакты рук/лиц/текста, `Consistency`) с повтором до `Iteration Limit` (`PIC-POL-03`, `PIC-QA-01..05`); принятые звенья сохраняются в `pictures/stages/`, неудачные попытки удаляются (`PIC-POL-04`); фильтр стиля накладывается строго после готовности конечного базового изображения (`PIC-POL-05`).
+
+Подробности: `HYAI/core/domains/picture/policy.md` и выбранный профиль/workflow.

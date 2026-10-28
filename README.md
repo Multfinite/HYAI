@@ -67,6 +67,7 @@ updated: "2026-10-22"
 | [`software`](HYAI/core/domains/software/README.md) | `code`, `architect`, `analysis` | код, тесты, контракты, архитектура ПО |
 | [`docs`](HYAI/core/domains/docs/README.md) | `spec-author`, `tech-writer`, `diagrams`, `analysis` | ТЗ, технические спецификации, документация, комментарии, схемы |
 | [`narrative`](HYAI/core/domains/narrative/README.md) | `lore`, `history`, `prose`, `analysis` | факты мира, хронология, текст |
+| [`picture`](HYAI/core/domains/picture/README.md) | `instant`, `pipeline`, `art-director`, `analysis` | генерация изображений, конвейеров звеньев и серий через промпт |
 
 Профиль описывает **тему, задачу и мыслительный процесс**, а не права: права у агента общие, профиль заявляет зону ответственности, а выход за зону объявляется полем `cross_scope`. Домен и профиль агент либо берёт из слов пользователя, либо предлагает 2–3 варианта с ценой, либо объявляет выбор одной строкой — и фиксирует его в отчёте.
 

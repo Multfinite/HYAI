@@ -35,4 +35,5 @@ updated: "2026-10-22"
 - [`terminology/software.md`](terminology/software.md)
 - [`terminology/docs.md`](terminology/docs.md)
 - [`terminology/narrative.md`](terminology/narrative.md)
+- [`terminology/picture.md`](terminology/picture.md)
 - [`terminology/kit.md`](terminology/kit.md)

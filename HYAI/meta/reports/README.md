@@ -21,6 +21,7 @@ updated: "2026-10-22"
 | [`software/`](software/) | работа с кодом | `software` |
 | [`docs/`](docs/) | работа с документами и схемами | `docs` |
 | [`narrative/`](narrative/) | работа с миром и текстом | `narrative` |
+| [`picture/`](picture/) | генерация изображений, конвейеров звеньев и серий через промпт | `picture` |
 | [`plans/`](plans/README.md) | планы и матрицы, которые не являются отчётами о работе | — |
 | [`archive/`](archive/README.md) | старое, сохранённое для истории | — |
 
@@ -35,5 +36,7 @@ updated: "2026-10-22"
 | [`2026-10-26-followup-agent-optimization.md`](kit/2026-10-26-followup-agent-optimization.md) | `kit` | `kit/domain-builder` | `analysis` |
 | [`2026-10-26-bootstrap-pointer-consolidation.md`](kit/2026-10-26-bootstrap-pointer-consolidation.md) | `kit` | `kit/domain-builder` | `task` |
 | [`2026-10-28-process-step-narration.md`](kit/2026-10-28-process-step-narration.md) | `kit` | `kit/domain-builder` | `task` |
+| [`2026-10-28-picture-domain-analysis.md`](kit/2026-10-28-picture-domain-analysis.md) | `kit` | `kit/domain-builder` | `analysis` |
+| [`2026-10-28-picture-domain-implementation.md`](kit/2026-10-28-picture-domain-implementation.md) | `kit` | `kit/domain-builder` | `task` |
 
 Новый отчёт обязан появиться в этой таблице (`HYAI-ART-13`): `check_report.py` сверяет индекс с файловой системой.

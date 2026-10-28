@@ -19,6 +19,7 @@ updated: "2026-10-22"
 | [`software`](software/README.md) | код, тесты, контракты, архитектура ПО | `code`, `architect`, `analysis` |
 | [`docs`](docs/README.md) | ТЗ, спецификации, документация, диаграммы | `spec-author`, `tech-writer`, `diagrams`, `analysis` |
 | [`narrative`](narrative/README.md) | факты мира, хронология, текст | `lore`, `history`, `prose`, `analysis` |
+| [`picture`](picture/README.md) | промптовая генерация изображений, конвейеры звеньев и серии | `instant`, `pipeline`, `art-director`, `analysis` |
 | [`_template`](_template/README.md) | скелет нового домена | — (образец) |
 
 ## Состав домена

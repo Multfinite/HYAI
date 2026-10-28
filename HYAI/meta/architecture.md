@@ -20,6 +20,7 @@ updated: "2026-10-22"
 | `software` | [`architecture/software.md`](architecture/software.md) | код, тесты, контракты модулей, схемы данных |
 | `docs` | [`architecture/docs.md`](architecture/docs.md) | ТЗ, спецификации, документация, диаграммы |
 | `narrative` | [`architecture/narrative.md`](architecture/narrative.md) | факты мира, хронология, текст |
+| `picture` | [`architecture/picture.md`](architecture/picture.md) | брифы, промпты «5+3», промежуточные звенья и финальные изображения |
 | `kit` | [`architecture/kit.md`](architecture/kit.md) | домены, профили, проверки каркаса |
 
 ## Правила хаба

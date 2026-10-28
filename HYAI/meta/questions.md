@@ -21,6 +21,7 @@ updated: "2026-10-22"
 | `Q-SW-NN` | [`questions/software.md`](questions/software.md) | домен `software` |
 | `Q-DOC-NN` | [`questions/docs.md`](questions/docs.md) | домен `docs` |
 | `Q-NR-NN` | [`questions/narrative.md`](questions/narrative.md) | домен `narrative` |
+| `Q-PIC-NN` | [`questions/picture.md`](questions/picture.md) | домен `picture` |
 | `Q-KIT-NN` | [`questions/kit.md`](questions/kit.md) | домен `kit` |
 
 Маркер `[?]` в тексте обязан указывать на существующий `Q-*` (`HYAI-PROV-02`).
