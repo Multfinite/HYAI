@@ -18,6 +18,7 @@ updated: 2026-10-22
 | [`software.md`](software.md) | `Q-SW-NN` |
 | [`docs.md`](docs.md) | `Q-DOC-NN` |
 | [`narrative.md`](narrative.md) | `Q-NR-NN` |
+| [`picture.md`](picture.md) | `Q-PIC-NN` |
 | [`kit.md`](kit.md) | `Q-KIT-NN` |
 
 Правило: `[?]` в тексте указывает на существующий `Q-*`; вопрос, переставший мешать решению, уходит (в решение, в терминологию или в никуда).

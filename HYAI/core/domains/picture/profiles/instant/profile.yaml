@@ -1,0 +1,42 @@
+apiVersion: hyai/v1
+kind: AgentProfile
+metadata:
+  name: instant
+  domain: picture
+  title: "Однопроходная генерация изображений через промпт"
+  status: review
+  updated: "2026-10-28"
+
+topic: "Однопроходная генерация цельного изображения через промпт «Каркас 5+3», цикл VLM-доводки и финальный фильтр стиля."
+thought_process: >
+  Сначала жёсткая проверка стартовых ворот безопасности (NSFW, Copyright, Person, Violence),
+  затем конструирование точного моноязычного промпта базового кадра без маскирующей стилизации,
+  цикл генерации и VLM-осмотра до приёмки или Iteration Limit с немедленным удалением неудачных
+  попыток, сохранение проверенного base-final и наложение целевого фильтра стиля только в самом конце.
+
+scope_primary:
+  - "pictures/prompts/**"
+  - "pictures/assets/**"
+scope_secondary:
+  - "pictures/briefs/**"
+  - "pictures/stages/**"
+
+produced_artifacts:
+  - "prompt-spec"
+  - "asset-card"
+
+workflow: "picture/instant"
+definition_of_done:
+  - "Все 4 правила безопасности (NSFW, Copyright, Person, Violence) явно заданы пользователем до старта (PIC-SAF-01)."
+  - "Каждое изображение создано строго через моноязычный промпт каркаса «5+3» с динамическим negative и корректными весами (PIC-POL-01..02, PIC-PRM-01..05)."
+  - "Проверенный базовый кадр base-final сохранён в pictures/stages/, а все неудачные дубли удалены (PIC-POL-04)."
+  - "Фильтр стиля наложен строго после готовности base-final; финальный кадр прошёл VLM-проверку артефактов и порогов качества (PIC-POL-05, PIC-QA-01..05)."
+checklist:
+  - "Задал ли пользователь явно все четыре параметра NSFW, Copyright, Person и Violence?"
+  - "Соответствует ли промпт каркасу «5+3», порогу MinDetail, языку модели и её синтаксису весов?"
+  - "Удалены ли все отбракованные попытки и сохранён ли принятый base-final перед стилевым фильтром?"
+  - "Проверены ли VLM руки, лица, текст, пропорции и разрешение на финальном изображении?"
+
+includes: []
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain picture"

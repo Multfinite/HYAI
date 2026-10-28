@@ -7,7 +7,7 @@ metadata:
   name: project-template
   version: "1.0.0"
   status: released
-  updated: "2026-10-22"
+  updated: "2026-10-28"
   language: ru
   owner: maintainer
   license: "GPL-3.0-only"
@@ -28,12 +28,15 @@ active:
     profile: spec-author
   - domain: narrative
     profile: prose
+  - domain: picture
+    profile: instant
 
 domains:
   kit: "HYAI/core/domains/kit/manifest.yaml"
   software: "HYAI/core/domains/software/manifest.yaml"
   docs: "HYAI/core/domains/docs/manifest.yaml"
   narrative: "HYAI/core/domains/narrative/manifest.yaml"
+  picture: "HYAI/core/domains/picture/manifest.yaml"
 
 # Где лежит сам каркас относительно корня репозитория.
 # В проекте, использующем HYAI, каркас ставится каталогом `HYAI/` — отсюда префикс
@@ -98,11 +101,12 @@ path_map:
   "chapters/**": narrative
   "drafts/**": narrative
   "styles/**": narrative
+  "pictures/**": picture
 
 report:
   naming: "YYYY-MM-DD-<slug>.md"
   dir_pattern: "HYAI/meta/reports/{scope}/"
-  allowed_scopes: [project, kit, software, docs, narrative]
+  allowed_scopes: [project, kit, software, docs, narrative, picture]
   index: "HYAI/meta/reports/README.md"
   required_fields: [id, title, type, report_kind, domain, profile, status, date, workflow]
   optional_fields: [cross_scope, decisions, role, prism, characters, supersedes]
@@ -145,6 +149,10 @@ decisions:
       prefix: "NR"
       dir: "HYAI/meta/decisions/narrative"
       title: "Решения домена narrative"
+    picture:
+      prefix: "PIC"
+      dir: "HYAI/meta/decisions/picture"
+      title: "Решения домена picture"
 
 task_contract:
   required_fields: [goal, non_goals, domain, profile, sources, outputs, acceptance, contour, stop_conditions]

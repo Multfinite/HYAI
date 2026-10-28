@@ -1,0 +1,33 @@
+version: "1.0"
+domain: picture
+read_first:
+  - "HYAI/meta/project.md"
+  - "HYAI/core/domains/picture/policy.md"
+  - "HYAI/core/domains/picture/authority.md"
+  - "HYAI/core/domains/picture/access.md"
+documents:
+  - id: picture.policy
+    path: "HYAI/core/domains/picture/policy.md"
+    type: policy
+    authority: contract
+    why: "Обязательные правила промпт-генерации, стартовых ворот безопасности, промптов «5+3», конвейеров и VLM-качества"
+  - id: picture.authority
+    path: "HYAI/core/domains/picture/authority.md"
+    type: policy
+    authority: invariant
+    why: "Уровни visual-canon, brief, prompt, stage и границы полномочий владельца"
+  - id: picture.access
+    path: "HYAI/core/domains/picture/access.md"
+    type: policy
+    authority: invariant
+    why: "Контуры public/internal/restricted, правила выгрузки и обязательного disclaimer"
+  - id: picture.architecture
+    path: "HYAI/meta/architecture/picture.md"
+    type: architecture
+    authority: contract
+    why: "Раскладка продуктового каталога pictures/, жизненный цикл звеньев и инварианты хранения"
+  - id: picture.terminology
+    path: "HYAI/meta/terminology/picture.md"
+    type: meta
+    authority: contract
+    why: "Словарь терминов домена: Каркас 5+3, base-neutral, base-final, style-filter, series-anchor"

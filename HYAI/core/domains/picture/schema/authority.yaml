@@ -1,0 +1,25 @@
+# Машинный словарь уровней нормативности домена picture.
+version: "1.0"
+domain: picture
+
+authority:
+  values:
+    - visual-canon   # сквозной эталон серии, паспорта персонажей/объектов и целевого стиля
+    - brief          # бриф задачи, явно заданные правила безопасности и пороги качества
+    - prompt         # структурированный промпт «5+3», динамический negative, веса и лог итераций
+    - stage          # принятое промежуточное звено генерации или паспорт готового ассета
+    - none           # отчёты, обзоры и рабочие заметки
+  default: prompt
+  approval_required: [visual-canon, brief]
+
+status:
+  values: [draft, review, approved, superseded, deprecated, archived]
+  default: draft
+  owner_only: [approved]
+
+markers:
+  source: "[И]"
+  derived: "[В]"
+  hypothesis: "[Г]"
+  author: "[А]"
+  question: "[?]"

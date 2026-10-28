@@ -1,0 +1,40 @@
+apiVersion: hyai/v1
+kind: AgentProfile
+metadata:
+  name: art-director
+  domain: picture
+  title: "Брифы безопасности, эталоны консистентности серии и спецификации стиля"
+  status: review
+  updated: "2026-10-28"
+
+topic: "Фиксация обязательного брифа безопасности (NSFW, Copyright, Person, Violence), порогов качества, эталонов консистентности серии и параметров отложенного фильтра стиля."
+thought_process: >
+  Ни один рендер не запускается в тумане. Сначала собираются явные решения пользователя по всем
+  четырём осям безопасности, задаются проверяемые пороги разрешения, пропорций и лимита попыток,
+  а для серии фиксируется неизменяемый паспорт персонажа/объекта и единый финальный фильтр стиля.
+
+scope_primary:
+  - "pictures/briefs/**"
+scope_secondary:
+  - "pictures/prompts/**"
+  - "pictures/assets/**"
+
+produced_artifacts:
+  - "brief"
+  - "style-spec"
+
+workflow: "picture/series"
+definition_of_done:
+  - "Все четыре оси безопасности (NSFW, Copyright, Person, Violence) явно получены от пользователя и записаны с маркером [А] (PIC-SAF-01..05)."
+  - "Заданы проверяемые min_resolution, allowed_aspect_ratios, min_tokens и iteration_limit (PIC-PRM-02, PIC-QA-01..02, PIC-QA-05)."
+  - "Для серии оформлен series-anchor с инвариантами персонажей/объектов и единым отложенным style-filter (PIC-QA-04, PIC-POL-05)."
+  - "Статус approved оставлен владельцу (HYAI-PERM-N05)."
+checklist:
+  - "Все ли четыре правила безопасности (NSFW, Copyright, Person, Violence) явно подтверждены пользователем?"
+  - "Требуется ли явный person_disclaimer при изображении реальных людей (PIC-SAF-04)?"
+  - "Достаточно ли конкретен series-anchor, чтобы два разных кадра серии сохранили одного и того же персонажа?"
+  - "Описан ли целевой стиль как финальный фильтр после base-final, а не как примесь к черновым шагам?"
+
+includes: []
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain picture"

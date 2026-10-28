@@ -1,0 +1,42 @@
+apiVersion: hyai/v1
+kind: AgentDomain
+metadata:
+  name: picture
+  title: "Генерация изображений и визуальных серий через промпт"
+  status: review
+  updated: "2026-10-28"
+  owner: maintainer
+
+# Каталог продукта, принадлежащий самодостаточному домену picture.
+root_paths:
+  - "pictures"
+
+# Строгая зона домена: профили не переопределяют уровни нормативности и контуры доступа.
+authority:
+  doc: "HYAI/core/domains/picture/authority.md"
+  schema: "HYAI/core/domains/picture/schema/authority.yaml"
+access:
+  doc: "HYAI/core/domains/picture/access.md"
+  schema: "HYAI/core/domains/picture/schema/access.yaml"
+
+# Оверлей frontmatter и машинные проверки терминов/правил в HYAI/meta/.
+schema: "HYAI/meta/schema/domains/picture.yaml"
+lint:
+  - "HYAI/meta/lint/terms/picture.json"
+policy: "HYAI/core/domains/picture/policy.md"
+agents: "HYAI/core/domains/picture/agents.md"
+registry: "HYAI/core/domains/picture/registry/documents.yaml"
+workflows_dir: "HYAI/core/domains/picture/workflows/"
+templates_dir: "HYAI/core/domains/picture/templates/"
+decisions_scope: picture
+
+profiles:
+  instant: "HYAI/core/domains/picture/profiles/instant/profile.yaml"
+  pipeline: "HYAI/core/domains/picture/profiles/pipeline/profile.yaml"
+  art-director: "HYAI/core/domains/picture/profiles/art-director/profile.yaml"
+  analysis: "HYAI/core/domains/picture/profiles/analysis/profile.yaml"
+
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain picture"
+  - "python3 HYAI/tools/lint_scopes.py --domain picture"
+  - "python3 HYAI/tools/build_export.py --domain picture --preset public --dry-run"

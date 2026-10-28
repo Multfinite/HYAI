@@ -21,6 +21,7 @@ updated: "2026-10-22"
 | [`terms/software.json`](terms/software.json) | `lint_terms.py` | Термины и паттерны кода |
 | [`terms/docs.json`](terms/docs.json) | `lint_terms.py` | Вода в документах, TODO без владельца, схема картинкой |
 | [`terms/narrative.json`](terms/narrative.json) | `lint_terms.py` | Термины и паттерны текста |
+| [`terms/picture.json`](terms/picture.json) | `lint_terms.py` | Плейсхолдеры безопасности, пустой `negative`, штампы качества, смешение весов, хранение брака, ранняя стилизация |
 
 ## Обязательные поля правила
 

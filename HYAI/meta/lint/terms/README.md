@@ -19,5 +19,6 @@ updated: "2026-10-22"
 | [`software.json`](software.json) | `software` | Магические числа, пустой `except`, `FIXME` без `Q-` |
 | [`docs.json`](docs.json) | `docs` | Вода, `TODO` без владельца, схема только картинкой |
 | [`narrative.json`](narrative.json) | `narrative` | Канцелярит в описании мира, абсолютные утверждения без маркера |
+| [`picture.json`](picture.json) | `picture` | Незаданные оси безопасности, пустой `negative`, штампы качества, смешение весов, брак в хранилище, ранняя стилизация |
 
 Формат правила: `id`, `severity`, `pattern`, `applies_to`, `reason`, опционально `suggest`.

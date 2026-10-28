@@ -17,3 +17,4 @@ updated: "2026-10-22"
 | --- | --- | --- |
 | [`KIT-0001`](KIT-0001-agent-entrypoint-structure.md) | Структура общего входа агента | review |
 | [`KIT-0002`](KIT-0002-core-process-narration.md) | Общее правило озвучивания этапов в ядре | review |
+| [`KIT-0003`](KIT-0003-picture-domain.md) | Самодостаточный домен `picture` | review |

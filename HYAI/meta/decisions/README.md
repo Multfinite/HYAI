@@ -20,6 +20,7 @@ updated: "2026-10-22"
 | `software` | [`software/`](software/README.md) | `SW` | архитектура, контракты, зависимости |
 | `docs` | [`docs/`](docs/README.md) | `DOC` | типы документов, требования, формы ТЗ |
 | `narrative` | [`narrative/`](narrative/README.md) | `NR` | канон, хронология, доступ |
+| `picture` | [`picture/`](picture/README.md) | `PIC` | промпт-генерация, конвейер звеньев, приёмка и стиль |
 
 ## Действующие решения
 
@@ -29,6 +30,7 @@ updated: "2026-10-22"
 | [`P-0002`](project/P-0002-process-step-narration.md) | project | Единое озвучивание шагов работы во всех доменах | review |
 | [`KIT-0001`](kit/KIT-0001-agent-entrypoint-structure.md) | kit | Структура общего входа агента | review |
 | [`KIT-0002`](kit/KIT-0002-core-process-narration.md) | kit | Общее правило озвучивания этапов в ядре | review |
+| [`KIT-0003`](kit/KIT-0003-picture-domain.md) | kit | Самодостаточный домен `picture` | review |
 
 ## Правила
 
