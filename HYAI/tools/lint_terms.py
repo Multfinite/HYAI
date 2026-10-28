@@ -23,25 +23,50 @@ CODE_FENCE = re.compile(r"```.*?```", re.S)
 
 def load_rules(root: Path, man: dict, domain: str | None) -> tuple[list[dict], list[str], list[str]]:
     rel_dir = (man.get("validation", {}).get("data") or {}).get("terms_dir") or "meta/lint/terms/"
+    configs = sh.domain_configs(root, man)
     rules: list[dict] = []
     config_problems: list[str] = []
     searched: list[str] = []
-    for path in sorted((root / str(rel_dir)).glob("*.json")):
+    loaded_domains: set[str] = set()
+
+    candidate_paths: list[Path] = []
+    local_dir = sh.fw(root, str(rel_dir))
+    if local_dir.exists():
+        candidate_paths.extend(sorted(local_dir.glob("*.json")))
+
+    for path in candidate_paths:
         config = sh.load_json(path)
-        name = config.get("domain") or path.stem
+        name = str(config.get("domain") or path.stem)
+        loaded_domains.add(name)
+
+    for dname, cfg in sorted(configs.items()):
+        if dname in loaded_domains:
+            continue
+        for lint_rel in (cfg.get("data") or {}).get("lint") or []:
+            resolved = sh.fw(root, str(lint_rel))
+            if resolved.exists() and resolved not in candidate_paths:
+                candidate_paths.append(resolved)
+
+    for path in candidate_paths:
+        config = sh.load_json(path)
+        name = str(config.get("domain") or path.stem)
         if domain and name != domain:
             continue
         searched.append(sh.rel_posix(root, path))
-        default_scope = config.get("applies_to") or []
+        dom_cfg = configs.get(name) or {}
+        template_roots = dom_cfg.get("template_root_paths") or []
+        effective_roots = (dom_cfg.get("data") or {}).get("root_paths") or []
+        default_scope = sh.rebase_globs(config.get("applies_to") or [], template_roots, effective_roots)
         for rule in config.get("rules") or []:
             missing = [f for f in ("id", "severity", "reason") if not rule.get(f)]
-            if not (rule.get("applies_to") or default_scope):
+            raw_scope = rule.get("applies_to") or default_scope
+            if not raw_scope:
                 missing.append("applies_to")
             if missing:
                 config_problems.append(f"{path.name}: правило {rule.get('id') or '?'} без полей {', '.join(missing)}")
                 continue
             merged = dict(rule)
-            merged["applies_to"] = rule.get("applies_to") or default_scope
+            merged["applies_to"] = sh.rebase_globs(raw_scope, template_roots, effective_roots)
             merged["domain"] = name
             rules.append(merged)
     return rules, config_problems, searched

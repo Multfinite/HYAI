@@ -13,7 +13,7 @@ template_kind: output
 
 # Паспорт готового изображения (`asset-card`)
 
-Создаётся в `pictures/assets/<slug>.md` рядом с финальным изображением (или ссылкой на внешнее хранилище при размере > 10 МБ, `HYAI-ART-19`).
+Создаётся в `<picture_root>/assets/<slug>.md` рядом с финальным изображением (или ссылкой на внешнее хранилище при размере > 10 МБ, `HYAI-ART-19`), где `<picture_root>` — `root_paths` манифеста активного домена `picture` (вне подмодуля HYAI для внешних проектов — `PIC-POL-06`).
 
 **Если данных нет:** карточка с пустой отметкой по любой из осей безопасности (`PIC-SAF-01..05`) или VLM-проверки качества (`PIC-QA-01..05`) приёмку не проходит; недостающая проверка выполняется до закрытия задачи.
 
@@ -31,15 +31,15 @@ visibility: internal
 
 ## 1. Файл и провенанс
 
-- **Путь к финальному файлу (или URI внешнего хранилища):** `pictures/assets/<slug>.png`
+- **Путь к финальному файлу (или URI внешнего хранилища):** `<picture_root>/assets/<slug>.png`
 - **`sha256`:** `<хэш файла>`
 - **Рабочий процесс:** `picture/instant` | `picture/pipeline` | `picture/series`
-- **Бриф безопасности:** `pictures/briefs/<slug>.md`
-- **Принятый базовый кадр до фильтра стиля (`PIC-POL-04..05`):** `pictures/stages/<slug>/<base-final>.png`
-- **Карта промежуточных звеньев (для `pipeline`):** `pictures/stages/<slug>/pipeline-manifest.md`
-- **Промпт базового кадра (`PIC-POL-01`):** `pictures/prompts/<slug>-base.md`
-- **Промпт фильтра стиля (`PIC-POL-05`):** `pictures/prompts/<slug>-style.md` (или `none-by-brief`)
-- **Эталон серии (`PIC-QA-04`):** `<pictures/briefs/<series>-anchor.md или "одиночный кадр">`
+- **Бриф безопасности:** `<picture_root>/briefs/<slug>.md`
+- **Принятый базовый кадр до фильтра стиля (`PIC-POL-04..05`):** `<picture_root>/stages/<slug>/<base-final>.png`
+- **Карта промежуточных звеньев (для `pipeline`):** `<picture_root>/stages/<slug>/pipeline-manifest.md`
+- **Промпт базового кадра (`PIC-POL-01`):** `<picture_root>/prompts/<slug>-base.md`
+- **Промпт фильтра стиля (`PIC-POL-05`):** `<picture_root>/prompts/<slug>-style.md` (или `none-by-brief`)
+- **Эталон серии (`PIC-QA-04`):** `<<picture_root>/briefs/<series>-anchor.md или "одиночный кадр">`
 - **Тип синтетического источника (IPTC):** `trainedAlgorithmicMedia` | `compositeWithTrainedAlgorithmicMedia`
 
 ## 2. Контроль безопасности и публичных оговорок (`PIC-SAF-01..05`)

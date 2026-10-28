@@ -101,7 +101,7 @@ path_map:
   "chapters/**": narrative
   "drafts/**": narrative
   "styles/**": narrative
-  "pictures/**": picture
+  "HYAI/core/domains/picture/pictures/**": picture
 
 report:
   naming: "YYYY-MM-DD-<slug>.md"

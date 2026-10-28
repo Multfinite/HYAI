@@ -15,11 +15,11 @@ thought_process: >
   попыток, сохранение проверенного base-final и наложение целевого фильтра стиля только в самом конце.
 
 scope_primary:
-  - "pictures/prompts/**"
-  - "pictures/assets/**"
+  - "HYAI/core/domains/picture/pictures/prompts/**"
+  - "HYAI/core/domains/picture/pictures/assets/**"
 scope_secondary:
-  - "pictures/briefs/**"
-  - "pictures/stages/**"
+  - "HYAI/core/domains/picture/pictures/briefs/**"
+  - "HYAI/core/domains/picture/pictures/stages/**"
 
 produced_artifacts:
   - "prompt-spec"
@@ -29,7 +29,7 @@ workflow: "picture/instant"
 definition_of_done:
   - "Все 4 правила безопасности (NSFW, Copyright, Person, Violence) явно заданы пользователем до старта (PIC-SAF-01)."
   - "Каждое изображение создано строго через моноязычный промпт каркаса «5+3» с динамическим negative и корректными весами (PIC-POL-01..02, PIC-PRM-01..05)."
-  - "Проверенный базовый кадр base-final сохранён в pictures/stages/, а все неудачные дубли удалены (PIC-POL-04)."
+  - "Проверенный базовый кадр base-final сохранён в <picture_root>/stages/, а все неудачные дубли удалены (PIC-POL-04)."
   - "Фильтр стиля наложен строго после готовности base-final; финальный кадр прошёл VLM-проверку артефактов и порогов качества (PIC-POL-05, PIC-QA-01..05)."
 checklist:
   - "Задал ли пользователь явно все четыре параметра NSFW, Copyright, Person и Violence?"

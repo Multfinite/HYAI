@@ -11,15 +11,15 @@ topic: "Декомпозиция сложной сцены на отдельны
 thought_process: >
   Сложная сцена собирается из независимых проверяемых звеньев, как сборочный чертёж.
   Каждое звено порождается собственным промптом, сверяется VLM с исходным запросом, при успехе
-  сохраняется в pictures/stages/, а при браке удаляется и перегенерируется на месте. Только когда
+  сохраняется в <picture_root>/stages/, а при браке удаляется и перегенерируется на месте. Только когда
   все звенья и собранный из них base-final приняты, накладывается финальный фильтр стиля.
 
 scope_primary:
-  - "pictures/stages/**"
+  - "HYAI/core/domains/picture/pictures/stages/**"
 scope_secondary:
-  - "pictures/prompts/**"
-  - "pictures/assets/**"
-  - "pictures/briefs/**"
+  - "HYAI/core/domains/picture/pictures/prompts/**"
+  - "HYAI/core/domains/picture/pictures/assets/**"
+  - "HYAI/core/domains/picture/pictures/briefs/**"
 
 produced_artifacts:
   - "stage-manifest"
@@ -29,7 +29,7 @@ produced_artifacts:
 workflow: "picture/pipeline"
 definition_of_done:
   - "Все 4 правила безопасности (NSFW, Copyright, Person, Violence) явно заданы пользователем до старта (PIC-SAF-01)."
-  - "Каждое активное звено S1..S7 создано через отдельный промпт, прошло VLM-сверку с запросом и сохранено в pictures/stages/<slug>/ (PIC-POL-01, PIC-POL-04, PIC-WF-01..02)."
+  - "Каждое активное звено S1..S7 создано через отдельный промпт, прошло VLM-сверку с запросом и сохранено в <picture_root>/stages/<slug>/ (PIC-POL-01, PIC-POL-04, PIC-WF-01..02)."
   - "Ни один файл неудачной промежуточной попытки не оставлен в хранилище (PIC-POL-04)."
   - "Фильтр стиля S8 применён строго после полной готовности и приёмки S7 base-final (PIC-POL-05)."
 checklist:

@@ -14,10 +14,10 @@ thought_process: >
   а для серии фиксируется неизменяемый паспорт персонажа/объекта и единый финальный фильтр стиля.
 
 scope_primary:
-  - "pictures/briefs/**"
+  - "HYAI/core/domains/picture/pictures/briefs/**"
 scope_secondary:
-  - "pictures/prompts/**"
-  - "pictures/assets/**"
+  - "HYAI/core/domains/picture/pictures/prompts/**"
+  - "HYAI/core/domains/picture/pictures/assets/**"
 
 produced_artifacts:
   - "brief"

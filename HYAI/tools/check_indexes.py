@@ -34,8 +34,38 @@ def governed_bases(man: dict) -> list[str]:
     return bases or ["HYAI/core", "HYAI/meta", "HYAI/tools"]
 
 
+def working_data_roots(root: Path, man: dict) -> set[str]:
+    """Рабочие каталоги доменов (`root_paths`), не содержащие манифестов доменов и схем."""
+    configs = sh.domain_configs(root, man)
+    governance_targets: list[str] = []
+    for cfg in configs.values():
+        if cfg.get("rel"):
+            governance_targets.append(str(cfg["rel"]).replace("\\", "/").strip("/"))
+        overlay = (cfg.get("data") or {}).get("schema")
+        if overlay:
+            governance_targets.append(str(overlay).replace("\\", "/").strip("/"))
+    schema_dir = ((man.get("paths") or {}).get("schema")) or ""
+    if schema_dir:
+        governance_targets.append(str(schema_dir).replace("\\", "/").strip("/"))
+    fm_schema = (((man.get("validation") or {}).get("data") or {}).get("frontmatter_schema")) or ""
+    if fm_schema:
+        governance_targets.append(str(fm_schema).replace("\\", "/").strip("/"))
+
+    data_roots: set[str] = set()
+    for cfg in configs.values():
+        for raw in (cfg.get("data") or {}).get("root_paths") or []:
+            clean = str(raw).replace("\\", "/").strip("/")
+            if not clean:
+                continue
+            if any(t == clean or t.startswith(clean + "/") for t in governance_targets if t):
+                continue
+            data_roots.add(clean)
+    return data_roots
+
+
 def governed_dirs(root: Path, man: dict) -> list[Path]:
     result: list[Path] = []
+    skip_data = working_data_roots(root, man)
     for base in governed_bases(man):
         for path in sorted(sh.fw(root, base).rglob("*")):
             if not path.is_dir():
@@ -45,7 +75,7 @@ def governed_dirs(root: Path, man: dict) -> list[Path]:
             rel = sh.rel_posix(root, path)
             if any(part in SKIP_PARTS for part in Path(rel).parts):
                 continue
-            if any(rel == p or rel.startswith(p + "/") for p in SKIP_PREFIXES):
+            if any(rel == p or rel.startswith(p + "/") for p in SKIP_PREFIXES | skip_data):
                 continue
             if any(child.suffix.lower() in (".md", ".yaml", ".yml", ".json", ".py") for child in path.iterdir() if child.is_file()):
                 result.append(path)
@@ -142,6 +172,7 @@ def check_manifest_paths(root: Path, man: dict) -> list[str]:
 
     optional = [str(p).rstrip("/") for p in man.get("optional_paths") or []]
     domains = list(sh.domain_configs(root, man)) or ["domain"]
+    man_rel = sh.rel_posix(root, sh.manifest_path(root))
     seen: set[str] = set()
     for rel in candidates:
         if not rel:
@@ -155,20 +186,31 @@ def check_manifest_paths(root: Path, man: dict) -> list[str]:
                 continue
             seen.add(target)
             if not sh.fw(root, target).exists():
-                problems.append(f"HYAI/meta/manifest.yaml: путь не найден: {target}")
+                problems.append(f"{man_rel}: путь не найден: {target}")
     return problems
 
 
 def check_domain_roots(root: Path, man: dict) -> list[str]:
     problems: list[str] = []
     optional = [str(p).rstrip("/") for p in man.get("optional_paths") or []]
+    active_names = {d for d, _ in sh.active_pairs(man)}
+    consumer = sh.is_consumer_project(root)
     for name, cfg in sh.domain_configs(root, man).items():
         for rel in cfg["data"].get("root_paths") or []:
             base = str(rel).rstrip("/")
             if base in optional:
                 continue
-            if not sh.fw(root, str(rel)).exists():
-                problems.append(f"HYAI/core/domains/{name}/manifest.yaml: каталог домена не найден: {rel}")
+            if name in active_names:
+                if consumer and sh.in_submodule(root, man, str(rel)):
+                    problems.append(
+                        f"{cfg['rel']}: каталог активного домена указывает внутрь подмодуля: {rel}"
+                    )
+                    continue
+                exists = (root / str(rel)).exists()
+            else:
+                exists = sh.fw(root, str(rel)).exists()
+            if not exists:
+                problems.append(f"{cfg['rel']}: каталог домена не найден: {rel}")
     return problems
 
 

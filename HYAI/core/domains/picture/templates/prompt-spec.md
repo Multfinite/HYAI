@@ -13,7 +13,7 @@ template_kind: output
 
 # Спецификация промпта («Каркас 5+3»)
 
-Копируется в `pictures/prompts/<slug>-<pass>.md` для каждого шага генерации (`PIC-POL-01`, `PIC-PRM-01..05`). На базовых и промежуточных шагах `style_phase: base-neutral`; на заключительном проходе `style-filter` — `style_phase: target-style` (`PIC-POL-05`).
+Копируется в `<picture_root>/prompts/<slug>-<pass>.md` для каждого шага генерации (`PIC-POL-01`, `PIC-PRM-01..05`), где `<picture_root>` — `root_paths` манифеста активного домена `picture` (вне подмодуля HYAI для внешних проектов — `PIC-POL-06`). На базовых и промежуточных шагах `style_phase: base-neutral`; на заключительном проходе `style-filter` — `style_phase: target-style` (`PIC-POL-05`).
 
 **Если данных нет:** если не заполнены все четыре параметра безопасности из брифа — стоп по `PIC-SAF-01`; если не хватает предметных деталей сцены — уточнить у пользователя или явно отметить выбор агента в отчёте, не добивая объём пустыми штампами `8k / masterpiece` (`PIC-PRM-02`).
 
@@ -31,7 +31,7 @@ visibility: internal
 
 ## Управляющий паспорт (`render_params`)
 
-- **Бриф и безопасность:** `pictures/briefs/<slug>.md` (`safety_nsfw`, `safety_copyright`, `safety_person`, `safety_violence` заданы `[А]`)
+- **Бриф и безопасность:** `<picture_root>/briefs/<slug>.md` (`safety_nsfw`, `safety_copyright`, `safety_person`, `safety_violence` заданы `[А]`)
 - **Целевая модель / движок:** `<имя и версия модели>`
 - **`prompt_language` (`PIC-PRM-04`):** `<en | иной моноязык модели>`
 - **`scene_complexity` и `MinDetail` (`PIC-PRM-02`):** `<simple | complex>`, `min_tokens`: `<N>`, `token_count`: `<факт>`

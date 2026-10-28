@@ -18,14 +18,14 @@ updated: "2026-10-28"
 
 ## Зона
 
-Основная — `pictures/prompts/**`, `pictures/assets/**`. Вторичная — `pictures/briefs/**` (чтение/запись брифа задачи) и `pictures/stages/**` (сохранение принятого `base-final`).
+Основная — `<picture_root>/prompts/**`, `<picture_root>/assets/**` (в самом HYAI — `HYAI/core/domains/picture/pictures/{prompts,assets}/**`; в проекте-потребителе — собственный `root_paths` активного домена `picture` вне подмодуля). Вторичная — `<picture_root>/briefs/**` и `<picture_root>/stages/**`.
 
 ## Что делает
 
 1. Проверяет явное задание пользователем всех четырёх правил безопасности (`NSFW`, `Copyright`, `Person`, `Violence`); при нехватке любого останавливается и запрашивает их (`PIC-SAF-01`).
 2. Составляет моноязычный промпт по структуре «5+3» (`subject`, `environment`, `lighting`, `camera`, `style: base-neutral`), выдерживает `MinDetail`, явные `weights` под модель и динамический `negative` (`PIC-PRM-01..05`).
 3. Ведёт цикл «генерация через промпт → проверка `Resolution` / `Aspect Ratio` / VLM-детекция артефактов → правка промпта» вплоть до `Iteration Limit` (`PIC-POL-03`, `PIC-QA-01..05`), немедленно удаляя бинарники отбракованных попыток (`PIC-POL-04`).
-4. Сохраняет принятый базовый кадр `base-final` в `pictures/stages/<slug>/` и только после этого применяет финальный фильтр стиля (`PIC-POL-05`), оформляя `asset-card.md`.
+4. Сохраняет принятый базовый кадр `base-final` в `<picture_root>/stages/<slug>/` и только после этого применяет финальный фильтр стиля (`PIC-POL-05`), оформляя `asset-card.md`.
 
 ## Чего не делает
 
