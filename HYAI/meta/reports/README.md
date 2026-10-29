@@ -22,6 +22,7 @@ updated: "2026-10-22"
 | [`docs/`](docs/) | работа с документами и схемами | `docs` |
 | [`narrative/`](narrative/) | работа с миром и текстом | `narrative` |
 | [`picture/`](picture/) | генерация изображений, конвейеров звеньев и серий через промпт | `picture` |
+| [`video/`](video/) | планирование, continuity, звук, швы, сегменты и монтаж | `video` |
 | [`plans/`](plans/README.md) | планы и матрицы, которые не являются отчётами о работе | — |
 | [`archive/`](archive/README.md) | старое, сохранённое для истории | — |
 
@@ -39,5 +40,7 @@ updated: "2026-10-22"
 | [`2026-10-28-picture-domain-analysis.md`](kit/2026-10-28-picture-domain-analysis.md) | `kit` | `kit/domain-builder` | `analysis` |
 | [`2026-10-28-picture-domain-implementation.md`](kit/2026-10-28-picture-domain-implementation.md) | `kit` | `kit/domain-builder` | `task` |
 | [`2026-10-28-picture-data-root-separation.md`](kit/2026-10-28-picture-data-root-separation.md) | `kit` | `kit/domain-builder` | `task` |
+| [`2026-10-29-video-domain-analysis.md`](kit/2026-10-29-video-domain-analysis.md) | `kit` | `kit/domain-builder` | `analysis` |
+| [`2026-10-29-video-domain-implementation.md`](kit/2026-10-29-video-domain-implementation.md) | `kit` | `kit/domain-builder` | `task` |
 
 Новый отчёт обязан появиться в этой таблице (`HYAI-ART-13`): `check_report.py` сверяет индекс с файловой системой.

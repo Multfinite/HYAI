@@ -1,0 +1,32 @@
+version: "1.0"
+domain: video
+read_first:
+  - "HYAI/meta/project.md"
+  - "HYAI/core/domains/video/policy.md"
+  - "HYAI/core/domains/video/workflows/production.md"
+documents:
+  - id: video.policy
+    path: "HYAI/core/domains/video/policy.md"
+    type: policy
+    authority: contract
+    why: "Обязательные вопросы, границы владения, бесшовные швы, звук и хранение."
+  - id: video.production
+    path: "HYAI/core/domains/video/workflows/production.md"
+    type: workflow
+    authority: contract
+    why: "Стартовый intake и approval gates для видеозадачи."
+  - id: video.continuity
+    path: "HYAI/core/domains/video/workflows/continuity.md"
+    type: workflow
+    authority: contract
+    why: "Способ handoff сегментов и обязательная обработка seam-window."
+  - id: picture.series
+    path: "HYAI/core/domains/picture/workflows/series.md"
+    type: workflow
+    authority: contract
+    why: "Единственный владелец генерации визуальных серий/keyframe assets, на которые ссылается video."
+  - id: video.audit
+    path: "HYAI/core/domains/video/workflows/audit.md"
+    type: workflow
+    authority: contract
+    why: "Доменная проекция общего read-only audit процесса на video records и seam QA."

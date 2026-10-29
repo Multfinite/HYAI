@@ -1,0 +1,20 @@
+version: "1.0"
+domain: video
+authority:
+  values: [video-canon, brief, shot-plan, continuity, segment-record, delivery, none]
+  default: segment-record
+  order: [video-canon, brief, shot-plan, continuity, segment-record, delivery, none]
+  approval_required: [video-canon, brief, shot-plan, continuity, delivery]
+status:
+  values: [draft, review, approved, superseded, deprecated, archived]
+  default: draft
+  transitions:
+    draft: [review, archived]
+    review: [approved, draft, archived]
+    approved: [superseded, archived]
+    superseded: []
+    deprecated: []
+    archived: []
+  owner_only: [approved]
+provenance:
+  markers: ["[А]", "[И]", "[В]", "[Г]", "[?]"]

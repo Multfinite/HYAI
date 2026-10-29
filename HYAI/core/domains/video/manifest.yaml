@@ -1,0 +1,39 @@
+apiVersion: hyai/v1
+kind: AgentDomain
+metadata:
+  name: video
+  title: "Планирование, генерация и приёмка видео"
+  status: review
+  updated: "2026-10-29"
+  owner: maintainer
+
+root_paths:
+  - "HYAI/core/domains/video/videos"
+
+authority:
+  doc: "HYAI/core/domains/video/authority.md"
+  schema: "HYAI/core/domains/video/schema/authority.yaml"
+access:
+  doc: "HYAI/core/domains/video/access.md"
+  schema: "HYAI/core/domains/video/schema/access.yaml"
+
+schema: "HYAI/meta/schema/domains/video.yaml"
+lint:
+  - "HYAI/meta/lint/terms/video.json"
+policy: "HYAI/core/domains/video/policy.md"
+agents: "HYAI/core/domains/video/agents.md"
+registry: "HYAI/core/domains/video/registry/documents.yaml"
+workflows_dir: "HYAI/core/domains/video/workflows/"
+templates_dir: "HYAI/core/domains/video/templates/"
+decisions_scope: video
+
+profiles:
+  producer: "HYAI/core/domains/video/profiles/producer/profile.yaml"
+  continuity-director: "HYAI/core/domains/video/profiles/continuity-director/profile.yaml"
+  sound-designer: "HYAI/core/domains/video/profiles/sound-designer/profile.yaml"
+  editor: "HYAI/core/domains/video/profiles/editor/profile.yaml"
+  analysis: "HYAI/core/domains/video/profiles/analysis/profile.yaml"
+
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain video"
+  - "python3 HYAI/tools/lint_scopes.py --domain video"
