@@ -5,8 +5,8 @@ type: meta
 status: approved
 authority: invariant
 visibility: internal
-version: "2.0"
-updated: "2026-10-22"
+version: "2.1"
+updated: "2026-10-29"
 ---
 
 # Политики ядра
@@ -19,7 +19,7 @@ updated: "2026-10-22"
 | Насколько документ нормативен и откуда взято утверждение? | [`provenance.md`](provenance.md) | `PROV-*` |
 | Какую форму имеет результат и где он лежит? | [`artifacts.md`](artifacts.md) | `ART-*` |
 | Как принимаются и сливаются решения? | [`decisions.md`](decisions.md) | `DEC-*` |
-| Как агент начинает работу и общается с человеком? | [`interaction.md`](interaction.md) | `INT-*` |
+| Как агент начинает работу, общается с человеком и согласует параллельное исполнение? | [`interaction.md`](interaction.md) | `INT-*` |
 
 ## Правила пространств ID
 

@@ -5,8 +5,8 @@ type: meta
 status: approved
 authority: contract
 visibility: internal
-version: "2.0"
-updated: "2026-10-22"
+version: "2.1"
+updated: "2026-10-29"
 ---
 
 # Отчёты
@@ -42,5 +42,6 @@ updated: "2026-10-22"
 | [`2026-10-28-picture-data-root-separation.md`](kit/2026-10-28-picture-data-root-separation.md) | `kit` | `kit/domain-builder` | `task` |
 | [`2026-10-29-video-domain-analysis.md`](kit/2026-10-29-video-domain-analysis.md) | `kit` | `kit/domain-builder` | `analysis` |
 | [`2026-10-29-video-domain-implementation.md`](kit/2026-10-29-video-domain-implementation.md) | `kit` | `kit/domain-builder` | `task` |
+| [`2026-10-29-parallel-execution-rule.md`](kit/2026-10-29-parallel-execution-rule.md) | `kit` | `kit/domain-builder` | `task` |
 
 Новый отчёт обязан появиться в этой таблице (`HYAI-ART-13`): `check_report.py` сверяет индекс с файловой системой.
