@@ -19,6 +19,7 @@ updated: "2026-10-22"
 | [`docs.md`](docs.md) | `docs` |
 | [`narrative.md`](narrative.md) | `narrative` |
 | [`picture.md`](picture.md) | `picture` |
+| [`video.md`](video.md) | `video` |
 | [`kit.md`](kit.md) | `kit` |
 
 Правило: два разных определения одного термина в разных доменах — ошибка `lint_terms.py`. Синонимы не вводятся: переименование оформляется правилом с `reason`.

@@ -84,7 +84,7 @@ cross_scope:
 
 ## Активная конфигурация
 
-Домены и профили этого репозитория: `kit/domain-builder`, `software/code`, `docs/spec-author`, `narrative/prose`, `picture/instant`.
+Домены и профили этого репозитория: `kit/domain-builder`, `software/code`, `docs/spec-author`, `narrative/prose`, `picture/instant`, `video/producer`.
 
 | Домен | Профили | Когда выбирать |
 | --- | --- | --- |
@@ -93,6 +93,7 @@ cross_scope:
 | `docs` | `docs/spec-author`, `docs/tech-writer`, `docs/diagrams`, `docs/analysis` | Документы: ТЗ, спецификации, документация, диаграммы |
 | `narrative` | `narrative/lore`, `narrative/history`, `narrative/prose`, `narrative/analysis` | Литература: мир, хронология, текст |
 | `picture` | `picture/instant`, `picture/pipeline`, `picture/art-director`, `picture/analysis` | Генерация изображений и визуальных серий через промпт |
+| `video` | `video/producer`, `video/continuity-director`, `video/sound-designer`, `video/editor`, `video/analysis` | Планирование, генерация и приёмка видео |
 
 ## Домен `kit`
 
@@ -139,3 +140,9 @@ cross_scope:
 **Критерий:** до начала работы пользователь обязан явно задать все 4 правила безопасности (`NSFW`, `Copyright`, `Person`, `Violence`, `PIC-SAF-01`); генерация ведётся всегда только через моноязычный промпт каркаса «5+3» (`subject`, `environment`, `lighting`, `camera`, `style` + динамический `negative` и `weights`, `PIC-POL-01..02`, `PIC-PRM-01..05`); каждый шаг проходит VLM-проверку (`Resolution`, `Aspect Ratio`, артефакты рук/лиц/текста, `Consistency`) с повтором до `Iteration Limit` (`PIC-POL-03`, `PIC-QA-01..05`); принятые звенья сохраняются в `<picture_root>/stages/`, неудачные попытки удаляются (`PIC-POL-04`); окружение кадра задаётся якорями канона мира проекта (`env_canon_source`, `env_anchor_ids`) и принимается по пяти осям с отметкой `env_ok` (`PIC-PRM-06`, `PIC-ENV-01..04`, `PIC-QA-06`); фильтр стиля накладывается строго после готовности конечного базового изображения (`PIC-POL-05`); данные внешнего проекта не направляются внутрь подмодуля HYAI (`PIC-POL-06`).
 
 Подробности: `HYAI/core/domains/picture/policy.md` и выбранный профиль/workflow.
+
+## Домен `video`
+
+Перед началом производства получить явный ответ пользователя о необходимости звука (предложенный default — да), определить применяемую project/session storage policy и спросить, как именно следующий сегмент получает temporal context, включая последний кадр/хвост предыдущего (`VID-POL-02..04`). Для каждого перехода, обозначенного seamless, отдельно обработать и проверить временное окно с центром на шве до приёмки; простая склейка, необработанный overlap или передача still-кадра сами по себе шов не устраняют (`VID-POL-07`). Keyframes принадлежат `picture`; в видео-проекте сохранять ссылки и hashes, не бинарные дубликаты (`VID-POL-08`). Домен даёт инструкции и критерии — он не интегрируется с renderer/API и не заявляет о рендере, который не выполнялся (`VID-POL-10`).
+
+Полный процесс: `HYAI/core/domains/video/policy.md` и соответствующий workflow. Общие требования к озвучиванию шагов и переходов профиля задаёт ядро (`P-0002`); домен их не дублирует.

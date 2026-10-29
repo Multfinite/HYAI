@@ -20,6 +20,7 @@ updated: "2026-10-22"
 | [`docs`](docs/README.md) | ТЗ, спецификации, документация, диаграммы | `spec-author`, `tech-writer`, `diagrams`, `analysis` |
 | [`narrative`](narrative/README.md) | факты мира, хронология, текст | `lore`, `history`, `prose`, `analysis` |
 | [`picture`](picture/README.md) | промптовая генерация изображений, конвейеры звеньев и серии | `instant`, `pipeline`, `art-director`, `analysis` |
+| [`video`](video/README.md) | временная связность, сегменты, звук, обработка швов и ручной монтаж | `producer`, `continuity-director`, `sound-designer`, `editor`, `analysis` |
 | [`_template`](_template/README.md) | скелет нового домена | — (образец) |
 
 ## Состав домена

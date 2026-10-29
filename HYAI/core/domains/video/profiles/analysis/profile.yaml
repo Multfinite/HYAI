@@ -1,0 +1,40 @@
+apiVersion: hyai/v1
+kind: AgentProfile
+metadata:
+  name: analysis
+  domain: video
+  title: "Аудит видеоплана и continuity без правок"
+  status: review
+  updated: "2026-10-29"
+
+includes:
+  - "HYAI/core/shared/profiles/analysis"
+
+topic: "Аудит видеопакета на соответствие brief, storage/audio gates, segment handoff, seam-window processing, provenance и QA без изменения project artifacts."
+thought_process: >
+  Сопоставить brief → shot plan → actual segment records → processed seam windows → delivery card.
+  Проверять только заявления, подтверждаемые предоставленными файлами/медиа; недостаток данных
+  отмечать как unverifiable, а не считать качеством/дефектом без доказательства.
+
+scope_primary:
+  - "HYAI/meta/reports/video/**"
+scope_secondary:
+  - "HYAI/core/domains/video/videos/**"
+
+produced_artifacts:
+  - "video-audit-report"
+
+workflow: "video/audit"
+definition_of_done:
+  - "Проверены правила VID-POL-01..12 по путям/артефактам и приведены конкретные доказательства."
+  - "Каждая seamless boundary проверена на наличие отдельного centered seam-window и его disposition; содержательное качество отмечено только при просмотре реального media."
+  - "Звук, storage, handoff и human approvals сверены с brief; неопределённость помечена как не подтверждённая."
+  - "Проектные документы не изменялись; создан только report и предусмотренные индексы."
+checklist:
+  - "Указаны ли конкретные project/session storage rules и закрыт ли вопрос audio yes/no?"
+  - "Есть ли у каждого segment реальная запись о handoff mode и фактических refs?"
+  - "Есть ли отдельный обработанный seam-window у каждой seamless границы?"
+  - "Не выдаются ли формальные checks или VLM score за human review/гарантию плавности?"
+
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain video"

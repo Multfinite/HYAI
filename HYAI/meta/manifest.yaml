@@ -7,7 +7,7 @@ metadata:
   name: project-template
   version: "1.0.0"
   status: released
-  updated: "2026-10-28"
+  updated: "2026-10-29"
   language: ru
   owner: maintainer
   license: "GPL-3.0-only"
@@ -30,6 +30,8 @@ active:
     profile: prose
   - domain: picture
     profile: instant
+  - domain: video
+    profile: producer
 
 domains:
   kit: "HYAI/core/domains/kit/manifest.yaml"
@@ -37,6 +39,7 @@ domains:
   docs: "HYAI/core/domains/docs/manifest.yaml"
   narrative: "HYAI/core/domains/narrative/manifest.yaml"
   picture: "HYAI/core/domains/picture/manifest.yaml"
+  video: "HYAI/core/domains/video/manifest.yaml"
 
 # Где лежит сам каркас относительно корня репозитория.
 # В проекте, использующем HYAI, каркас ставится каталогом `HYAI/` — отсюда префикс
@@ -102,11 +105,12 @@ path_map:
   "drafts/**": narrative
   "styles/**": narrative
   "HYAI/core/domains/picture/pictures/**": picture
+  "HYAI/core/domains/video/videos/**": video
 
 report:
   naming: "YYYY-MM-DD-<slug>.md"
   dir_pattern: "HYAI/meta/reports/{scope}/"
-  allowed_scopes: [project, kit, software, docs, narrative, picture]
+  allowed_scopes: [project, kit, software, docs, narrative, picture, video]
   index: "HYAI/meta/reports/README.md"
   required_fields: [id, title, type, report_kind, domain, profile, status, date, workflow]
   optional_fields: [cross_scope, decisions, role, prism, characters, supersedes]
@@ -153,6 +157,10 @@ decisions:
       prefix: "PIC"
       dir: "HYAI/meta/decisions/picture"
       title: "Решения домена picture"
+    video:
+      prefix: "VID"
+      dir: "HYAI/meta/decisions/video"
+      title: "Решения домена video"
 
 task_contract:
   required_fields: [goal, non_goals, domain, profile, sources, outputs, acceptance, contour, stop_conditions]

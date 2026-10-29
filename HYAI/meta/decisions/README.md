@@ -21,6 +21,7 @@ updated: "2026-10-22"
 | `docs` | [`docs/`](docs/README.md) | `DOC` | типы документов, требования, формы ТЗ |
 | `narrative` | [`narrative/`](narrative/README.md) | `NR` | канон, хронология, доступ |
 | `picture` | [`picture/`](picture/README.md) | `PIC` | промпт-генерация, конвейер звеньев, приёмка и стиль |
+| `video` | [`video/`](video/README.md) | `VID` | временная связность, сегменты, sound plan, швы и монтаж |
 
 ## Действующие решения
 
@@ -31,6 +32,8 @@ updated: "2026-10-22"
 | [`KIT-0001`](kit/KIT-0001-agent-entrypoint-structure.md) | kit | Структура общего входа агента | review |
 | [`KIT-0002`](kit/KIT-0002-core-process-narration.md) | kit | Общее правило озвучивания этапов в ядре | review |
 | [`KIT-0003`](kit/KIT-0003-picture-domain.md) | kit | Самодостаточный домен `picture` | review |
+| [`KIT-0004`](kit/KIT-0004-video-domain.md) | kit | Самостоятельный домен `video` для temporal continuity, звука и монтажа | review |
+| [`P-0003`](project/P-0003-picture-video-keyframe-handoff.md) | project | Разделение владения keyframe-изображениями между picture и video | review |
 
 ## Правила
 
