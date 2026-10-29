@@ -68,6 +68,17 @@
       "reason": "PIC-POL-05: фильтр стиля накладывается строго после готовности конечного базового изображения"
     },
     {
+      "id": "pic.unset-env-anchor",
+      "severity": "error",
+      "pattern": "(?i)\\benv_(?:canon_source|anchor_ids)\\b[^\\n]*\\b(?:TBD|TODO|unset|unknown|не задано|пусто)\\b",
+      "applies_to": [
+        "HYAI/core/domains/picture/pictures/briefs/**",
+        "HYAI/core/domains/picture/pictures/prompts/**"
+      ],
+      "suggest": "указать документ канона окружения проекта и ID якорей; если их нет — остановиться и спросить пользователя",
+      "reason": "PIC-ENV-01 / PIC-PRM-06: окружение кадра задаётся каноном мира проекта, а не умолчаниями модели"
+    },
+    {
       "id": "pic.todo-without-owner",
       "severity": "warn",
       "pattern": "\\bTODO\\b(?!\\()",

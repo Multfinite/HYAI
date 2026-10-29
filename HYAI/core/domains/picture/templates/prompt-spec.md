@@ -5,8 +5,8 @@ type: template
 status: review
 authority: none
 visibility: internal
-version: "1.0"
-updated: "2026-10-28"
+version: "1.1"
+updated: "2026-10-29"
 template: true
 template_kind: output
 ---
@@ -36,6 +36,7 @@ visibility: internal
 - **`prompt_language` (`PIC-PRM-04`):** `<en | иной моноязык модели>`
 - **`scene_complexity` и `MinDetail` (`PIC-PRM-02`):** `<simple | complex>`, `min_tokens`: `<N>`, `token_count`: `<факт>`
 - **`weight_syntax` (`PIC-PRM-05`):** `<clip-paren (term:1.2) | mj-colons term::1.5 | node-weights | positional-only>`
+- **Канон окружения (`PIC-ENV-01`):** `env_canon_source`: `<путь к документу канона окружения проекта>`, `env_anchor_ids`: `<список ID якорей, например ENV-01, ENV-02>`
 - **`style_phase` (`PIC-POL-05`):** `<base-neutral | target-style>`
 - **Параметры кадра:** `resolution`: `<WxH>`, `aspect_ratio`: `<W:H>`, `seed`: `<целое число>`
 
@@ -47,8 +48,18 @@ visibility: internal
 ### 2. `environment`
 `<локация, передний/средний/дальний план, опорные поверхности, время суток, атмосфера>`
 
+Пять осей окружения (`PIC-ENV-02`) — каждая либо дословный блок якоря канона на `prompt_language`, либо `not applicable` с причиной:
+
+- **Флора (`PIC-ENV-02.2`):** `<цвет, материал и блеск растительности — или её отсутствие; либо not applicable + причина>`
+- **Небо (`PIC-ENV-02.3`):** `<цвет, плотность облачности, цвет дымки у горизонта; либо not applicable — интерьер, подземелье>`
+- **Небесные тела (`PIC-ENV-02.4`):** `<число, видимый размер, фаза и положение спутников, их неподвижность при геостационарной орбите; либо not applicable>`
+
 ### 3. `lighting`
 `<источники key/fill/rim, направление и мягкость света, цветовая температура, контактные и падающие тени>`
+
+- **Свет звезды (`PIC-ENV-02.1`):** `<дословный блок якоря: цветовая температура, интенсивность, жёсткость и длина теней, характер бликов>`
+- **Локальные тёплые источники (`PIC-ENV-02.5`):** `<какие именно источники в кадре дают тёплый свет и насколько локально; либо «нет»>`
+- **Признаки земного дрейфа в `negative` (`PIC-ENV-03`):** `<golden hour light, saturated green foliage, clear turquoise sky, single moon, …>`
 
 ### 4. `camera`
 `<крупность плана, высота и угол камеры, фокусное расстояние/объектив, глубина резкости, кадрирование>`
@@ -82,7 +93,9 @@ NEGATIVE:
 
 ## 9. Журнал итераций и удаления брака (`PIC-POL-03..04`, `PIC-QA-05`)
 
-| Попытка (`k / iteration_limit`) | `seed` | Вердикт VLM | Найденный дефект и правка промпта | Статус бинарника |
+| Попытка (`k / iteration_limit`) | `seed` | Вердикт VLM (в т.ч. `env_ok`) | Найденный дефект и правка промпта | Статус бинарника |
 | --- | --- | --- | --- | --- |
-| `1 / 5` | `<seed>` | `rejected` / `accepted` | `<что исправлено в секциях / negative / weights>` | `удалён` / `сохранён в stages или assets` |
+| `1 / 5` | `<seed>` | `rejected` / `accepted`, `env_ok: <true / false>` | `<что исправлено в секциях / negative / weights>` | `удалён` / `сохранён в stages или assets` |
+
+Вердикт `accepted` ставится только при `env_ok: true` (`PIC-QA-06`): земные умолчания модели по свету, флоре, небу и спутникам — брак, даже когда артефактов рук/лиц/текста нет.
 ````
