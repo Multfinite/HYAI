@@ -19,7 +19,7 @@ classes:
   SW: [POL, INV]
   DOC: [POL, TXT, INV]
   NR: [POL, TXT, ENT, CMP, EXP, READ, INV]
-  PIC: [POL, SAF, PRM, WF, QA, INV]
+  PIC: [POL, SAF, PRM, ENV, WF, QA, INV]
   PRJ: [POL]
 
 # Где искать определения правил. Порядок важен: первый совпавший шаблон задаёт файл.
