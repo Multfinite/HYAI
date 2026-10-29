@@ -5,8 +5,8 @@ type: meta
 status: approved
 authority: none
 visibility: internal
-version: "2.0"
-updated: "2026-10-22"
+version: "2.1"
+updated: "2026-10-29"
 ---
 
 # Отчёты домена `kit`
@@ -23,3 +23,4 @@ updated: "2026-10-22"
 | [`2026-10-28-picture-data-root-separation.md`](2026-10-28-picture-data-root-separation.md) | `kit/domain-builder` | `task` |
 | [`2026-10-29-video-domain-analysis.md`](2026-10-29-video-domain-analysis.md) | `kit/domain-builder` | `analysis` |
 | [`2026-10-29-video-domain-implementation.md`](2026-10-29-video-domain-implementation.md) | `kit/domain-builder` | `task` |
+| [`2026-10-29-parallel-execution-rule.md`](2026-10-29-parallel-execution-rule.md) | `kit/domain-builder` | `task` |

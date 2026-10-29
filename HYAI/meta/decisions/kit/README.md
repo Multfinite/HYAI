@@ -5,8 +5,8 @@ type: meta
 status: approved
 authority: contract
 visibility: internal
-version: "2.0"
-updated: "2026-10-22"
+version: "2.1"
+updated: "2026-10-29"
 ---
 
 # Решения о каркасе
@@ -19,3 +19,4 @@ updated: "2026-10-22"
 | [`KIT-0002`](KIT-0002-core-process-narration.md) | Общее правило озвучивания этапов в ядре | review |
 | [`KIT-0003`](KIT-0003-picture-domain.md) | Самодостаточный домен `picture` | review |
 | [`KIT-0004`](KIT-0004-video-domain.md) | Самостоятельный домен `video` для temporal continuity, звука и монтажа | review |
+| [`KIT-0005`](KIT-0005-parallel-execution.md) | Общее правило параллельного выполнения и очереди удалённых задач | review |

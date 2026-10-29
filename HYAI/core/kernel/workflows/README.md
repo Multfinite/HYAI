@@ -5,8 +5,8 @@ type: meta
 status: approved
 authority: contract
 visibility: internal
-version: "2.0"
-updated: "2026-10-22"
+version: "2.1"
+updated: "2026-10-29"
 ---
 
 # Процессы ядра
@@ -19,6 +19,7 @@ updated: "2026-10-22"
 | [`audit.md`](audit.md) | нужно исследовать, не меняя | отчёт `audit` с приоритетами |
 | [`decision-consolidation.md`](decision-consolidation.md) | решения расползлись | слитые решения по `HYAI-DEC-09` |
 | [`doc-cleanup.md`](doc-cleanup.md) | документы обросли водой | сокращённые документы с сохранением норм |
+| [`parallel-execution.md`](parallel-execution.md) | есть независимые задачи или удалённые исполнители | конкурентное исполнение в подтверждённом лимите, очередь и обработка результатов по мере готовности |
 
 Доменные процессы: `HYAI/core/domains/<domain>/workflows/`. Профиль ссылается на процесс полем `workflow` в своём `profile.yaml`.
 
