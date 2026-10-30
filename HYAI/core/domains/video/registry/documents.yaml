@@ -25,6 +25,16 @@ documents:
     type: workflow
     authority: contract
     why: "Единственный владелец генерации визуальных серий/keyframe assets, на которые ссылается video."
+  - id: video.frame-repair
+    path: "HYAI/core/domains/video/workflows/frame-repair.md"
+    type: workflow
+    authority: contract
+    why: "Покадровая правка окна: адресация кадра, порог мерцания, неизменяемость мастера, приёмка в движении."
+  - id: video.template.frame-job
+    path: "HYAI/core/domains/video/templates/frame-job.md"
+    type: template
+    authority: none
+    why: "Карточка окна покадровой правки: провенанс, метрики и решение."
   - id: video.audit
     path: "HYAI/core/domains/video/workflows/audit.md"
     type: workflow

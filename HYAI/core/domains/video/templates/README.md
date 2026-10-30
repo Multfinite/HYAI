@@ -5,8 +5,8 @@ type: meta
 status: review
 authority: none
 visibility: internal
-version: "1.0"
-updated: "2026-10-29"
+version: "1.1"
+updated: "2026-10-30"
 ---
 
 # Шаблоны `video`
@@ -21,3 +21,4 @@ updated: "2026-10-29"
 | [`sound-plan.md`](sound-plan.md) | `output` | `videos/sound/`, если audio_required=yes |
 | [`segment-record.md`](segment-record.md) | `output` | `videos/segments/` |
 | [`delivery-card.md`](delivery-card.md) | `output` | `videos/assembly/` |
+| [`frame-job.md`](frame-job.md) | `output` | `videos/segments/` или `videos/assembly/`, для каждого окна покадровой правки |
