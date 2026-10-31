@@ -15,7 +15,7 @@ owners:
 
 # Классы по владельцу. Класс без регистрации — ошибка: неизвестный класс нельзя проверить.
 classes:
-  HYAI: [PERM-N, PERM-G, PERM-A, PERM-P, PERM-E, PERM-V, INT, ART, DEC, PROV]
+  HYAI: [PERM-N, PERM-G, PERM-A, PERM-P, PERM-E, PERM-V, INT, ART, DEC, PROV, RES]
   KIT: [POL, INV]
   SW: [POL, INV]
   DOC: [POL, TXT, INV]

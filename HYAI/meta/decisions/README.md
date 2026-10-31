@@ -35,6 +35,7 @@ updated: "2026-10-29"
 | [`KIT-0004`](kit/KIT-0004-video-domain.md) | kit | Самостоятельный домен `video` для temporal continuity, звука и монтажа | review |
 | [`KIT-0005`](kit/KIT-0005-parallel-execution.md) | kit | Общее правило параллельного выполнения и очереди удалённых задач | review |
 | [`P-0003`](project/P-0003-picture-video-keyframe-handoff.md) | project | Разделение владения keyframe-изображениями между picture и video | review |
+| [`P-0004`](project/P-0004-resource-bootstrap.md) | project | Общий вход: провайдер генерации, стоимость и правила расхода | review |
 
 ## Правила
 
