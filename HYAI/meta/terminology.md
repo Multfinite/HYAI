@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "2.0"
-updated: "2026-10-22"
+updated: "2026-11-01"
 ---
 
 # Терминология проекта
@@ -36,4 +36,5 @@ updated: "2026-10-22"
 - [`terminology/docs.md`](terminology/docs.md)
 - [`terminology/narrative.md`](terminology/narrative.md)
 - [`terminology/picture.md`](terminology/picture.md)
+- [`terminology/cartography.md`](terminology/cartography.md)
 - [`terminology/kit.md`](terminology/kit.md)

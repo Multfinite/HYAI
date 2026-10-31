@@ -1,0 +1,40 @@
+apiVersion: hyai/v1
+kind: AgentProfile
+metadata:
+  name: analysis
+  domain: cartography
+  title: "Анализ и аудит атласа без правок данных"
+  status: review
+  updated: "2026-11-01"
+
+includes:
+  - "HYAI/core/shared/profiles/analysis"
+
+topic: "Read-only проверка планетарных записей, CRS, слоёв, климатической классификации, векторных exports и provenance."
+thought_process: >
+  Сопоставляет атласные records, source/derived chain, metadata и результат проверки инструментами;
+  фиксирует только выводы с evidence, а недоступные CRS/модельные свойства отмечает как unverifiable.
+
+scope_primary:
+  - "HYAI/meta/reports/cartography/**"
+scope_secondary:
+  - "HYAI/core/domains/cartography/atlases/**"
+
+produced_artifacts:
+  - "cartography-audit-report"
+  - "crs-compatibility-report"
+
+workflow: "cartography/audit"
+definition_of_done:
+  - "Ссылки ID, body/CRS, units/time, provenance и uncertainty проверены; gaps перечислены."
+  - "Климатический слой оценён на Köppen–Geiger, входы/порог/период и adaptation note; незаполненные значения не додуманы."
+  - "Формат/векторность exports и результаты проверки целевого приложения подтверждены evidence или отмечены как незапроверенные."
+  - "Аудит не менял источник и отделяет ошибки структуры от научных/инструментальных ограничений."
+checklist:
+  - "Есть ли у каждого пространственного слоя body ID, CRS, units, epoch/time range и provenance?"
+  - "Подтверждён ли output как векторный файл без raster underlay?"
+  - "Отличены ли несоответствие правилам и непроверенное научное утверждение?"
+  - "Проверена ли совместимость именно с целевым телом/CRS, а не только Землёй?"
+
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain cartography"

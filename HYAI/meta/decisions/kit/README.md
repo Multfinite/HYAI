@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "2.1"
-updated: "2026-10-29"
+updated: "2026-11-01"
 ---
 
 # Решения о каркасе
@@ -20,3 +20,4 @@ updated: "2026-10-29"
 | [`KIT-0003`](KIT-0003-picture-domain.md) | Самодостаточный домен `picture` | review |
 | [`KIT-0004`](KIT-0004-video-domain.md) | Самостоятельный домен `video` для temporal continuity, звука и монтажа | review |
 | [`KIT-0005`](KIT-0005-parallel-execution.md) | Общее правило параллельного выполнения и очереди удалённых задач | review |
+| [`KIT-0006`](KIT-0006-cartography-domain.md) | Самостоятельный домен cartography для планетарного атласа и векторных карт | review |

@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "2.0"
-updated: "2026-10-22"
+updated: "2026-11-01"
 ---
 
 # Словари доменов
@@ -20,6 +20,7 @@ updated: "2026-10-22"
 | [`narrative.md`](narrative.md) | `narrative` |
 | [`picture.md`](picture.md) | `picture` |
 | [`video.md`](video.md) | `video` |
+| [`cartography.md`](cartography.md) | `cartography` |
 | [`kit.md`](kit.md) | `kit` |
 
 Правило: два разных определения одного термина в разных доменах — ошибка `lint_terms.py`. Синонимы не вводятся: переименование оформляется правилом с `reason`.

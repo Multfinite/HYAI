@@ -1,0 +1,33 @@
+version: "1.0"
+domain: cartography
+read_first:
+  - "HYAI/core/domains/cartography/README.md"
+  - "HYAI/core/domains/cartography/policy.md"
+  - "HYAI/meta/decisions/project/P-0005-cartography-world-canon.md"
+records:
+  systems:
+    path: "<atlas_root>/systems/"
+    template: "HYAI/core/domains/cartography/templates/system-record.yaml"
+    owns: "Идентификаторы звёздных систем, звёзд, орбитальные параметры и календарные периоды."
+  bodies:
+    path: "<atlas_root>/bodies/"
+    template: "HYAI/core/domains/cartography/templates/body-record.yaml"
+    owns: "Размеры, фигура, датум/CRS, ось, вращение и ссылка на родительскую систему."
+  layers:
+    path: "<atlas_root>/layers/"
+    templates:
+      - "HYAI/core/domains/cartography/templates/geospatial-layer.yaml"
+      - "HYAI/core/domains/cartography/templates/climate-layer.yaml"
+    owns: "Векторные тематические слои; производные значения содержат модель и provenance."
+  maps:
+    path: "<atlas_root>/maps/"
+    template: "HYAI/core/domains/cartography/templates/map-spec.yaml"
+    owns: "Проекция, стиль, легенда, vector output и sidecar-метаданные."
+  exports:
+    path: "<atlas_root>/exports/"
+    owns: "Только согласованные векторные deliverables и записи QA; экранный viewport не экспортируется как raster."
+toolkit:
+  vector_gis: "QGIS — кандидат на редактирование геоданных и SVG export; пользовательские planetary CRS требуют проверки."
+  vector_editor: "Inkscape — редактор SVG."
+  interactive_view: "CesiumJS — кандидат на просмотр векторных слоёв на интерактивном 3D-глобусе; это только renderer, не научная модель."
+  validation: "Прототип на целевом теле проверяет эллипсоид, CRS, единицы, ось, временные данные и точность SVG/векторных слоёв."

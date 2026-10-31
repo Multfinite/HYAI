@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "2.1"
-updated: "2026-10-29"
+updated: "2026-11-01"
 ---
 
 # Отчёты
@@ -23,6 +23,7 @@ updated: "2026-10-29"
 | [`narrative/`](narrative/) | работа с миром и текстом | `narrative` |
 | [`picture/`](picture/) | генерация изображений, конвейеров звеньев и серий через промпт | `picture` |
 | [`video/`](video/) | планирование, continuity, звук, швы, сегменты и монтаж | `video` |
+| [`cartography/`](cartography/) | планетарные атласы, spatial layers и векторные карты | `cartography` |
 | [`plans/`](plans/README.md) | планы и матрицы, которые не являются отчётами о работе | — |
 | [`archive/`](archive/README.md) | старое, сохранённое для истории | — |
 
@@ -43,5 +44,6 @@ updated: "2026-10-29"
 | [`2026-10-29-video-domain-analysis.md`](kit/2026-10-29-video-domain-analysis.md) | `kit` | `kit/domain-builder` | `analysis` |
 | [`2026-10-29-video-domain-implementation.md`](kit/2026-10-29-video-domain-implementation.md) | `kit` | `kit/domain-builder` | `task` |
 | [`2026-10-29-parallel-execution-rule.md`](kit/2026-10-29-parallel-execution-rule.md) | `kit` | `kit/domain-builder` | `task` |
+| [`2026-11-01-cartography-domain-implementation.md`](kit/2026-11-01-cartography-domain-implementation.md) | `kit` | `kit/domain-builder` | `task` |
 
 Новый отчёт обязан появиться в этой таблице (`HYAI-ART-13`): `check_report.py` сверяет индекс с файловой системой.
