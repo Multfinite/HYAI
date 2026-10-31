@@ -19,3 +19,4 @@ updated: "2026-10-22"
 | [`P-0002`](P-0002-process-step-narration.md) | Единое озвучивание шагов работы во всех доменах | review |
 | [`P-0003`](P-0003-picture-video-keyframe-handoff.md) | Разделение владения keyframe-изображениями между picture и video | review |
 | [`P-0004`](P-0004-resource-bootstrap.md) | Общий вход: провайдер генерации, стоимость и правила расхода | review |
+| [`P-0005`](P-0005-style-asked-not-assumed.md) | Стиль базы и стиль-фильтр выбирает пользователь, а не агент | review |
