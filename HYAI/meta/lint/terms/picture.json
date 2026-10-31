@@ -1,5 +1,5 @@
 {
-  "$comment": "Машинные правила домена picture: ворота безопасности, негативный промпт, пустые штампы, веса, брак и отложенный стиль. Глобы автоматически ребазируются движком на root_paths активного домена проекта-потребителя.",
+  "$comment": "Машинные правила домена picture: ворота безопасности, негативный промпт, пустые штампы, веса, брак и отложенный стиль. Глобы автоматически ребазируются движком на root_paths активного домена проекта-потребителя; а также незаполненные base_style и style_filter (PIC-POL-07..08).",
   "domain": "picture",
   "applies_to": [
     "HYAI/core/domains/picture/pictures/**"
@@ -86,6 +86,28 @@
         "HYAI/core/domains/picture/pictures/**"
       ],
       "reason": "HYAI-PROV-01: незакрытое место оформляется как Q-PIC-* с владельцем"
+    },
+    {
+      "id": "pic.unset-style-base",
+      "severity": "error",
+      "pattern": "(?i)\\bbase_style\\b[^\\n]*\\b(?:TBD|TODO|unset|unknown|не задано|пусто)\\b",
+      "applies_to": [
+        "HYAI/core/domains/picture/pictures/briefs/**",
+        "HYAI/core/domains/picture/pictures/prompts/**"
+      ],
+      "suggest": "спросить у пользователя вид базового изображения (фотография / живопись / рендер / графика) и записать ответ",
+      "reason": "PIC-POL-07: base_style задаёт пользователь, а не агент"
+    },
+    {
+      "id": "pic.unset-style-filter",
+      "severity": "error",
+      "pattern": "(?i)\\bstyle_filter\\b[^\\n]*\\b(?:TBD|TODO|unset|unknown|не задано|пусто)\\b",
+      "applies_to": [
+        "HYAI/core/domains/picture/pictures/briefs/**",
+        "HYAI/core/domains/picture/pictures/prompts/**"
+      ],
+      "suggest": "спросить у пользователя финальный фильтр стиля или явный отказ (style_filter: none)",
+      "reason": "PIC-POL-08: style_filter задаёт пользователь отдельно от base_style"
     }
   ]
 }
