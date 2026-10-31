@@ -1,0 +1,38 @@
+apiVersion: hyai/v1
+kind: AgentDomain
+metadata:
+  name: cartography
+  title: "Планетарные атласы и векторная картография"
+  status: review
+  updated: "2026-11-01"
+  owner: maintainer
+
+root_paths:
+  - "HYAI/core/domains/cartography/atlases"
+
+authority:
+  doc: "HYAI/core/domains/cartography/authority.md"
+  schema: "HYAI/core/domains/cartography/schema/authority.yaml"
+access:
+  doc: "HYAI/core/domains/cartography/access.md"
+  schema: "HYAI/core/domains/cartography/schema/access.yaml"
+
+schema: "HYAI/meta/schema/domains/cartography.yaml"
+lint:
+  - "HYAI/meta/lint/terms/cartography.json"
+policy: "HYAI/core/domains/cartography/policy.md"
+agents: "HYAI/core/domains/cartography/agents.md"
+registry: "HYAI/core/domains/cartography/registry/documents.yaml"
+workflows_dir: "HYAI/core/domains/cartography/workflows/"
+templates_dir: "HYAI/core/domains/cartography/templates/"
+decisions_scope: cartography
+
+profiles:
+  cartographer: "HYAI/core/domains/cartography/profiles/cartographer/profile.yaml"
+  planetary-modeler: "HYAI/core/domains/cartography/profiles/planetary-modeler/profile.yaml"
+  atlas-editor: "HYAI/core/domains/cartography/profiles/atlas-editor/profile.yaml"
+  analysis: "HYAI/core/domains/cartography/profiles/analysis/profile.yaml"
+
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain cartography"
+  - "python3 HYAI/tools/lint_scopes.py --domain cartography"

@@ -1,0 +1,27 @@
+schema_version: "1.0"
+record_type: geospatial-layer
+layer_id: "<stable-layer-id>"
+layer_type: "<tectonic|ocean-current|atmosphere|temperature|precipitation|political|settlement|route|other>"
+status: draft
+body_id: "<stable-body-id>"
+crs_id: "<stable-crs-id>"
+geometry_type: "<point|line|polygon|multipolygon|mesh-or-explicit-vector-type>"
+coordinate_units: "<unit>"
+spatial_extent: "<bounds in declared CRS>"
+epoch_or_time_range: "<instant or start/end with time standard>"
+properties_schema:
+  - name: "<field-name>"
+    type: "<type-and-unit>"
+    description: "<meaning>"
+features: []
+# For currents include warm/cold/neutral category and temperature baseline.
+# For atmosphere include height/level, temperature/precipitation units, time resolution.
+# For tectonics include plate ID, velocity vector, reference frame and epoch.
+provenance:
+  source_refs: []
+  method: "<observation|model|authored|derived>"
+  model_or_algorithm: "<name/version or null>"
+  input_layer_ids: []
+  uncertainty: "<quantitative or qualitative>"
+authority: source-record
+visibility: internal

@@ -6,7 +6,7 @@ status: approved
 authority: none
 visibility: internal
 version: "2.0"
-updated: 2026-10-22
+updated: "2026-11-01"
 ---
 
 # Вопросы доменов
@@ -20,6 +20,7 @@ updated: 2026-10-22
 | [`narrative.md`](narrative.md) | `Q-NR-NN` |
 | [`picture.md`](picture.md) | `Q-PIC-NN` |
 | [`video.md`](video.md) | `Q-VID-NN` |
+| [`cartography.md`](cartography.md) | `Q-CART-NN` |
 | [`kit.md`](kit.md) | `Q-KIT-NN` |
 
 Правило: `[?]` в тексте указывает на существующий `Q-*`; вопрос, переставший мешать решению, уходит (в решение, в терминологию или в никуда).

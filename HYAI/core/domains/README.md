@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "2.0"
-updated: "2026-10-22"
+updated: "2026-11-01"
 ---
 
 # Домены
@@ -21,6 +21,7 @@ updated: "2026-10-22"
 | [`narrative`](narrative/README.md) | факты мира, хронология, текст | `lore`, `history`, `prose`, `analysis` |
 | [`picture`](picture/README.md) | промптовая генерация изображений, конвейеры звеньев и серии | `instant`, `pipeline`, `art-director`, `analysis` |
 | [`video`](video/README.md) | временная связность, сегменты, звук, обработка швов и ручной монтаж | `producer`, `continuity-director`, `sound-designer`, `editor`, `analysis` |
+| [`cartography`](cartography/README.md) | планетарные системы, пространственные слои, векторные карты и интерактивный просмотр | `cartographer`, `planetary-modeler`, `atlas-editor`, `analysis` |
 | [`_template`](_template/README.md) | скелет нового домена | — (образец) |
 
 ## Состав домена

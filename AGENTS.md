@@ -92,7 +92,7 @@ cross_scope:
 
 ## Активная конфигурация
 
-Домены и профили этого репозитория: `kit/domain-builder`, `software/code`, `docs/spec-author`, `narrative/prose`, `picture/instant`, `video/producer`.
+Домены и профили этого репозитория: `kit/domain-builder`, `software/code`, `docs/spec-author`, `narrative/prose`, `picture/instant`, `video/producer`, `cartography/cartographer`.
 
 | Домен | Профили | Когда выбирать |
 | --- | --- | --- |
@@ -102,6 +102,7 @@ cross_scope:
 | `narrative` | `narrative/lore`, `narrative/history`, `narrative/prose`, `narrative/analysis` | Литература: мир, хронология, текст |
 | `picture` | `picture/instant`, `picture/pipeline`, `picture/art-director`, `picture/analysis` | Генерация изображений и визуальных серий через промпт |
 | `video` | `video/producer`, `video/continuity-director`, `video/sound-designer`, `video/editor`, `video/analysis` | Планирование, генерация и приёмка видео |
+| `cartography` | `cartography/cartographer`, `cartography/planetary-modeler`, `cartography/atlas-editor`, `cartography/analysis` | Планетарные атласы и векторная картография |
 
 ## Домен `kit`
 
@@ -154,3 +155,16 @@ cross_scope:
 Перед началом производства получить явный ответ пользователя о необходимости звука (предложенный default — да), определить применяемую project/session storage policy и спросить, как именно следующий сегмент получает temporal context, включая последний кадр/хвост предыдущего (`VID-POL-02..04`). Для каждого перехода, обозначенного seamless, отдельно обработать и проверить временное окно с центром на шве до приёмки; простая склейка, необработанный overlap или передача still-кадра сами по себе шов не устраняют (`VID-POL-07`). Keyframes принадлежат `picture`; в видео-проекте сохранять ссылки и hashes, не бинарные дубликаты (`VID-POL-08`). Домен даёт инструкции и критерии — он не интегрируется с renderer/API и не заявляет о рендере, который не выполнялся (`VID-POL-10`).
 
 Полный процесс: `HYAI/core/domains/video/policy.md` и соответствующий workflow. Общие требования к озвучиванию шагов и переходов профиля задаёт ядро (`P-0002`); домен их не дублирует.
+
+# Агент домена `cartography`
+
+Начинай с `HYAI/core/domains/cartography/README.md`, затем выбери профиль и workflow. Соблюдай `CART-POL-01..14` и междоменное решение `P-0005`.
+
+- `cartographer`: собирает атласные объекты и тематические пространственные слои.
+- `planetary-modeler`: фиксирует параметры звёздной системы/тела и описывает производные геофизические/климатические модели, не выдавая визуализатор за симулятор.
+- `atlas-editor`: подготавливает векторные карты, SVG, интерактивный просмотр исходных векторных слоёв и QA.
+- `analysis`: проверяет данные и provenance без изменения project data.
+
+Для каждого слоя указывай стабильные ID, тело, CRS/датум/проекцию, единицы, эпоху/временной диапазон, источник и уровень неопределённости. Не предполагай земную систему координат. Климатическая классификация — Кёппен; адаптацию для не-земных условий помечай как такую, не создавая новых категорий.
+
+Сохраняемый map output — вектор. Экранная растеризация интерактивного viewport разрешена только как transient view; не сохраняй её как raster map, скриншот или подложку. Используй QGIS/Inkscape/CesiumJS только как рекомендуемые кандидаты: совместимость с целевым телом и CRS нужно проверить прототипом. Не добавляй зависимости или интеграции без запроса.

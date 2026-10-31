@@ -1,0 +1,29 @@
+schema_version: "1.0"
+record_type: star_system
+system_id: "<stable-system-id>"
+status: draft
+name:
+  canonical: "<system-name>"
+  aliases: []
+reference_origin:
+  description: "<reference point for system-level distances>"
+stars:
+  - star_id: "<stable-star-id>"
+    name: "<star-name>"
+    spectral_class: unknown
+    mass: {value: null, unit: null, uncertainty: null}
+    radius: {value: null, unit: null, uncertainty: null}
+    luminosity: {value: null, unit: null, uncertainty: null}
+    effective_temperature: {value: null, unit: null, uncertainty: null}
+    distance_from_reference: {value: null, unit: null, uncertainty: null}
+    source_ids: []
+calendar:
+  system_epoch: "<epoch-or-null>"
+  reference_time_standard: "<time-standard>"
+provenance:
+  source_type: "<authored|observed|derived>"
+  source_refs: []
+  method: "<method-or-null>"
+  uncertainty_notes: "<unknowns and limits>"
+authority: source-record
+visibility: internal

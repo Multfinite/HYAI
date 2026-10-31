@@ -1,0 +1,51 @@
+{
+  "$comment": "Проверки картографии обнаруживают очевидные незавершённые записи и запрещённые растровые экспорты. Они не заменяют GIS topology, CRS validation, scientific review или визуальный QA.",
+  "domain": "cartography",
+  "applies_to": [
+    "HYAI/core/domains/cartography/atlases/**"
+  ],
+  "rules": [
+    {
+      "id": "cartography.raster-map-output",
+      "severity": "error",
+      "pattern": "(?im)^[ \\t]*(?:format|output_format|export_format)[ \\t]*:[ \\t]*[\\\"']?(?:png|jpe?g|tiff?|webp|bmp)[\\\"']?[ \\t]*(?:#.*)?$",
+      "applies_to": [
+        "HYAI/core/domains/cartography/atlases/maps/*.yaml",
+        "HYAI/core/domains/cartography/atlases/exports/*.yaml"
+      ],
+      "suggest": "сохранить карту или экспорт в SVG либо в другой согласованный векторный формат; не подменять viewport raster-файлом",
+      "reason": "CART-POL-09: сохраняемые map deliverables должны быть векторными"
+    },
+    {
+      "id": "cartography.unresolved-spatial-reference",
+      "severity": "error",
+      "pattern": "(?im)^[ \\t]*(?:body_id|crs_id)[ \\t]*:[ \\t]*(?:null|TBD|TODO|unknown|pending|не задано)[ \\t]*(?:#.*)?$",
+      "applies_to": [
+        "HYAI/core/domains/cartography/atlases/maps/*.yaml",
+        "HYAI/core/domains/cartography/atlases/layers/*.yaml"
+      ],
+      "suggest": "указать стабильный ID тела и идентификатор CRS/датума; если значения неизвестны, не принимать слой как готовый",
+      "reason": "CART-POL-03: body и система координат обязательны для пространственного слоя"
+    },
+    {
+      "id": "cartography.unresolved-climate-scheme",
+      "severity": "error",
+      "pattern": "(?im)^[ \\t]*classification_scheme[ \\t]*:[ \\t]*(?:TBD|TODO|unknown|pending|не задано)[ \\t]*(?:#.*)?$",
+      "applies_to": [
+        "HYAI/core/domains/cartography/atlases/layers/climate/*.yaml"
+      ],
+      "suggest": "указать вариант Köppen–Geiger и версию/пороги либо явно оформить ограничение не-земной адаптации",
+      "reason": "CART-POL-08: климатическая классификация использует Köppen; неизвестную схему нельзя подменять догадкой"
+    },
+    {
+      "id": "cartography.non-koppen-climate-scheme",
+      "severity": "error",
+      "pattern": "(?im)^[ \\t]*classification_scheme[ \\t]*:[ \\t]*(?![ \\t]*[\"']?koppen(?:-geiger)?[\"']?[ \\t]*(?:#.*)?$)[^\\r\\n]+$",
+      "applies_to": [
+        "HYAI/core/domains/cartography/atlases/layers/climate/*.yaml"
+      ],
+      "suggest": "использовать Köppen–Geiger и вынести версию/параметры в отдельные поля; не заменять требование другой классификацией",
+      "reason": "CART-POL-08: только климатическая классификация Köppen разрешена контрактом"
+    }
+  ]
+}

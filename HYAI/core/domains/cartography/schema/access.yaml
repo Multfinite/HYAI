@@ -1,0 +1,29 @@
+version: "1.0"
+domain: cartography
+model: flat
+visibility:
+  values: [public, internal, restricted]
+  default: internal
+  order: [restricted, internal, public]
+status_order: [draft, review, approved, superseded, deprecated, archived]
+rules:
+  default_deny: true
+  inherit_strictest: true
+  strip_fields: [internal_notes, storage_location]
+checks:
+  - id: acc.unknown_visibility
+    severity: error
+    kind: unknown_visibility
+export:
+  presets:
+    vector-public:
+      allow_visibility: [public]
+      status_floor: approved
+      allowed_formats: [svg, pdf, eps, dxf]
+      required_sidecar_fields: [body_id, crs_id, units, provenance]
+      strip_frontmatter: true
+      strip_internal_links: true
+      strip_internal_ids: false
+      strip_comments: true
+      strip_repo_paths: true
+      out_dir: "Exports/cartography-public"

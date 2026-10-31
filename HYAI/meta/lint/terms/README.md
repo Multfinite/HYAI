@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "2.0"
-updated: "2026-10-22"
+updated: "2026-11-01"
 ---
 
 # Правила терминов
@@ -21,5 +21,6 @@ updated: "2026-10-22"
 | [`narrative.json`](narrative.json) | `narrative` | Канцелярит в описании мира, абсолютные утверждения без маркера |
 | [`picture.json`](picture.json) | `picture` | Незаданные оси безопасности, пустой `negative`, штампы качества, смешение весов, брак в хранилище, ранняя стилизация |
 | [`video.json`](video.json) | `video` | Незаданный ответ о звуке, storage policy или handoff сегментов |
+| [`cartography.json`](cartography.json) | `cartography` | Растровый map export, незаполненные body/CRS и не-Köppen climate scheme |
 
 Формат правила: `id`, `severity`, `pattern`, `applies_to`, `reason`, опционально `suggest`.

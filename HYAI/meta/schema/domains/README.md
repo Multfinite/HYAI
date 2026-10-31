@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "2.0"
-updated: "2026-10-22"
+updated: "2026-11-01"
 ---
 
 # Оверлеи схем
@@ -20,6 +20,7 @@ updated: "2026-10-22"
 | [`narrative.yaml`](narrative.yaml) | `narrative` | `core/setting/detail/presentation`, шесть контуров, ось `knowledge` |
 | [`picture.yaml`](picture.yaml) | `picture` | `visual-canon/brief/prompt/stage`, брифы, промпты, звенья и карточки ассетов |
 | [`video.yaml`](video.yaml) | `video` | `video-canon/brief/shot-plan/continuity`, сегменты и delivery records |
+| [`cartography.yaml`](cartography.yaml) | `cartography` | параметры тел, spatial/climate layers, vector map specs и exports |
 | [`kit.yaml`](kit.yaml) | `kit` | Узкий словарь каркаса, запрет `implementation` |
 
 Правила слияния — `MERGE-01..06` в [`../../../HYAI/core/kernel/spec/merge-rules.md`](../../../../HYAI/core/kernel/spec/merge-rules.md).

@@ -1,0 +1,35 @@
+schema_version: "1.0"
+record_type: climate-layer
+layer_id: "<stable-climate-layer-id>"
+status: draft
+body_id: "<stable-body-id>"
+crs_id: "<stable-crs-id>"
+classification_scheme: koppen-geiger
+classification_variant: "<Köppen–Geiger variant and version>"
+period: "<start/end, calendar and time standard>"
+inputs:
+  temperature:
+    source_layer_id: "<stable-layer-id>"
+    units: "<unit>"
+    averaging_window: "<period>"
+    thresholds: "<versioned thresholds or cited standard>"
+  precipitation:
+    source_layer_id: "<stable-layer-id>"
+    units: "<unit>"
+    averaging_window: "<period>"
+    thresholds: "<versioned thresholds or cited standard>"
+features:
+  - feature_id: "<stable-feature-id>"
+    geometry: "<vector geometry reference>"
+    koppen_geiger_code: "<valid code under stated variant>"
+    evidence: "<inputs and classification basis>"
+non_terrestrial_adaptation:
+  applied: false
+  method: null
+  limits: "<if applied, identify adaptation and uncertainty; do not invent categories>"
+provenance:
+  source_refs: []
+  model_or_algorithm: "<name/version>"
+  uncertainty: "<quantitative or qualitative>"
+authority: derived-layer
+visibility: internal
