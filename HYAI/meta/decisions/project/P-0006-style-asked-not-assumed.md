@@ -1,5 +1,5 @@
 ---
-id: decision.project.P-0005
+id: decision.project.P-0006
 title: "Стиль базы и стиль-фильтр выбирает пользователь, а не агент"
 type: decision
 status: review
@@ -15,7 +15,7 @@ affects:
 supersedes: null
 ---
 
-# P-0005. Стиль выбирает пользователь, а не агент
+# P-0006. Стиль выбирает пользователь, а не агент
 
 ## Решение
 

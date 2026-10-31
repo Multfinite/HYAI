@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "2.0"
-updated: "2026-10-22"
+updated: "2026-11-01"
 ---
 
 # `HYAI/meta/lint/`
@@ -22,6 +22,7 @@ updated: "2026-10-22"
 | [`terms/docs.json`](terms/docs.json) | `lint_terms.py` | Вода в документах, TODO без владельца, схема картинкой |
 | [`terms/narrative.json`](terms/narrative.json) | `lint_terms.py` | Термины и паттерны текста |
 | [`terms/picture.json`](terms/picture.json) | `lint_terms.py` | Плейсхолдеры безопасности, пустой `negative`, штампы качества, смешение весов, хранение брака, ранняя стилизация |
+| [`terms/cartography.json`](terms/cartography.json) | `lint_terms.py` | Растровые map exports, незаполненные body/CRS и не-Köppen climate scheme |
 
 ## Обязательные поля правила
 

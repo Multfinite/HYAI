@@ -1,0 +1,28 @@
+schema_version: "1.0"
+record_type: planetary-atlas
+atlas_id: "<stable-atlas-id>"
+status: draft
+title: "<atlas-title>"
+system_ids: []
+body_ids: []
+crs_ids: []
+layer_ids: []
+map_ids: []
+canonical_sources:
+  system_records: "<atlas_root>/systems/"
+  body_records: "<atlas_root>/bodies/"
+  layers: "<atlas_root>/layers/"
+  map_specs: "<atlas_root>/maps/"
+  exports: "<atlas_root>/exports/"
+vector_policy:
+  saved_map_formats: [svg]
+  raster_exports_allowed: false
+interactive_view:
+  required_capability: true
+  renderer_candidate: "<CesiumJS or tested alternative>"
+  viewport_is_transient: true
+provenance:
+  owner: "<owner>"
+  created: "<ISO 8601>"
+  source_refs: []
+visibility: internal

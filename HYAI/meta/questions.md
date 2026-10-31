@@ -6,7 +6,7 @@ status: approved
 authority: none
 visibility: internal
 version: "2.0"
-updated: "2026-10-22"
+updated: "2026-11-01"
 ---
 
 # Открытые вопросы проекта
@@ -23,6 +23,7 @@ updated: "2026-10-22"
 | `Q-NR-NN` | [`questions/narrative.md`](questions/narrative.md) | домен `narrative` |
 | `Q-PIC-NN` | [`questions/picture.md`](questions/picture.md) | домен `picture` |
 | `Q-VID-NN` | [`questions/video.md`](questions/video.md) | домен `video` |
+| `Q-CART-NN` | [`questions/cartography.md`](questions/cartography.md) | домен `cartography` |
 | `Q-KIT-NN` | [`questions/kit.md`](questions/kit.md) | домен `kit` |
 
 Маркер `[?]` в тексте обязан указывать на существующий `Q-*` (`HYAI-PROV-02`).

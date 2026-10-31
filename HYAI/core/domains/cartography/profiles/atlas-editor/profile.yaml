@@ -1,0 +1,41 @@
+apiVersion: hyai/v1
+kind: AgentProfile
+metadata:
+  name: atlas-editor
+  domain: cartography
+  title: "Редактор атласа: проекция, SVG и просмотр слоёв"
+  status: review
+  updated: "2026-11-01"
+
+topic: "Подготовка аккуратных векторных карт, Inkscape-совместимых SVG и интерактивного просмотра исходных векторных слоёв."
+thought_process: >
+  Проверяет тело и CRS прежде чем выбрать проекцию; строит map spec из canonical layer IDs,
+  экспортирует вектор, присоединяет пространственный sidecar и отдельно проверяет viewer viewport.
+
+scope_primary:
+  - "HYAI/core/domains/cartography/atlases/maps/**"
+  - "HYAI/core/domains/cartography/atlases/exports/**"
+scope_secondary:
+  - "HYAI/core/domains/cartography/atlases/layers/**"
+  - "HYAI/core/domains/cartography/atlases/bodies/**"
+
+produced_artifacts:
+  - "map-specification"
+  - "vector-map"
+  - "interactive-view-test"
+  - "export-qa-record"
+
+workflow: "cartography/map-production"
+definition_of_done:
+  - "Map spec задаёт body/CRS, projection, source layer IDs, extent/scale, format и metadata sidecar."
+  - "SVG/иной output действительно содержит векторные map features; raster export/underlay/screenshot отсутствуют."
+  - "SVG открывается в Inkscape, если выбран SVG, а viewport renderer отдельно проверен на исходных vector layers."
+  - "Custom body/CRS и temporal behaviour проверены прототипом или явно оставлены не поддержанными."
+checklist:
+  - "Указаны ли тело, CRS, датум, единицы, проекция и временная область?"
+  - "Проверена ли SVG на embedded image и сохранены ли необходимые sidecar-поля?"
+  - "Если включён 3D-view, отображает ли он canonical vector data, а не raster-копию?"
+  - "Отделены ли aesthetic decisions от изменений canonical geometry?"
+
+checks:
+  - "python3 HYAI/tools/lint_terms.py --domain cartography"

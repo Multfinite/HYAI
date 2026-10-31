@@ -6,7 +6,7 @@ status: approved
 authority: none
 visibility: internal
 version: "2.1"
-updated: "2026-10-29"
+updated: "2026-11-01"
 ---
 
 # Отчёты домена `kit`
@@ -24,3 +24,4 @@ updated: "2026-10-29"
 | [`2026-10-29-video-domain-analysis.md`](2026-10-29-video-domain-analysis.md) | `kit/domain-builder` | `analysis` |
 | [`2026-10-29-video-domain-implementation.md`](2026-10-29-video-domain-implementation.md) | `kit/domain-builder` | `task` |
 | [`2026-10-29-parallel-execution-rule.md`](2026-10-29-parallel-execution-rule.md) | `kit/domain-builder` | `task` |
+| [`2026-11-01-cartography-domain-implementation.md`](2026-11-01-cartography-domain-implementation.md) | `kit/domain-builder` | `task` |

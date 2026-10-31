@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "2.1"
-updated: "2026-10-29"
+updated: "2026-11-01"
 ---
 
 # Решения
@@ -22,6 +22,7 @@ updated: "2026-10-29"
 | `narrative` | [`narrative/`](narrative/README.md) | `NR` | канон, хронология, доступ |
 | `picture` | [`picture/`](picture/README.md) | `PIC` | промпт-генерация, конвейер звеньев, приёмка и стиль |
 | `video` | [`video/`](video/README.md) | `VID` | временная связность, сегменты, sound plan, швы и монтаж |
+| `cartography` | [`cartography/`](cartography/README.md) | `CART` | планетарные атласы и векторная картография |
 
 ## Действующие решения
 
@@ -36,7 +37,9 @@ updated: "2026-10-29"
 | [`KIT-0005`](kit/KIT-0005-parallel-execution.md) | kit | Общее правило параллельного выполнения и очереди удалённых задач | review |
 | [`P-0003`](project/P-0003-picture-video-keyframe-handoff.md) | project | Разделение владения keyframe-изображениями между picture и video | review |
 | [`P-0004`](project/P-0004-resource-bootstrap.md) | project | Общий вход: провайдер генерации, стоимость и правила расхода | review |
-| [`P-0005`](project/P-0005-style-asked-not-assumed.md) | project | Стиль базы и стиль-фильтр выбирает пользователь, а не агент | review |
+| [`P-0005`](project/P-0005-cartography-world-canon.md) | project | Владение структурированным планетарным и пространственным каноном | review |
+| [`P-0006`](project/P-0006-style-asked-not-assumed.md) | project | Стиль базы и стиль-фильтр выбирает пользователь, а не агент | review |
+| [`KIT-0006`](kit/KIT-0006-cartography-domain.md) | kit | Самостоятельный домен cartography для планетарного атласа и векторных карт | review |
 
 ## Правила
 

@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "2.0"
-updated: "2026-10-22"
+updated: "2026-11-01"
 ---
 
 # Архитектура: хаб
@@ -21,6 +21,7 @@ updated: "2026-10-22"
 | `docs` | [`architecture/docs.md`](architecture/docs.md) | ТЗ, спецификации, документация, диаграммы |
 | `narrative` | [`architecture/narrative.md`](architecture/narrative.md) | факты мира, хронология, текст |
 | `picture` | [`architecture/picture.md`](architecture/picture.md) | брифы, промпты «5+3», промежуточные звенья и финальные изображения |
+| `cartography` | [`architecture/cartography.md`](architecture/cartography.md) | планетарные данные, пространственные слои, векторные карты и интерактивный просмотр |
 | `kit` | [`architecture/kit.md`](architecture/kit.md) | домены, профили, проверки каркаса |
 
 ## Правила хаба

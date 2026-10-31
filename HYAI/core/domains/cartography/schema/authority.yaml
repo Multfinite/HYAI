@@ -1,0 +1,20 @@
+version: "1.0"
+domain: cartography
+authority:
+  values: [atlas-canon, source-record, derived-layer, map-design, export-record, none]
+  default: source-record
+  order: [atlas-canon, source-record, derived-layer, map-design, export-record, none]
+  approval_required: [atlas-canon, map-design, export-record]
+status:
+  values: [draft, review, approved, superseded, deprecated, archived]
+  default: draft
+  transitions:
+    draft: [review, archived]
+    review: [approved, draft, archived]
+    approved: [superseded, archived]
+    superseded: []
+    deprecated: []
+    archived: []
+  owner_only: [approved]
+provenance:
+  markers: ["[А]", "[И]", "[В]", "[Г]", "[?]"]

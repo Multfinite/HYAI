@@ -1,0 +1,41 @@
+schema_version: "1.0"
+record_type: planet-body
+body_id: "<stable-body-id>"
+status: draft
+system_id: "<stable-system-id>"
+primary_star_id: "<stable-star-id>"
+name:
+  canonical: "<body-name>"
+  aliases: []
+figure:
+  model: "<sphere|oblate-spheroid|triaxial|other>"
+  semi_major_axis: {value: null, unit: null, uncertainty: null}
+  semi_minor_axis: {value: null, unit: null, uncertainty: null}
+  flattening: {value: null, unit: null, uncertainty: null}
+reference_frame:
+  frame_id: "<stable-frame-id>"
+  datum_id: "<stable-datum-id>"
+  crs_id: "<stable-crs-id>"
+  ellipsoid: "<ellipsoid definition or explicit custom parameters>"
+  axes: "<axis order, direction and units>"
+  prime_meridian: "<definition and units>"
+orientation:
+  pole_ra: {value: null, unit: null, epoch: null}
+  pole_dec: {value: null, unit: null, epoch: null}
+  axial_tilt: {value: null, unit: null, epoch: null}
+rotation:
+  direction: "<prograde|retrograde|unknown>"
+  period: {value: null, unit: null, uncertainty: null}
+  day_length: {value: null, unit: null, uncertainty: null}
+orbit:
+  semi_major_axis: {value: null, unit: null, uncertainty: null}
+  eccentricity: {value: null, uncertainty: null}
+  orbital_period: {value: null, unit: null, uncertainty: null}
+  year_length: {value: null, unit: null, uncertainty: null}
+  epoch: "<epoch>"
+provenance:
+  source_refs: []
+  method: "<method-or-authored>"
+  uncertainty_notes: "<unknowns and limits>"
+authority: source-record
+visibility: internal

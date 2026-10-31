@@ -1,0 +1,37 @@
+schema_version: "1.0"
+record_type: map-spec
+map_id: "<stable-map-id>"
+status: draft
+title: "<map-title>"
+body_id: "<stable-body-id>"
+crs_id: "<stable-crs-id>"
+source_layer_ids: []
+projection:
+  name: "<projection>"
+  parameters: {}
+  distortion_notes: "<known limits>"
+extent: "<bounds and units>"
+scale_or_resolution: "<scale/resolution and unit>"
+style:
+  style_id: "<stable-style-id>"
+  legend: "<legend-reference>"
+output:
+  format: svg
+  file: "<vector-output-file.svg>"
+  vector_only: true
+  embedded_raster: false
+  sidecar: "<map-output.metadata.yaml>"
+  required_sidecar_fields: [body_id, crs_id, projection, units, epoch_or_time_range, provenance]
+interactive_3d_view:
+  enabled: "<true|false>"
+  renderer_candidate: "<CesiumJS or verified alternative>"
+  source_layer_ids: []
+  screen_rasterization_transient_only: true
+  save_viewport_as_map: false
+provenance:
+  source_refs: []
+  tool_versions: []
+  export_timestamp: "<ISO 8601>"
+  output_sha256: "<hash after export>"
+authority: map-design
+visibility: internal
