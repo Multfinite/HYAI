@@ -5,8 +5,8 @@ type: template
 status: review
 authority: none
 visibility: internal
-version: "1.1"
-updated: "2026-10-29"
+version: "1.2"
+updated: "2026-11-03"
 template: true
 template_kind: output
 ---
@@ -32,11 +32,14 @@ visibility: internal
 ## 1. Сквозные правила безопасности и качества серии
 
 - **Бриф безопасности (`G0-SAF`):** `<picture_root>/briefs/<series>-brief.md` (все 4 оси заданы `[А]`)
+- **`series_mode`:** `independent` (по умолчанию, `PIC-POL-09`) | `continuity` (сквозные персонажи — явное решение брифа)
 - **`min_resolution`:** `<WxH>`
 - **`allowed_aspect_ratios`:** `<список>`
 - **`iteration_limit`:** `<N>`
 
 ## 2. Неизменяемые якоря персонажей и ключевых объектов (`PIC-QA-04`)
+
+Заполняется только в режиме `series_mode: continuity`. В режиме `independent` раздел помечается `not applicable` с причиной: каждая картинка серии независима — разные персонажи (количество, класс/страта) и разные места (`PIC-POL-09`).
 
 | ID якоря | Субъект / объект | Дословный блок описания для секции `subject` (`prompt_language`) | Эталонный принятый файл | Запрещённый дрейф для `negative` |
 | --- | --- | --- | --- | --- |
