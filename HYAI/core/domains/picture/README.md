@@ -5,8 +5,8 @@ type: meta
 status: review
 authority: invariant
 visibility: internal
-version: "1.1"
-updated: "2026-10-29"
+version: "1.2"
+updated: "2026-11-04"
 ---
 
 # Домен `picture`
@@ -27,6 +27,7 @@ updated: "2026-10-29"
 | Фильтр стиля — строго в конце | `PIC-POL-05` | Стилевой фильтр накладывается только после приёмки готового базового изображения (`base-final`) |
 | Окружение кадра — по канону мира | `PIC-PRM-06`, `PIC-ENV-01..04`, `PIC-QA-06` | Свет звезды, флора, небо и спутники берутся дословными якорями из канона проекта; земные умолчания модели (золотой час, зелёная листва, одна луна) — брак |
 | Изоляция данных при подмодуле | `PIC-POL-06` | Внешний проект определяет собственный `<picture_root>` вне подмодуля HYAI через манифест активного домена |
+| Форма переноса в другой чат | `PIC-POL-10..11` | На просьбу об удобной форме копирования «промпт + картинка» выдаётся страница по шаблону, а не стена текста |
 
 ## Что здесь лежит
 
@@ -34,14 +35,14 @@ updated: "2026-10-29"
 | --- | --- |
 | [`manifest.yaml`](manifest.yaml) | Машинный манифест домена: `root_paths` (`HYAI/core/domains/picture/pictures` в HYAI), профили, схемы и проверки |
 | [`pictures/`](pictures/) | Рабочий каталог данных домена внутри самого репозитория HYAI (`briefs/`, `prompts/`, `stages/`, `assets/`) |
-| [`policy.md`](policy.md) | Правила `PIC-POL-01..06`, `PIC-SAF-01..05`, `PIC-PRM-01..06`, `PIC-ENV-01..04`, `PIC-WF-01..02`, `PIC-QA-01..06` |
+| [`policy.md`](policy.md) | Правила `PIC-POL-01..11`, `PIC-SAF-01..05`, `PIC-PRM-01..06`, `PIC-WF-01..03`, `PIC-QA-01..07`, `PIC-ENV-01..04` |
 | [`authority.md`](authority.md) | Уровни нормативности `visual-canon / brief / prompt / stage / none` |
 | [`schema/`](schema/README.md) | Машинные словари уровней нормативности и контуров доступа |
 | [`access.md`](access.md) | Контуры доступа `public / internal / restricted` и правила выгрузки ассетов |
 | [`agents.md`](agents.md) | Краткий фрагмент `AGENTS.md` для активного домена `picture` |
 | [`registry/`](registry/README.md) | Реестр обязательного чтения перед работой в домене |
-| [`workflows/`](workflows/README.md) | Процессы `instant`, `pipeline`, `series`, `style-filter` |
-| [`templates/`](templates/README.md) | Шаблоны брифа безопасности, промпта «5+3», карты конвейера, эталона серии и паспорта ассета |
+| [`workflows/`](workflows/README.md) | Процессы `instant`, `pipeline`, `series`, `style-filter`, `handoff-page` |
+| [`templates/`](templates/README.md) | Шаблоны брифа безопасности, промпта «5+3», карты конвейера, эталона серии, паспорта ассета и страницы переноса в другой чат |
 | [`profiles/`](profiles/) | Профили `instant`, `pipeline`, `art-director`, `analysis` |
 
 ## Профили домена

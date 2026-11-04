@@ -5,8 +5,8 @@ type: meta
 status: review
 authority: none
 visibility: internal
-version: "1.0"
-updated: "2026-10-28"
+version: "1.1"
+updated: "2026-11-04"
 ---
 
 # Отчёты домена `picture`
@@ -15,6 +15,6 @@ updated: "2026-10-28"
 
 | Отчёт | Профиль | Вид |
 | --- | --- | --- |
-| — | — | — |
+| [`2026-11-04-handoff-page.md`](2026-11-04-handoff-page.md) | `picture/pipeline` | `task` |
 
 Отчёт, которого нет в индексе `HYAI/meta/reports/README.md`, не проходит проверку (`HYAI-ART-13`).

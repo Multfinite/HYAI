@@ -5,8 +5,8 @@ type: meta
 status: review
 authority: none
 visibility: internal
-version: "1.0"
-updated: "2026-10-28"
+version: "1.1"
+updated: "2026-11-04"
 ---
 
 # Шаблоны домена `picture`
@@ -20,6 +20,9 @@ updated: "2026-10-28"
 | [`pipeline-manifest.md`](pipeline-manifest.md) | `output` | `<picture_root>/stages/<slug>/pipeline-manifest.md` — карта принятых промежуточных звеньев `S1..S8` |
 | [`series-anchor.md`](series-anchor.md) | `output` | `<picture_root>/briefs/<series>-anchor.md` — эталон консистентности серии и единого фильтра стиля |
 | [`asset-card.md`](asset-card.md) | `output` | `<picture_root>/assets/<slug>.md` — паспорт готового изображения, провенанс и протокол VLM-приёмки |
+| [`handoff-page.md`](handoff-page.md) | `output` | `<picture_root>/stages/<slug>/<slug>-handoff.html` — спецификация полей и структуры страницы переноса «промпт + картинка» в другой чат (`PIC-POL-10`) |
+| [`handoff-page.html`](handoff-page.html) | `output` | каркас той же страницы: плейсхолдеры, встроенные CSS/JS, карточки с `data:` URI и кнопками копирования |
+| [`build_handoff_page.py`](build_handoff_page.py) | `output` | сборщик `<slug>-handoff.html`, `<slug>-handoff.txt`, `<slug>-handoff.zip` из JSON-манифеста (`PIC-WF-03`) |
 
 ## Правило заполнения шаблонов
 

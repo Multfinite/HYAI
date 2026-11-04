@@ -5,8 +5,8 @@ type: tool
 status: approved
 authority: contract
 visibility: internal
-version: "2.0"
-updated: "2026-10-22"
+version: "2.1"
+updated: "2026-11-04"
 ---
 
 # Тесты
@@ -22,5 +22,6 @@ updated: "2026-10-22"
 | [`test_access.py`](test_access.py) | «Роль × призма», компетенции, карта понимания, выгрузки |
 | [`test_rules.py`](test_rules.py) | Идентификаторы правил: формат, владелец, дубли, висячие ссылки, `retired`; ворота выгрузки |
 | [`test_self_check.py`](test_self_check.py) | Матричный прогон по всем активным парам и сборка `AGENTS.md` |
+| [`test_handoff_page.py`](test_handoff_page.py) | Сборщик страницы переноса `picture/handoff-page`: автономный HTML, ZIP, отказ на битом манифесте |
 
 Копия каркаса для мутаций — [`_kit.py`](_kit.py).
