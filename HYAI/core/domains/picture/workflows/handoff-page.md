@@ -31,7 +31,7 @@ updated: "2026-11-04"
 ## 3. Шаги
 
 1. **Объявить источник и действие** перед шагом (`HYAI-INT-29`): политика `PIC-POL-10`, процесс `picture/handoff-page`, ожидаемый результат — три файла в `<picture_root>/stages/<slug>/`.
-2. **Собрать манифест** по [`../templates/handoff-page.md`](../templates/handoff-page.md): по одному `frames[]` на кадр, `prompt_a` копируется дословно, `image` указывает на существующий файл. Проверить, что путей столько же, сколько промптов.
+2. **Собрать манифест** по [`../templates/handoff-page.md`](../templates/handoff-page.md): по одному `frames[]` на кадр, `prompt_a` копируется дословно, `image` указывает на существующий файл. Проверить, что путей столько же, сколько промптов. Если для серии задан `style_filter` (`PIC-POL-08`), перенести дословный блок фильтра в **первую строку каждого промпта**, задать `style_filter_block`, `require_style_filter: true` и `badge` на карточку: сборщик отвергнёт промпт, у которого фильтр спрятан за замком содержания.
 3. **Отрендерить** страницу сборщиком [`../templates/build_handoff_page.py`](../templates/build_handoff_page.py): `python3 build_handoff_page.py --manifest <manifest>.json --out-dir <picture_root>/stages/<slug>/`. Сборщик встраивает изображения в `data:` URI, пишет HTML, TXT и ZIP.
 4. **Проверить по `PIC-QA-07`** (раздел 5 ниже). Упавшую проверку исправить, не отключать (`HYAI-PERM-N01`).
 5. **Выдать**: открыть HTML через `present_file`; в ответе по `HYAI-INT-22` перечислить все три файла таблицей «Файл · Действие · Что изменилось» и дать пути **обычным текстом в обратных кавычках**. Ссылки вида `sandbox:` не давать: в чате они только подчёркиваются и не открываются.
@@ -56,6 +56,7 @@ print('карточек:', p.count('<section class="card"'))
 print('data-URI:', p.count('data:image/'))
 print('внешних http:', len(re.findall(r'(?:src|href)="https?://', p)))
 print('sandbox-ссылок:', p.count('sandbox:'))
+print('промптов с фильтром:', p.count('STYLE FILTER — MANDATORY'))
 Path('/tmp/handoff.js').write_text(re.search(r'<script>(.*?)</script>', p, re.S).group(1))
 z = zipfile.ZipFile('<slug>-handoff.zip')
 print('ZIP test:', z.testzip(), '| файлов:', len(z.namelist()))
@@ -63,7 +64,7 @@ PY
 node --check /tmp/handoff.js
 ```
 
-Ожидается: карточек = числу пар; `data:` URI = числу пар; внешних `http` и `sandbox:` — `0`; `node --check` — `rc=0`; `ZIP test: None`. Дополнительно сверить вручную, что в каждой карточке лежит именно её изображение и именно её промпт.
+Ожидается: карточек = числу пар; `data:` URI = числу пар; внешних `http` и `sandbox:` — `0`; при `require_style_filter: true` счётчик «промптов с фильтром» = числу непустых промптов во всех вариантах (A и B); `node --check` — `rc=0`; `ZIP test: None`. Дополнительно сверить вручную, что в каждой карточке лежит именно её изображение и именно её промпт и что фильтр стоит в первой строке.
 
 ## 6. Остановки и границы
 

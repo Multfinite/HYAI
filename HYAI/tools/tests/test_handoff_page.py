@@ -69,6 +69,36 @@ class HandoffPageTest(unittest.TestCase):
         finally:
             tmp.cleanup()
 
+    def test_style_filter_is_enforced(self):
+        block = "rich saturated painterly finish: intensify and deepen every local color"
+        data = manifest([
+            {"id": "01", "caption": "A", "image": "images/a.png",
+             "prompt_a": "STYLE FILTER — MANDATORY, APPLY FIRST:\n" + block + "\n\nUse the attached image ..."},
+        ])
+        data["style_filter_block"] = block
+        data["require_style_filter"] = True
+        tmp, out, result = self.render(data)
+        try:
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            page = (out / "demo-handoff.html").read_text(encoding="utf-8")
+            self.assertIn("СТИЛЬ-ФИЛЬТР: включён в 1/1 промптов", page)
+            self.assertIn(block, page)
+        finally:
+            tmp.cleanup()
+
+    def test_hidden_style_filter_is_rejected(self):
+        data = manifest([
+            {"id": "01", "caption": "A", "image": "images/a.png", "prompt_a": "CONTENT LOCK: keep the source image ..."},
+        ])
+        data["style_filter_block"] = "rich saturated painterly finish: intensify and deepen every local color"
+        data["require_style_filter"] = True
+        tmp, _out, result = self.render(data)
+        try:
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("STYLE FILTER", result.stderr)
+        finally:
+            tmp.cleanup()
+
     def test_missing_prompt_is_rejected(self):
         frames = [{"id": "01", "caption": "A", "image": "images/a.png"}]
         tmp, _out, result = self.render(manifest(frames))

@@ -84,9 +84,11 @@ def card(index: int, frame: dict, image_path: Path, ext: str) -> str:
     ident = html.escape(str(frame["id"]))
     caption = html.escape(str(frame.get("caption") or ""))
     name = html.escape(image_path.stem)
+    badge = f'<div class="badge">{html.escape(str(frame["badge"]))}</div>' if frame.get("badge") else ""
     return f"""<section class="card" data-i="{index}">
 <div class="thumb"><img data-img="{index}" alt="{name}{ext}"></div>
 <div class="body">
+{badge}
 <div class="head"><span class="num">{ident}</span><h2>{caption}</h2></div>
 <div class="file">файл: <code>{name}{ext}</code> · в буфер копируется PNG</div>
 <textarea class="prompt" readonly spellcheck="false"></textarea>
@@ -102,6 +104,10 @@ def card(index: int, frame: dict, image_path: Path, ext: str) -> str:
 
 
 def build_html(template: str, data: dict, frames: list[dict], base: Path) -> tuple[str, list[tuple[Path, str]]]:
+    block = str(data.get("style_filter_block") or "").strip()
+    require = bool(data.get("require_style_filter"))
+    if require and not block:
+        fail("require_style_filter: true требует непустое поле style_filter_block")
     images: list[str] = []
     names: list[str] = []
     exts: list[str] = []
@@ -119,6 +125,15 @@ def build_html(template: str, data: dict, frames: list[dict], base: Path) -> tup
         names.append(image_path.stem)
         exts.append(ext)
         files.append((image_path, "images/" + image_path.name))
+        if require:
+            for key in ("prompt_a", "prompt_b"):
+                value = str(frame.get(key) or "")
+                if not value:
+                    continue
+                pos = value.find(block)
+                if not value.lstrip().startswith("STYLE FILTER") or pos < 0 or pos > 200:
+                    fail(f"кадр {index + 1}: {key} не начинается с блока STYLE FILTER "
+                         f"(PIC-POL-08, PIC-QA-07); стиль-фильтр обязан быть в начале промпта")
         a.append(str(frame["prompt_a"]))
         b.append(str(frame.get("prompt_b") or ""))
         cards.append(card(index, frame, image_path, ext))
@@ -131,10 +146,14 @@ def build_html(template: str, data: dict, frames: list[dict], base: Path) -> tup
         + ", IMG_EXTS = " + tags(json.dumps(exts, ensure_ascii=False))
         + ", HAS_B = " + ("true" if has_b else "false") + ";"
     )
+    note = str(data["note"])
+    if require:
+        note = (f'<div class="badge">СТИЛЬ-ФИЛЬТР: включён в {len(frames)}/{len(frames)} промптов, '
+                f'блок стоит первым</div>' + note)
     rendered = (template
                 .replace("__HANDOFF_TITLE__", html.escape(str(data["title"])))
                 .replace("__HANDOFF_CAPTION__", html.escape(str(data["caption"])))
-                .replace("__HANDOFF_NOTE__", str(data["note"]))
+                .replace("__HANDOFF_NOTE__", note)
                 .replace("__HANDOFF_CARDS__", "\n".join(cards))
                 .replace("__HANDOFF_DATA__", payload))
     left = sorted(set(re.findall(r"__HANDOFF_[A-Z_]+__", rendered)))
@@ -215,7 +234,9 @@ def main() -> int:
                    "Прогон промптов выполняет пользователь в другом чате.\n")
 
     external = len(re.findall(r'(?:src|href)="https?://', page))
+    enforced = bool(data.get("require_style_filter") and data.get("style_filter_block"))
     print(f"кадров: {len(data['frames'])}; data-URI: {page.count('data:image/')}")
+    print("стиль-фильтр: " + ("обязателен, блок первым в каждом промпте" if enforced else "не задан"))
     print(f"внешних http-ресурсов: {external}; вариант B: {'да' if any(f.get('prompt_b') for f in data['frames']) else 'нет'}")
     for path in (html_path, txt_path, zip_path):
         print(f"создан: {path}")
