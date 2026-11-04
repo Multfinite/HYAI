@@ -5,8 +5,8 @@ type: meta
 status: review
 authority: contract
 visibility: internal
-version: "1.0"
-updated: "2026-10-28"
+version: "1.1"
+updated: "2026-11-04"
 ---
 
 # Решения домена `picture`
@@ -17,4 +17,4 @@ updated: "2026-10-28"
 
 | ID | Название | Статус |
 | --- | --- | --- |
-| — | — | — |
+| [`PIC-0001`](PIC-0001-handoff-page.md) | Форма переноса промптов и изображений в другой чат — страница по шаблону | review |

@@ -31,3 +31,18 @@ documents:
     type: meta
     authority: contract
     why: "Словарь терминов домена: Каркас 5+3, base-neutral, base-final, style-filter, series-anchor"
+  - id: picture.workflow.handoff-page
+    path: "HYAI/core/domains/picture/workflows/handoff-page.md"
+    type: workflow
+    authority: contract
+    why: "Процесс picture/handoff-page: страница переноса «промпт + картинка» в другой чат (PIC-POL-10..11, PIC-WF-03, PIC-QA-07)"
+  - id: picture.template.handoff-page
+    path: "HYAI/core/domains/picture/templates/handoff-page.md"
+    type: template
+    authority: none
+    why: "Поля манифеста, обязательная структура страницы, запреты и приёмка формы переноса"
+  - id: picture.template.handoff-page-html
+    path: "HYAI/core/domains/picture/templates/handoff-page.html"
+    type: template
+    authority: none
+    why: "Каркас автономной HTML-страницы: карточки, data: URI, кнопки копирования и фолбэки"

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__HANDOFF_TITLE__</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0e1116;color:#e7ebf0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#151a22;border-bottom:1px solid #2b3442;padding:16px 22px}
+h1{margin:0 0 4px;font-size:19px}
+p{margin:2px 0;color:#9aa7b8;font-size:13px}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0 4px}
+.seg{display:inline-flex;border:1px solid #334052;border-radius:8px;overflow:hidden}
+.seg button{background:#1b2230;color:#c7d2e0;border:0;padding:9px 14px;cursor:pointer;font-size:13px}
+.seg button.on{background:#3b6ea8;color:#fff;font-weight:600}
+.btn{background:#1f2836;color:#dbe4ef;border:1px solid #36445a;border-radius:7px;padding:8px 12px;cursor:pointer;font-size:12.5px}
+.btn:hover{background:#2a3648}
+.btn.primary{background:#2f6fb5;border-color:#2f6fb5;color:#fff;font-weight:600}
+.btn.primary:hover{background:#3a82cf}
+.note{background:#171f2b;border:1px solid #2d3a4d;border-radius:9px;padding:12px 14px;margin:16px 0 22px;font-size:13px;color:#cbd6e4}
+.note b{color:#fff}
+.note ol{margin:8px 0 0 18px;padding:0}
+.note li{margin:3px 0}
+.card{display:grid;grid-template-columns:270px 1fr;gap:18px;background:#141a23;border:1px solid #273141;border-radius:12px;padding:16px;margin:0 0 18px}
+.thumb img{width:100%;height:auto;display:block;border-radius:7px;background:#222}
+.head{display:flex;gap:10px;align-items:baseline}
+h2{font-size:15px;margin:0;font-weight:650;color:#fff}
+.num{font:700 12px ui-monospace,monospace;color:#8fc0ff;background:#1d2a3c;padding:3px 7px;border-radius:5px}
+.file{margin:5px 0 9px;color:#8896a8;font-size:12px;font-family:ui-monospace,monospace}
+textarea.prompt{width:100%;height:168px;resize:vertical;background:#0d1219;color:#d5e0ee;border:1px solid #2c3849;border-radius:7px;padding:10px;font:11.5px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap}
+.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.status{margin-top:8px;min-height:16px;font-size:12px;color:#7fd8a4}
+.status.err{color:#ff9a8f}
+@media(max-width:760px){.card{grid-template-columns:1fr}.thumb{max-width:260px}}
+</style>
+</head>
+<body>
+<header>
+<h1>__HANDOFF_TITLE__</h1>
+<p>__HANDOFF_CAPTION__</p>
+<div class="bar">
+<div class="seg" id="variants"><button data-v="A" class="on">A · image-to-image (с картинкой)</button><button data-v="B">B · одиночный проход (с нуля)</button></div>
+<button class="btn" id="copyAll">Скопировать все промпты</button>
+</div>
+</header>
+<div class="wrap">
+<div class="note">__HANDOFF_NOTE__</div>
+__HANDOFF_CARDS__
+</div>
+<script>
+__HANDOFF_DATA__
+if(!HAS_B){document.getElementById('variants').style.display='none';}
+IMG.forEach((u,i)=>{const el=document.querySelector('img[data-img="'+i+'"]');if(el)el.src=u;});
+let variant='A';
+const cards=[...document.querySelectorAll('.card')];
+function paint(){cards.forEach((c,i)=>{c.querySelector('textarea').value=(variant==='A'?A:B)[i];c.querySelector('.status').textContent='';});}
+paint();
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.seg button').forEach(x=>x.classList.toggle('on',x===b));
+  variant=b.dataset.v;paint();
+});
+function say(c,msg,bad){const s=c.querySelector('.status');s.textContent=msg;s.classList.toggle('err',!!bad);clearTimeout(c._t);c._t=setTimeout(()=>s.textContent='',4200);}
+async function copyText(t){
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(t);return true;}}catch(e){}
+  const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand('copy');}catch(e){}
+  ta.remove();return ok;
+}
+function pngBlob(i){return new Promise(res=>{
+  const im=new Image();im.onload=()=>{const cv=document.createElement('canvas');cv.width=im.naturalWidth;cv.height=im.naturalHeight;
+  cv.getContext('2d').drawImage(im,0,0);cv.toBlob(b=>res(b),'image/png');};im.src=IMG[i];});}
+function download(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();}
+function baseName(i){return IMG_NAMES[i]||('frame_'+String(i+1).padStart(2,'0'));}
+async function copyImage(i,c){
+  try{const blob=await pngBlob(i);if(!blob)throw new Error('no blob');
+    if(!navigator.clipboard||!navigator.clipboard.write||!window.ClipboardItem)throw new Error('clipboard image unsupported');
+    await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+    say(c,'Картинка скопирована в буфер (PNG) — вставьте в чат Ctrl+V');
+  }catch(e){const blob=await pngBlob(i);download(URL.createObjectURL(blob),baseName(i)+'.png');
+    say(c,'Буфер картинок недоступен — PNG скачан, приложите файл вручную',true);}
+}
+document.querySelectorAll('.card').forEach((c,i)=>{
+  c.querySelectorAll('button').forEach(btn=>btn.onclick=async()=>{
+    const act=btn.dataset.act;
+    if(act==='prompt'){const ok=await copyText((variant==='A'?A:B)[i]);say(c,ok?'Промпт скопирован ('+variant+')':'Не удалось скопировать — выделите текст вручную',!ok);}
+    else if(act==='image')await copyImage(i,c);
+    else if(act==='src')download(IMG[i],baseName(i)+IMG_EXTS[i]);
+    else if(act==='png'){const blob=await pngBlob(i);download(URL.createObjectURL(blob),baseName(i)+'.png');say(c,'PNG скачан');}
+  });
+});
+document.getElementById('copyAll').onclick=async()=>{
+  const arr=(variant==='A'?A:B);
+  const t=arr.map((p,i)=>'===== '+String(i+1).padStart(2,'0')+' · '+baseName(i)+'.png =====\n'+p).join('\n\n');
+  const ok=await copyText(t);const s=document.getElementById('copyAll');s.textContent=ok?'Скопировано '+arr.length+' промптов ('+variant+')':'Не удалось — копируйте по одному';
+  setTimeout(()=>s.textContent='Скопировать все промпты',4200);
+};
+</script>
+</body>
+</html>

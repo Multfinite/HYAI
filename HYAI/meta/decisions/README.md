@@ -5,8 +5,8 @@ type: meta
 status: approved
 authority: contract
 visibility: internal
-version: "2.1"
-updated: "2026-11-01"
+version: "2.2"
+updated: "2026-11-04"
 ---
 
 # Решения
@@ -40,6 +40,7 @@ updated: "2026-11-01"
 | [`P-0005`](project/P-0005-cartography-world-canon.md) | project | Владение структурированным планетарным и пространственным каноном | review |
 | [`P-0006`](project/P-0006-style-asked-not-assumed.md) | project | Стиль базы и стиль-фильтр выбирает пользователь, а не агент | review |
 | [`KIT-0006`](kit/KIT-0006-cartography-domain.md) | kit | Самостоятельный домен cartography для планетарного атласа и векторных карт | review |
+| [`PIC-0001`](picture/PIC-0001-handoff-page.md) | picture | Форма переноса промптов и изображений в другой чат — страница по шаблону | review |
 
 ## Правила
 
