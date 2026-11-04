@@ -70,6 +70,26 @@ class PipelineTest(unittest.TestCase):
         self.assertFalse(any(step["layer"] == "project" for step in without_project))
 
 
+class CommandParsingTest(unittest.TestCase):
+    def test_python_module_is_not_treated_as_script_path(self) -> None:
+        sys.path.insert(0, str(ROOT / "HYAI" / "tools"))
+        import run_checks  # noqa: E402
+
+        self.assertEqual(
+            run_checks.argv_of("python3 -m unittest discover -s HYAI/tools/tests", ROOT),
+            [sys.executable, "-m", "unittest", "discover", "-s", "HYAI/tools/tests"],
+        )
+
+    def test_python_script_is_resolved_against_project_root(self) -> None:
+        sys.path.insert(0, str(ROOT / "HYAI" / "tools"))
+        import run_checks  # noqa: E402
+
+        self.assertEqual(
+            run_checks.argv_of("python3 HYAI/tools/frontmatter.py --check", ROOT),
+            [sys.executable, str(ROOT / "HYAI" / "tools" / "frontmatter.py"), "--check"],
+        )
+
+
 class MatrixTest(unittest.TestCase):
     """Каждая объявленная пара «домен + профиль» должна проходить структурные проверки."""
 

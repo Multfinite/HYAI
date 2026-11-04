@@ -47,7 +47,7 @@ def argv_of(command: str, root: Path) -> list[str]:
     parts = shlex.split(command)
     if parts and parts[0] in ("python", "python3"):
         parts[0] = sys.executable
-        if len(parts) > 1:
+        if len(parts) > 1 and not parts[1].startswith("-"):
             # Скрипт может быть записан от корня каркаса (`HYAI/tools/...`), а запускаться
             # от корня проекта: тогда находим его через корень каркаса.
             script = root / parts[1]
