@@ -21,7 +21,7 @@ classes:
   SW: [POL, INV]
   DOC: [POL, TXT, INV]
   NR: [POL, TXT, ENT, CMP, EXP, READ, INV]
-  PIC: [POL, SAF, PRM, ENV, WF, QA, INV]
+  PIC: [POL, SAF, PRM, ENV, ERA, WF, QA, INV]
   VID: [POL, WF, QA, INV]
   CART: [POL]
   PRJ: [POL]
