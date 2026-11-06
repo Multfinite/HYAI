@@ -37,6 +37,7 @@ profiles:
   pipeline: "HYAI/core/domains/picture/profiles/pipeline/profile.yaml"
   art-director: "HYAI/core/domains/picture/profiles/art-director/profile.yaml"
   analysis: "HYAI/core/domains/picture/profiles/analysis/profile.yaml"
+  audit: "HYAI/core/domains/picture/profiles/audit/profile.yaml"
 
 checks:
   - "python3 HYAI/tools/lint_terms.py --domain picture"
