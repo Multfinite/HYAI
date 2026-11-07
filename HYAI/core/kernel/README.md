@@ -23,7 +23,7 @@ updated: "2026-10-29"
 | [`policies/provenance.md`](policies/provenance.md) | `HYAI-PROV-01..08` | Оси документа, маркеры `[А]/[И]/[В]/[Г]/[?]`, наследование нормативности |
 | [`policies/artifacts.md`](policies/artifacts.md) | `HYAI-ART-01..14` | Отчёты, шаблоны, имена, индексы, `cross_scope` |
 | [`policies/decisions.md`](policies/decisions.md) | `HYAI-DEC-01..13` | Области решений, префиксы, слияние, индекс |
-| [`policies/interaction.md`](policies/interaction.md) | `HYAI-INT-01..30` | Работа с пользователем, входная проверка runtime, параллельное выполнение и удалённая диспетчеризация |
+| [`policies/interaction.md`](policies/interaction.md) | `HYAI-INT-01..30` | Работа с пользователем, озвучивание шагов до/после, runtime и параллельная диспетчеризация |
 | [`agents.md`](agents.md) | — | Фрагмент ядра для сборки `AGENTS.md` (протокол старта, запреты, провенанс) |
 | [`principles.md`](principles.md) | — | Четыре принципа каркаса: `3D`, `HaRD`, `INRA`, `HELPER` |
 | [`routing.md`](routing.md) | — | Как выбрать домен и профиль по формулировке задачи |
