@@ -41,6 +41,7 @@ updated: "2026-11-04"
 | [`P-0006`](project/P-0006-style-asked-not-assumed.md) | project | Стиль базы и стиль-фильтр выбирает пользователь, а не агент | review |
 | [`KIT-0006`](kit/KIT-0006-cartography-domain.md) | kit | Самостоятельный домен cartography для планетарного атласа и векторных карт | review |
 | [`PIC-0001`](picture/PIC-0001-handoff-page.md) | picture | Форма переноса промптов и изображений в другой чат — страница по шаблону | review |
+| [`PIC-0002`](picture/PIC-0002-body-refs-and-manual-photoreal.md) | picture | Эталоны частей тела не удаляются; фотореалистичный финал делает владелец | review |
 
 ## Правила
 

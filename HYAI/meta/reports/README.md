@@ -46,5 +46,6 @@ updated: "2026-11-04"
 | [`2026-10-29-parallel-execution-rule.md`](kit/2026-10-29-parallel-execution-rule.md) | `kit` | `kit/domain-builder` | `task` |
 | [`2026-11-01-cartography-domain-implementation.md`](kit/2026-11-01-cartography-domain-implementation.md) | `kit` | `kit/domain-builder` | `task` |
 | [`2026-11-04-handoff-page.md`](picture/2026-11-04-handoff-page.md) | `picture` | `picture/pipeline` | `task` |
+| [`2026-11-07-body-refs-and-manual-photoreal.md`](picture/2026-11-07-body-refs-and-manual-photoreal.md) | `picture` | `picture/pipeline` | `task` |
 
 Новый отчёт обязан появиться в этой таблице (`HYAI-ART-13`): `check_report.py` сверяет индекс с файловой системой.
