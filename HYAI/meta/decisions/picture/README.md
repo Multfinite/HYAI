@@ -5,8 +5,8 @@ type: meta
 status: review
 authority: contract
 visibility: internal
-version: "1.1"
-updated: "2026-11-04"
+version: "1.2"
+updated: "2026-11-07"
 ---
 
 # Решения домена `picture`
@@ -18,3 +18,4 @@ updated: "2026-11-04"
 | ID | Название | Статус |
 | --- | --- | --- |
 | [`PIC-0001`](PIC-0001-handoff-page.md) | Форма переноса промптов и изображений в другой чат — страница по шаблону | review |
+| [`PIC-0002`](PIC-0002-body-refs-and-manual-photoreal.md) | Эталоны частей тела не удаляются; фотореалистичный финал делает владелец | review |

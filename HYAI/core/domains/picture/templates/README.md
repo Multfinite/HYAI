@@ -5,8 +5,8 @@ type: meta
 status: review
 authority: none
 visibility: internal
-version: "1.1"
-updated: "2026-11-04"
+version: "1.2"
+updated: "2026-11-07"
 ---
 
 # Шаблоны домена `picture`
@@ -22,6 +22,7 @@ updated: "2026-11-04"
 | [`asset-card.md`](asset-card.md) | `output` | `<picture_root>/assets/<slug>.md` — паспорт готового изображения, провенанс и протокол VLM-приёмки |
 | [`handoff-page.md`](handoff-page.md) | `output` | `<picture_root>/stages/<slug>/<slug>-handoff.html` — спецификация полей и структуры страницы переноса «промпт + картинка» в другой чат (`PIC-POL-10`) |
 | [`handoff-page.html`](handoff-page.html) | `output` | каркас той же страницы: плейсхолдеры, встроенные CSS/JS, карточки с `data:` URI и кнопками копирования |
+| [`refs-part-readme.md`](refs-part-readme.md) | `output` | `<picture_root>/refs/<part>/README.md` — паспорт каталога эталонов части тела и правила применения (`PIC-POL-12`) |
 | [`build_handoff_page.py`](build_handoff_page.py) | `output` | сборщик `<slug>-handoff.html`, `<slug>-handoff.txt`, `<slug>-handoff.zip` из JSON-манифеста (`PIC-WF-03`) |
 
 ## Правило заполнения шаблонов
