@@ -46,3 +46,8 @@ documents:
     type: template
     authority: none
     why: "Каркас автономной HTML-страницы: карточки, data: URI, кнопки копирования и фолбэки"
+  - id: picture.workflow.remediation
+    path: "HYAI/core/domains/picture/workflows/remediation.md"
+    type: workflow
+    authority: contract
+    why: "Практики ремедиации и повторной ревизии: эталон картинкой, пересадка детали, участковая генерация, руки на крупном предмете, ухо под прядью (PIC-QA-09)"
