@@ -5,8 +5,8 @@ type: template
 status: review
 authority: none
 visibility: internal
-version: "1.0"
-updated: "2026-10-28"
+version: "1.1"
+updated: "2026-11-09"
 template: true
 template_kind: output
 ---
@@ -15,7 +15,7 @@ template_kind: output
 
 Создаётся в `<picture_root>/stages/<slug>/pipeline-manifest.md` при работе по процессу [`../workflows/pipeline.md`](../workflows/pipeline.md) (`PIC-POL-04`, `PIC-WF-01..02`), где `<picture_root>` — `root_paths` манифеста активного домена `picture` (вне подмодуля HYAI для внешних проектов — `PIC-POL-06`).
 
-**Если данных нет:** если звено не требуется по геометрии сцены (например, `S1 layout` или `S6 masks-guides`), оно помечается статусом `skipped-by-design` с коротким обоснованием; обязательные звенья (`S3`, `S4`, `S7` и `S8` при наличии целевого стиля) пропускать нельзя.
+**Если данных нет:** если звено не требуется по геометрии сцены (например, `S1 layout` или `S6 masks-guides`), оно помечается статусом `skipped-by-design` с коротким обоснованием; обязательные звенья (`S3`, `S4`, `S7`, `S7C` при `concept_method: monochrome-sketch + color-pass` (`PIC-POL-18`) и `S8` при наличии целевого стиля) пропускать нельзя.
 
 ````markdown
 ---
@@ -43,5 +43,6 @@ visibility: internal
 | `S5 lighting` | `accepted` | `<picture_root>/prompts/<slug>-s5.md` | `<picture_root>/stages/<slug>/s5-lighting.png` | `1/5` | единый вектор ключевого и контрового света | удалены (`0` в хранилище) |
 | `S6 masks-guides` | `accepted` / `skipped-by-design` | `<picture_root>/prompts/<slug>-s6.md` | `<picture_root>/stages/<slug>/s6-masks.png` | `1/5` | точные зоны опоры и перекрытий | удалены (`0` в хранилище) |
 | `S7 base-final` | `accepted` | `<picture_root>/prompts/<slug>-s7-base.md` | `<picture_root>/stages/<slug>/s7-base-final.png` | `2/5` | полная базовая сцена без стилизации принята | 1 дубль удалён |
-| `S8 style-final` | `accepted` | `<picture_root>/prompts/<slug>-s8-style.md` | `<picture_root>/assets/<slug>.png` | `1/5` | целевой стиль наложен без потери деталей `S7` | удалены (`0` в хранилище) |
+| `S7C color-pass` | `accepted` / `skipped-by-design` | `<picture_root>/prompts/<slug>-s7c-color.md` | `<picture_root>/stages/<slug>/s7c-color-final.png` | `1/5` | раскраска принятого `S7` без потери композиции, лиц и предметов; `skipped-by-design`, если `concept_method` — не скетч | удалены (`0` в хранилище) |
+| `S8 style-final` | `accepted` | `<picture_root>/prompts/<slug>-s8-style.md` | `<picture_root>/assets/<slug>.png` | `1/5` | целевой стиль наложен без потери деталей `S7C` (или `S7`) | удалены (`0` в хранилище) |
 ````

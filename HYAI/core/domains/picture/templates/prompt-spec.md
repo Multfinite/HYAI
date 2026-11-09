@@ -5,8 +5,8 @@ type: template
 status: review
 authority: none
 visibility: internal
-version: "1.2"
-updated: "2026-11-07"
+version: "1.3"
+updated: "2026-11-09"
 template: true
 template_kind: output
 ---
@@ -50,6 +50,7 @@ visibility: internal
 - **`weight_syntax` (`PIC-PRM-05`):** `<clip-paren (term:1.2) | mj-colons term::1.5 | node-weights | positional-only>`
 - **Канон окружения (`PIC-ENV-01`):** `env_canon_source`: `<путь к документу канона окружения проекта>`, `env_anchor_ids`: `<список ID якорей, например ENV-01, ENV-02>`
 - **`style_phase` (`PIC-POL-05`):** `<base-neutral | target-style>`
+- **`concept_method` (`PIC-POL-18`):** `<monochrome-sketch + color-pass | direct-color | <способ, названный пользователем>>` — способ генерации концепт-арта, заданный пользователем до первой генерации; определяет вид всех звеньев `S1..S7` и наличие звена раскраски `S7C`
 - **Параметры кадра:** `resolution`: `<WxH>`, `aspect_ratio`: `<W:H>`, `seed`: `<целое число>`
 
 ## Пять обязательных секций сцены (`PIC-PRM-01`, на языке `prompt_language`)
@@ -77,7 +78,7 @@ visibility: internal
 `<крупность плана, высота и угол камеры, фокусное расстояние/объектив, глубина резкости, кадрирование>`
 
 ### 5. `style`
-`<звенья S1..S7: вид базового изображения по base_style, выбранному пользователем (`PIC-POL-07`); для S8: замок содержания content-lock + style_filter по `PIC-POL-08`. base_style и style_filter — две независимые величины, обе обязательны в паспорте>*
+`<звенья S1..S7: вид базового изображения по base_style, выбранному пользователем (`PIC-POL-07`), в рабочей среде concept_method (`PIC-POL-18`), например «monochrome graphite pencil sketch on cream paper» для скетч-базы; звено S7C (раскраска): палитра и материалы проекта при замке содержания — раскраска, а не перерисовка; для S8: замок содержания content-lock + style_filter по `PIC-POL-08`. base_style, concept_method и style_filter — три независимые величины, все обязательны в паспорте>*
 
 ## Три управляющих блока (`negative`, `weights`, скомпилированный ввод)
 
