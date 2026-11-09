@@ -5,8 +5,8 @@ type: meta
 status: approved
 authority: contract
 visibility: internal
-version: "2.2"
-updated: "2026-11-04"
+version: "2.3"
+updated: "2026-11-09"
 ---
 
 # Решения
@@ -42,6 +42,7 @@ updated: "2026-11-04"
 | [`KIT-0006`](kit/KIT-0006-cartography-domain.md) | kit | Самостоятельный домен cartography для планетарного атласа и векторных карт | review |
 | [`PIC-0001`](picture/PIC-0001-handoff-page.md) | picture | Форма переноса промптов и изображений в другой чат — страница по шаблону | review |
 | [`PIC-0002`](picture/PIC-0002-body-refs-and-manual-photoreal.md) | picture | Эталоны частей тела не удаляются; фотореалистичный финал делает владелец | review |
+| [`PIC-0003`](picture/PIC-0003-concept-method-gate.md) | picture | Способ генерации концепт-арта задаёт пользователь до первой генерации | review |
 
 ## Правила
 

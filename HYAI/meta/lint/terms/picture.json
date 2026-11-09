@@ -118,6 +118,17 @@
       ],
       "suggest": "перекодировать кадр в webp q95 и записывать в опись только .webp; PNG/JPG-исходник принятого кадра не хранится",
       "reason": "PIC-POL-16: действующий комплект серии — только принятые кадры в webp q95"
+    },
+    {
+      "id": "pic.unset-concept-method",
+      "severity": "error",
+      "pattern": "(?i)\\bconcept_method\\b[^\\n]*\\b(?:TBD|TODO|unset|unknown|не задано|пусто)\\b",
+      "applies_to": [
+        "HYAI/core/domains/picture/pictures/briefs/**",
+        "HYAI/core/domains/picture/pictures/prompts/**"
+      ],
+      "suggest": "спросить у пользователя способ генерации концепт-арта (монохромный скетч + раскраска / прямой цвет / иной) и записать ответ как concept_method",
+      "reason": "PIC-POL-18: способ генерации концепт-арта (рабочая среда базы) задаёт пользователь до первой генерации"
     }
   ]
 }
