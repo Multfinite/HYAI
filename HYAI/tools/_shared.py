@@ -19,6 +19,19 @@ import yaml
 DEFAULT_ROOT = Path.cwd().resolve()
 
 
+def core_dir(root: Path) -> Path:
+    """Каталог каркаса в обоих раскладах: standalone-репо (`root/HYAI`) и
+    потребитель, подключивший каркас сабмодулем (`root/HYAI/HYAI`).
+
+    Опознаётся по каталогу `tools/`; fallback `root/HYAI` (историческое
+    поведение), чтобы одинокие вложенные чекеры не ломались.
+    """
+    for candidate in (root / "HYAI/HYAI", root / "HYAI"):
+        if (candidate / "tools").is_dir():
+            return candidate
+    return root / "HYAI"
+
+
 # ---------- чтение конфигурации ----------
 
 def load_yaml(path: Path) -> dict:
