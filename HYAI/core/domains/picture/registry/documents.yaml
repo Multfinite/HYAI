@@ -91,3 +91,19 @@ documents:
     type: template
     authority: none
     why: "Шаблон паспорта готового изображения и протокола VLM-приёмки"
+
+  - id: picture.workflow.cepi
+    path: "HYAI/core/domains/picture/workflows/crop-edit-paste-integrate.md"
+    type: workflow
+    authority: contract
+    why: "Обязательный CEPI для локальных генеративных исправлений, границы гарантий и остановки"
+  - id: picture.template.cepi-manifest
+    path: "HYAI/core/domains/picture/templates/cepi-manifest.md"
+    type: template
+    authority: none
+    why: "Проверяемая запись состояния, артефактов и доставки CEPI"
+  - id: picture.template.cepi-prompts
+    path: "HYAI/core/domains/picture/templates/cepi-prompts.md"
+    type: template
+    authority: none
+    why: "Раздельные промпты исправления, сильного стиля и сведения"

@@ -46,3 +46,14 @@ visibility: internal
 | `S7C color-pass` | `accepted` / `skipped-by-design` | `<picture_root>/prompts/<slug>-s7c-color.md` | `<picture_root>/stages/<slug>/s7c-color-final.png` | `1/5` | раскраска принятого `S7` без потери композиции, лиц и предметов; `skipped-by-design`, если `concept_method` — не скетч | удалены (`0` в хранилище) |
 | `S8 style-final` | `accepted` | `<picture_root>/prompts/<slug>-s8-style.md` | `<picture_root>/assets/<slug>.png` | `1/5` | целевой стиль наложен без потери деталей `S7C` (или `S7`) | удалены (`0` в хранилище) |
 ````
+
+## Дополнение при локальной ремедиации (CEPI)
+
+Связать этот документ с [cepi-manifest](cepi-manifest.md) и выполнить
+[CEPI](../workflows/crop-edit-paste-integrate.md). Дополнительные поля:
+`source_sha256`, `crop_box_xyxy`, `mask_sha256`, `protected_regions`, `eye_lock`,
+`generation_tool`, `prompt_verbatim`, `prompt_provenance`, `native_dimensions`,
+`export_dimensions`, `resampling`, `integrate_mode`, `integrate_calls`,
+`audit_evidence`, `owner_approval`, `delivery_mode`, `download_sha256`.
+Не подставлять реконструированный промпт как дословный лог вызова и не переносить
+нулевой diff композита на полнокадровый финал (`PIC-QA-12..13`).

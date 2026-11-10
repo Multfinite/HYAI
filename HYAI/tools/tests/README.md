@@ -26,3 +26,5 @@ updated: "2026-11-10"
 | [`test_eye_colour_contract.py`](test_eye_colour_contract.py) | Регрессия `PIC-QA-11`: ворота исходного цвета глаз в политиках и всех image-процессах picture |
 
 Копия каркаса для мутаций — [`_kit.py`](_kit.py).
+
+- [test_picture_cepi.py](test_picture_cepi.py) —29тестов структуры CEPI: маски, стадии, лимит, окружение, разрешение и доставка; без image API.

@@ -44,3 +44,4 @@ checks:
   - "python3 HYAI/tools/lint_scopes.py --domain picture"
   - "python3 HYAI/tools/check_picture_refs.py --domain picture"
   - "python3 HYAI/tools/build_export.py --domain picture --preset public --dry-run"
+  - "python3 HYAI/core/domains/picture/tools/check_cepi.py --discover"
