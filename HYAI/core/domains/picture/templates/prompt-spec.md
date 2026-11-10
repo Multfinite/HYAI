@@ -5,7 +5,7 @@ type: template
 status: review
 authority: none
 visibility: internal
-version: "1.4"
+version: "1.5"
 updated: "2026-11-10"
 template: true
 template_kind: output
@@ -13,7 +13,7 @@ template_kind: output
 
 # Спецификация промпта («Каркас 5+3»)
 
-Копируется в `<picture_root>/prompts/<slug>-<pass>.md` для каждого шага генерации (`PIC-POL-01`, `PIC-PRM-01..05`), где `<picture_root>` — `root_paths` манифеста активного домена `picture` (вне подмодуля HYAI для внешних проектов — `PIC-POL-06`). На базовых и промежуточных шагах `style_phase: base-neutral`; на заключительном проходе `style-filter` — `style_phase: target-style` (`PIC-POL-05`).
+Копируется в `<picture_root>/prompts/<name>.md` (кадр серии — в каталог серии `<picture_root>/prompts/<series>/<frame>.md`) для каждого шага генерации (`PIC-POL-01`, `PIC-PRM-01..05`); конвенция наименования id и имени файла задаётся политикой активного проекта, где `<picture_root>` — `root_paths` манифеста активного домена `picture` (вне подмодуля HYAI для внешних проектов — `PIC-POL-06`). На базовых и промежуточных шагах `style_phase: base-neutral`; на заключительном проходе `style-filter` — `style_phase: target-style` (`PIC-POL-05`).
 
 **Если данных нет:** если не заполнены все четыре параметра безопасности из брифа — стоп по `PIC-SAF-01`; если не хватает предметных деталей сцены — уточнить у пользователя или явно отметить выбор агента в отчёте, не добивая объём пустыми штампами `8k / masterpiece` (`PIC-PRM-02`).
 
@@ -33,7 +33,7 @@ template_kind: output
 
 ````markdown
 ---
-id: picture.prompt.<slug>.<pass>
+id: picture.prompt.<name>
 title: "Промпт: <название задачи> (<pass>)"
 type: prompt-spec
 status: review
@@ -115,4 +115,6 @@ NEGATIVE:
 | `1 / 5` | `<seed>` | `rejected` / `accepted`, `env_ok: <true / false>` | `<что исправлено в секциях / negative / weights>` | `удалён` / `сохранён в stages или assets` |
 
 Вердикт `accepted` ставится только при `env_ok: true` (`PIC-QA-06`): земные умолчания модели по свету, флоре, небу и спутникам — брак, даже когда артефактов рук/лиц/текста нет.
+
+Секция присутствует всегда, включая «генерация не запускалась»: тогда одна строка «генерация не запускалась (только спецификация)» — журнал не обязателен только для не-спецификаций.
 ````
