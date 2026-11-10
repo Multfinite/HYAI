@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import html
 import json
 import re
@@ -115,12 +116,23 @@ def build_html(template: str, data: dict, frames: list[dict], base: Path) -> tup
     cards: list[str] = []
     a: list[str] = []
     b: list[str] = []
+    sha_checked = 0
     for index, frame in enumerate(frames):
         for field in ("id", "caption", "image", "prompt_a"):
             if not frame.get(field):
                 fail(f"кадр {index + 1}: нет поля {field!r}")
         image_path = resolve(str(frame["image"]), base)
         uri, ext = embed(image_path)
+        expected_sha = str(frame.get("image_sha256") or "").strip().lower()
+        if expected_sha:
+            if not re.fullmatch(r"[0-9a-f]{8,64}", expected_sha):
+                fail(f"кадр {index + 1}: image_sha256 — hex, 8..64 символа (полный хэш или префикс), "
+                     f"факт: {expected_sha!r}")
+            actual_sha = hashlib.sha256(image_path.read_bytes()).hexdigest()
+            if not actual_sha.startswith(expected_sha):
+                fail(f"кадр {index + 1}: sha256 изображения {actual_sha} не совпадает с image_sha256 "
+                     f"{expected_sha} (PIC-QA-07): в карточку положено не принятый финал кадра")
+            sha_checked += 1
         images.append(uri)
         names.append(image_path.stem)
         exts.append(ext)
@@ -159,7 +171,7 @@ def build_html(template: str, data: dict, frames: list[dict], base: Path) -> tup
     left = sorted(set(re.findall(r"__HANDOFF_[A-Z_]+__", rendered)))
     if left:
         fail("незаполненные плейсхолдеры: " + ", ".join(left))
-    return rendered, files
+    return rendered, files, sha_checked
 
 
 def build_txt(data: dict, frames: list[dict], base: Path) -> str:
@@ -206,7 +218,7 @@ def main() -> int:
     if not args.template.is_file():
         fail(f"шаблон не найден: {args.template}")
     template = args.template.read_text(encoding="utf-8")
-    page, image_files = build_html(template, data, data["frames"], base)
+    page, image_files, sha_checked = build_html(template, data, data["frames"], base)
     text = build_txt(data, data["frames"], base)
 
     out = args.out_dir.resolve()
@@ -236,6 +248,7 @@ def main() -> int:
     external = len(re.findall(r'(?:src|href)="https?://', page))
     enforced = bool(data.get("require_style_filter") and data.get("style_filter_block"))
     print(f"кадров: {len(data['frames'])}; data-URI: {page.count('data:image/')}")
+    print(f"sha256-сверка (image_sha256): {sha_checked}/{len(data['frames'])} кадров")
     print("стиль-фильтр: " + ("обязателен, блок первым в каждом промпте" if enforced else "не задан"))
     print(f"внешних http-ресурсов: {external}; вариант B: {'да' if any(f.get('prompt_b') for f in data['frames']) else 'нет'}")
     for path in (html_path, txt_path, zip_path):
