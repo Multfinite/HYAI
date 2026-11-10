@@ -2,7 +2,7 @@
 id: domain.picture.policy
 title: "Политика домена picture"
 type: policy
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.8"

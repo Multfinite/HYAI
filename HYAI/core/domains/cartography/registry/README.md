@@ -2,7 +2,7 @@
 id: domain.cartography.registry.readme
 title: "Реестр домена cartography"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

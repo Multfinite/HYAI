@@ -2,7 +2,7 @@
 id: decision.project.P-0002
 title: "Единое озвучивание шагов работы во всех доменах"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: project

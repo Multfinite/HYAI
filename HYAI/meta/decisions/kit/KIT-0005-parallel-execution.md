@@ -2,7 +2,7 @@
 id: decision.kit.KIT-0005
 title: "Общее правило параллельного выполнения и очереди удалённых задач"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: kit

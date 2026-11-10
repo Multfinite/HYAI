@@ -2,7 +2,7 @@
 id: meta.architecture.cartography
 title: "Архитектура домена cartography"
 type: architecture
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

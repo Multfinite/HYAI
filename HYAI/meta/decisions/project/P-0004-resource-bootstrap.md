@@ -2,7 +2,7 @@
 id: decision.project.P-0004
 title: "Общий вход: провайдер генерации, стоимость и правила расхода"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: project

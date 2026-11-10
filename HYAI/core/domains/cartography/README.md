@@ -2,7 +2,7 @@
 id: domain.cartography.readme
 title: "Домен cartography: планетарные атласы и векторные карты"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

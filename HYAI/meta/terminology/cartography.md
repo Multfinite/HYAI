@@ -2,7 +2,7 @@
 id: meta.terminology.cartography
 title: "Терминология домена cartography"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

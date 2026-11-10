@@ -2,7 +2,7 @@
 id: meta.architecture.picture
 title: "Архитектура домена picture"
 type: architecture
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.1"

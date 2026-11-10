@@ -2,7 +2,7 @@
 id: domain.video.policy
 title: "Политика домена video"
 type: policy
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.1"

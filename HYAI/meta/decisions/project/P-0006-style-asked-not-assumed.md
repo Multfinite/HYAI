@@ -2,7 +2,7 @@
 id: decision.project.P-0006
 title: "Стиль базы и стиль-фильтр выбирает пользователь, а не агент"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: project

@@ -2,7 +2,7 @@
 id: domain.picture.registry.readme
 title: "Реестр документов домена picture"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

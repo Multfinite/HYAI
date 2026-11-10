@@ -2,7 +2,7 @@
 id: domain.cartography.workflow.body-model
 title: "Модель звёздной системы и тела"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

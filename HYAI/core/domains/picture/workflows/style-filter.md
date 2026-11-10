@@ -2,7 +2,7 @@
 id: domain.picture.workflow.style-filter
 title: "Процесс picture/style-filter: наложение фильтра стиля на готовое базовое изображение"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.3"

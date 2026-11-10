@@ -2,7 +2,7 @@
 id: domain.picture.workflow.pipeline
 title: "Процесс picture/pipeline: многозвенный конвейер сцены с поэтапной VLM-приёмкой и финальным стилем"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.3"

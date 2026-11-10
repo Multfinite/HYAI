@@ -2,7 +2,7 @@
 id: decision.kit.KIT-0002
 title: "Общее правило озвучивания этапов в ядре"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: kit

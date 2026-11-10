@@ -2,7 +2,7 @@
 id: domain.picture.workflow.handoff-page
 title: "Процесс picture/handoff-page: страница переноса промптов и изображений в другой чат"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.2"

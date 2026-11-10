@@ -2,7 +2,7 @@
 id: domain.picture.workflows.remediation
 title: "Домен picture: ремедиация и повторная ревизия (выводы практики)"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.5"

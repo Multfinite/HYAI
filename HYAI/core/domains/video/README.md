@@ -2,7 +2,7 @@
 id: domain.video.readme
 title: "Домен video — руководство агента по производству связных видео"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

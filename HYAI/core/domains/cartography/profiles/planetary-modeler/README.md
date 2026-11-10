@@ -2,7 +2,7 @@
 id: domain.cartography.profile.planetary-modeler
 title: "Профиль planetary-modeler"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

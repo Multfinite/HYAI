@@ -2,7 +2,7 @@
 id: domain.cartography.workflow.audit
 title: "Аудит атласа и картографической выдачи"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

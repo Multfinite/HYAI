@@ -2,7 +2,7 @@
 id: domain.picture.workflows.readme
 title: "Домен picture: рабочие процессы"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.4"

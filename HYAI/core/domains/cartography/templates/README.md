@@ -2,7 +2,7 @@
 id: domain.cartography.templates.readme
 title: "Шаблоны cartography"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

@@ -2,7 +2,7 @@
 id: domain.cartography.profile.analysis
 title: "Профиль analysis"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

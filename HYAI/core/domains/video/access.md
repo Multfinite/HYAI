@@ -2,7 +2,7 @@
 id: domain.video.access
 title: "Домен video: контуры доступа и хранения"
 type: policy
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

@@ -2,7 +2,7 @@
 id: domain.video.workflow.sound
 title: "Процесс video/sound: подтверждение и планирование аудио"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

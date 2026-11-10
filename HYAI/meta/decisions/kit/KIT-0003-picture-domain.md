@@ -2,7 +2,7 @@
 id: decision.kit.KIT-0003
 title: "Самодостаточный домен picture: промптовая генерация изображений, конвейер звеньев и изоляция корня данных"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: kit

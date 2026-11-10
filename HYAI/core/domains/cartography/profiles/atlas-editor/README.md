@@ -2,7 +2,7 @@
 id: domain.cartography.profile.atlas-editor
 title: "Профиль atlas-editor"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"
