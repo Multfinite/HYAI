@@ -64,3 +64,14 @@ visibility: internal
 | `PIC-QA-05` `Iteration Limit` | `<= <iteration_limit>` | `база: <k1/N>, стиль: <k2/N>; брак удалён` | `pass` |
 | `PIC-QA-06` `Environment` | пять осей `PIC-ENV-02` сверены с якорями канона | `<свет звезды / флора / небо / небесные тела / тёплые источники: совпало или not applicable>` | `pass` |
 ````
+
+## Дополнение при локальной ремедиации (CEPI)
+
+Связать этот документ с [cepi-manifest](cepi-manifest.md) и выполнить
+[CEPI](../workflows/crop-edit-paste-integrate.md). Дополнительные поля:
+`source_sha256`, `crop_box_xyxy`, `mask_sha256`, `protected_regions`, `eye_lock`,
+`generation_tool`, `prompt_verbatim`, `prompt_provenance`, `native_dimensions`,
+`export_dimensions`, `resampling`, `integrate_mode`, `integrate_calls`,
+`audit_evidence`, `owner_approval`, `delivery_mode`, `download_sha256`.
+Не подставлять реконструированный промпт как дословный лог вызова и не переносить
+нулевой diff композита на полнокадровый финал (`PIC-QA-12..13`).

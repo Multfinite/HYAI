@@ -118,3 +118,14 @@ NEGATIVE:
 
 Секция присутствует всегда, включая «генерация не запускалась»: тогда одна строка «генерация не запускалась (только спецификация)» — журнал не обязателен только для не-спецификаций.
 ````
+
+## Дополнение при локальной ремедиации (CEPI)
+
+Связать этот документ с [cepi-manifest](cepi-manifest.md) и выполнить
+[CEPI](../workflows/crop-edit-paste-integrate.md). Дополнительные поля:
+`source_sha256`, `crop_box_xyxy`, `mask_sha256`, `protected_regions`, `eye_lock`,
+`generation_tool`, `prompt_verbatim`, `prompt_provenance`, `native_dimensions`,
+`export_dimensions`, `resampling`, `integrate_mode`, `integrate_calls`,
+`audit_evidence`, `owner_approval`, `delivery_mode`, `download_sha256`.
+Не подставлять реконструированный промпт как дословный лог вызова и не переносить
+нулевой diff композита на полнокадровый финал (`PIC-QA-12..13`).

@@ -51,3 +51,5 @@ updated: "2026-11-07"
 | [`2026-11-07-picture-precall-context.md`](kit/2026-11-07-picture-precall-context.md) | `kit` | `kit/domain-builder` | `task` |
 
 Новый отчёт обязан появиться в этой таблице (`HYAI-ART-13`): `check_report.py` сверяет индекс с файловой системой.
+
+| [2026-11-08-cepi-method.md](picture/2026-11-08-cepi-method.md) | picture | picture/pipeline | task — CEPI: нормы, шаблоны, протокол и29тестов |
