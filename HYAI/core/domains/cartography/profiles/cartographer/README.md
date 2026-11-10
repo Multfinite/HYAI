@@ -2,7 +2,7 @@
 id: domain.cartography.profile.cartographer
 title: "Профиль cartographer"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

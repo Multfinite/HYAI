@@ -2,7 +2,7 @@
 id: decision.kit.KIT-0006
 title: "Самостоятельный домен cartography для планетарного атласа и векторных карт"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: kit

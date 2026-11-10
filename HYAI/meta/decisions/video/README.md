@@ -2,7 +2,7 @@
 id: meta.decisions.video
 title: "Решения домена video"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

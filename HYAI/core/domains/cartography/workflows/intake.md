@@ -2,7 +2,7 @@
 id: domain.cartography.workflow.intake
 title: "Intake планетарного атласа"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

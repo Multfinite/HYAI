@@ -2,7 +2,7 @@
 id: domain.picture.workflow.owner-manual-finish
 title: "Процесс picture/owner-manual-finish: передача финала владельцу и приёмка ручной работы"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

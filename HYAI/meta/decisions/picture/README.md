@@ -2,7 +2,7 @@
 id: meta.decisions.picture
 title: "Решения домена picture"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.4"

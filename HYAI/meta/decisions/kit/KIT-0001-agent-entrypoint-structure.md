@@ -2,7 +2,7 @@
 id: decision.kit.KIT-0001
 title: "Структура общего входа агента"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: kit

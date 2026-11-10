@@ -2,7 +2,7 @@
 id: meta.architecture.video
 title: "Архитектура домена video"
 type: architecture
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

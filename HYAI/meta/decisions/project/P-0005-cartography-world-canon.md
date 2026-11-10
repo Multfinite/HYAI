@@ -2,7 +2,7 @@
 id: decision.project.P-0005
 title: "Владение структурированным планетарным и пространственным каноном"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: project

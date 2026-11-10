@@ -2,7 +2,7 @@
 id: domain.video.workflow.audit
 title: "Процесс video/audit: аудит video-пакета без изменений"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

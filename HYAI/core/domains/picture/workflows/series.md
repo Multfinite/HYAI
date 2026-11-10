@@ -2,7 +2,7 @@
 id: domain.picture.workflow.series
 title: "Процесс picture/series: генерация серии изображений с сохранением стиля и персонажа"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.5"

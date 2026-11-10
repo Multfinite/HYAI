@@ -2,7 +2,7 @@
 id: decision.kit.KIT-0004
 title: "Самостоятельный домен video для temporal continuity, звука и монтажа"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: kit

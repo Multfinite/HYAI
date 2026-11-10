@@ -5,9 +5,9 @@ apiVersion: hyai/v1
 kind: HyaiManifest
 metadata:
   name: project-template
-  version: "1.0.0"
+  version: "1.1.0"
   status: released
-  updated: "2026-11-01"
+  updated: "2026-11-10"
   language: ru
   owner: maintainer
   license: "GPL-3.0-only"
@@ -244,6 +244,7 @@ validation:
     - "python3 HYAI/tools/check_manifest.py"
     - "python3 HYAI/tools/check_indexes.py"
     - "python3 HYAI/tools/check_rules.py"
+    - "python3 HYAI/tools/check_lint_naming.py"
     - "python3 HYAI/tools/whitespace.py"
   project:
     - "python3 -m unittest discover -s HYAI/tools/tests"

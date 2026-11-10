@@ -2,7 +2,7 @@
 id: domain.cartography.access
 title: "Домен cartography: доступ и хранение атласов"
 type: policy
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

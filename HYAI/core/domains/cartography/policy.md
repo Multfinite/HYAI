@@ -2,7 +2,7 @@
 id: domain.cartography.policy
 title: "Правила домена cartography"
 type: policy
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.1"

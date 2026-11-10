@@ -2,7 +2,7 @@
 id: decision.project.P-0003
 title: "Разделение владения keyframe-изображениями между picture и video"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: project

@@ -2,7 +2,7 @@
 id: domain.video.workflow.continuity
 title: "Процесс video/continuity: состояния и обработка окна шва"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

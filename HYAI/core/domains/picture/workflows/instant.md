@@ -2,7 +2,7 @@
 id: domain.picture.workflow.instant
 title: "Процесс picture/instant: однопроходная генерация с циклом VLM-доводки и финальным стилем"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.2"

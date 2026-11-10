@@ -2,7 +2,7 @@
 id: kernel.workflow.parallel-execution
 title: "Процесс: параллельное выполнение и очередь удалённых задач"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

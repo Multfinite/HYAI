@@ -2,7 +2,7 @@
 id: domain.cartography.template.vector-export-checklist
 title: "QA векторной картографической выдачи"
 type: template
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

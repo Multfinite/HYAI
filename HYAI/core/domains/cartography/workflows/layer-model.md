@@ -2,7 +2,7 @@
 id: domain.cartography.workflow.layer-model
 title: "Создание тематического векторного слоя"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

@@ -2,7 +2,7 @@
 id: domain.video.authority
 title: "Домен video: уровни нормативности"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

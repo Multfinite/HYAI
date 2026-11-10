@@ -7,7 +7,7 @@ domain: kit
 profile: kit/domain-builder
 authority: contract
 visibility: internal
-status: review
+status: approved
 date: "2026-11-01"
 workflow: kit/domain-authoring
 cross_scope:

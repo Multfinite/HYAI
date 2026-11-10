@@ -2,7 +2,7 @@
 id: domain.cartography.workflows.readme
 title: "Процессы домена cartography"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

@@ -2,7 +2,7 @@
 id: domain.video.workflow.production
 title: "Процесс video/production: brief, план и ворота запуска"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

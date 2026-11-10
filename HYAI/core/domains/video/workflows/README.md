@@ -2,7 +2,7 @@
 id: domain.video.workflows.readme
 title: "Домен video: процессы"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

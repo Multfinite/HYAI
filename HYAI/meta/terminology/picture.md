@@ -2,7 +2,7 @@
 id: meta.terminology.picture
 title: "Терминология домена picture"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

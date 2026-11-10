@@ -2,7 +2,7 @@
 id: domain.cartography.workflow.map-production
 title: "Векторная карта и интерактивный просмотр"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

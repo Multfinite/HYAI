@@ -2,7 +2,7 @@
 id: decision.project.P-0001
 title: "Единые требования общего входа агента"
 type: decision
-status: review
+status: approved
 authority: contract
 visibility: internal
 scope: project

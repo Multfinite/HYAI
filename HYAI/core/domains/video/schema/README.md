@@ -2,7 +2,7 @@
 id: domain.video.schema.readme
 title: "Схемы домена video"
 type: meta
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"

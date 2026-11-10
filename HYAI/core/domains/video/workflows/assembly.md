@@ -2,7 +2,7 @@
 id: domain.video.workflow.assembly
 title: "Процесс video/assembly: ручная сборка и финальная приёмка"
 type: workflow
-status: review
+status: approved
 authority: contract
 visibility: internal
 version: "1.0"
