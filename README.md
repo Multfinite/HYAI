@@ -6,7 +6,7 @@ status: approved
 authority: contract
 visibility: internal
 version: "1.0"
-updated: "2026-10-22"
+updated: "2026-10-28"
 ---
 
 # HYAI — Help Your AI

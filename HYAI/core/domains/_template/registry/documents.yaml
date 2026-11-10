@@ -1,3 +1,4 @@
+# Шаблон реестра домена: при создании домена заменить `<domain>` на имя (workflows/domain-authoring.md).
 version: "0.1"
 domain: "<domain>"
 read_first:

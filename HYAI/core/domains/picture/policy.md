@@ -5,7 +5,7 @@ type: policy
 status: review
 authority: contract
 visibility: internal
-version: "1.7"
+version: "1.8"
 updated: "2026-11-10"
 ---
 
@@ -169,3 +169,25 @@ updated: "2026-11-10"
   Запрет формулируется не как «нет пластика» (в мире с биополимером это неверно), а как **распределение**: если по канону полимер, стекло, металл или электроника доступны только высшим слоям, в кадре низшего слоя они запрещены перечислением, а в кадре высшего — разрешены и названы. Источник сословной шкалы указывается в брифе (`era_canon_source`), вместе с якорями материалов (`era_anchor_ids`).
 
   *Проверка:* раздел материальной эпохи в брифе задачи с цитатами канона; отсутствие слов `plain` при описании материала в секциях `subject`/`environment`; правило `pic.plain-material` в `lint_terms.py --domain picture`; VLM-ось «материальная эпоха и сословие» в `PIC-QA-06`.
+
+## 8. Машинные проверки
+
+Машинные правила [`HYAI/meta/lint/terms/picture.json`](../../../meta/lint/terms/picture.json) выполняют политику в `lint_terms.py --domain picture` и входят в `run_checks.py`; правило, которого нет в таблице, — не действует.
+
+| Правило | Норма и что ловит |
+| --- | --- |
+| `pic.unset-safety-placeholder` | PIC-SAF-01: без явно заданных NSFW, Copyright, Person и Violence работа над задачей не ведётся
+| `pic.empty-negative-prompt` | PIC-PRM-03 / PIC-POL-02: секция negative обязательна и формируется динамически
+| `pic.filler-quality-tags` | PIC-PRM-02: пустые усилители качества не засчитываются в MinDetail
+| `pic.mixed-weight-syntax` | PIC-PRM-05: запрещено смешивать весовые синтаксисы разных семейств моделей
+| `pic.rejected-artifact-stored` | PIC-POL-04: результаты неудачной промежуточной генерации не хранятся
+| `pic.premature-style-on-base` | PIC-POL-05: фильтр стиля накладывается строго после готовности конечного базового изображения
+| `pic.unset-env-anchor` | PIC-ENV-01 / PIC-PRM-06: окружение кадра задаётся каноном мира проекта, а не умолчаниями модели
+| `pic.todo-without-owner` | HYAI-PROV-01: незакрытое место оформляется как Q-PIC-* с владельцем
+| `pic.unset-style-base` | PIC-POL-07: base_style задаёт пользователь, а не агент
+| `pic.unset-style-filter` | PIC-POL-08: style_filter задаёт пользователь отдельно от base_style
+| `pic.accepted-not-webp` | PIC-POL-16: действующий комплект серии — только принятые кадры в webp q95
+| `pic.unset-concept-method` | PIC-POL-18: способ генерации концепт-арта (рабочая среда базы) задаёт пользователь до первой генерации
+| `pic.style-plate-missing` | PIC-POL-14: стиль серии фиксируется стилевой плитой после подтверждённой пробы
+| `pic.photoreal-chain-missing` | PIC-POL-13: автоматический фотореалистичный проход только по зафиксированной в журнале цепочке
+| `pic.plain-material` | PIC-ERA-01: `plain` материалом не является; материал называется по материальной эпохе и сословию мира

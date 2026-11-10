@@ -5,8 +5,8 @@ type: policy
 status: approved
 authority: contract
 visibility: internal
-version: "2.0"
-updated: "2026-10-22"
+version: "2.1"
+updated: "2026-11-10"
 ---
 
 # `SW` — правила домена software
@@ -40,3 +40,13 @@ updated: "2026-10-22"
 
 `SW-POL-12`. Документация описывает контракт, а не реализацию. Документ, который придётся править при каждом рефакторинге, написан неверно.
 `SW-POL-13`. Ссылка из документации на код — с путём и, где полезно, строкой (`../src/auth.py#L42`); такая ссылка проверяется `check_links.py`.
+
+## 6. Машинные проверки
+
+Машинные правила [`HYAI/meta/lint/terms/software.json`](../../../meta/lint/terms/software.json) выполняют политику в `lint_terms.py --domain software` и входят в `run_checks.py`; правило, которого нет в таблице, — не действует.
+
+| Правило | Норма и что ловит |
+| --- | --- |
+| `sw.no-magic-numbers` | SW-POL-13: числа с смыслом должны быть названы
+| `sw.no-empty-except` | SW-POL-10: ошибка не проглатывается
+| `sw.no-fixme-without-q` | HYAI-PROV-01: незакрытое место оформляется как открытый вопрос

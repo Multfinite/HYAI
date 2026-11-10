@@ -6,7 +6,7 @@ status: approved
 authority: invariant
 visibility: internal
 version: "2.1"
-updated: "2026-10-29"
+updated: "2026-11-07"
 ---
 
 # `HYAI/core/kernel/` — ядро

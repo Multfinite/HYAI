@@ -31,3 +31,13 @@ documents:
     type: meta
     authority: invariant
     why: "как выбрать домен и профиль"
+  - id: repo.principles
+    path: "HYAI/core/kernel/principles.md"
+    type: reference
+    authority: invariant
+    why: "Принципы HYAI: 3D, HaRD, INRA, HELPER"
+  - id: repo.architecture
+    path: "HYAI/meta/architecture.md"
+    type: architecture
+    authority: contract
+    why: "Архитектура: хаб доменов"

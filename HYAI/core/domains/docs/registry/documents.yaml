@@ -25,3 +25,18 @@ documents:
     type: meta
     authority: none
     why: "какая форма у ТЗ, спецификации, руководства и схемы"
+  - id: registry.workflow.spec
+    path: "HYAI/core/domains/docs/workflows/spec.md"
+    type: workflow
+    authority: contract
+    why: "Процесс docs/spec: ТЗ и техническая спецификация"
+  - id: registry.workflow.documentation
+    path: "HYAI/core/domains/docs/workflows/documentation.md"
+    type: workflow
+    authority: contract
+    why: "Процесс docs/documentation: документация и комментарии"
+  - id: registry.workflow.diagrams
+    path: "HYAI/core/domains/docs/workflows/diagrams.md"
+    type: workflow
+    authority: contract
+    why: "Процесс docs/diagrams: схемы и диаграммы"

@@ -36,3 +36,38 @@ documents:
     type: meta
     authority: invariant
     why: "уровни core/setting/detail/presentation"
+  - id: registry.workflow.entity-card
+    path: "HYAI/core/domains/narrative/workflows/entity-card.md"
+    type: workflow
+    authority: contract
+    why: "Процесс narrative/entity-card: карточка сущности"
+  - id: registry.workflow.lore-change
+    path: "HYAI/core/domains/narrative/workflows/lore-change.md"
+    type: workflow
+    authority: contract
+    why: "Процесс narrative/lore-change: изменение факта мира"
+  - id: registry.workflow.prose-cleanup
+    path: "HYAI/core/domains/narrative/workflows/prose-cleanup.md"
+    type: workflow
+    authority: contract
+    why: "Процесс narrative/prose-cleanup: текст без воды и без потери голоса"
+  - id: registry.workflow.species
+    path: "HYAI/core/domains/narrative/workflows/species.md"
+    type: workflow
+    authority: contract
+    why: "Процесс narrative/species: вид, подвид, наследуемая линия"
+  - id: registry.workflow.image
+    path: "HYAI/core/domains/narrative/workflows/image.md"
+    type: workflow
+    authority: contract
+    why: "Процесс narrative/image: иллюстрация и промпт"
+  - id: registry.workflow.export-book
+    path: "HYAI/core/domains/narrative/workflows/export-book.md"
+    type: workflow
+    authority: contract
+    why: "Процесс narrative/export-book: сборка проекции по пресету"
+  - id: registry.template.entity-card
+    path: "HYAI/core/domains/narrative/templates/entity-card.md"
+    type: template
+    authority: none
+    why: "Шаблон карточки сущности мира"

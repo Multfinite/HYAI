@@ -30,3 +30,18 @@ documents:
     type: workflow
     authority: contract
     why: "Доменная проекция общего read-only audit процесса на video records и seam QA."
+  - id: registry.workflow.assembly
+    path: "HYAI/core/domains/video/workflows/assembly.md"
+    type: workflow
+    authority: contract
+    why: "Процесс video/assembly: ручная сборка и финальная приёмка"
+  - id: registry.workflow.sound
+    path: "HYAI/core/domains/video/workflows/sound.md"
+    type: workflow
+    authority: contract
+    why: "Процесс video/sound: подтверждение и планирование аудио"
+  - id: registry.template.video-brief
+    path: "HYAI/core/domains/video/templates/video-brief.md"
+    type: template
+    authority: none
+    why: "Brief видеозадачи"

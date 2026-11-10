@@ -6,7 +6,7 @@ status: review
 authority: none
 visibility: internal
 version: "1.1"
-updated: "2026-11-04"
+updated: "2026-11-07"
 ---
 
 # Отчёты домена `picture`
