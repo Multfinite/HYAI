@@ -51,3 +51,43 @@ documents:
     type: workflow
     authority: contract
     why: "Практики ремедиации и повторной ревизии: эталон картинкой, пересадка детали, участковая генерация, руки на крупном предмете, ухо под прядью (PIC-QA-09)"
+  - id: registry.workflow.instant
+    path: "HYAI/core/domains/picture/workflows/instant.md"
+    type: workflow
+    authority: contract
+    why: "Процесс picture/instant: однопроходная генерация с циклом VLM-доводки и финальным стилем"
+  - id: registry.workflow.pipeline
+    path: "HYAI/core/domains/picture/workflows/pipeline.md"
+    type: workflow
+    authority: contract
+    why: "Процесс picture/pipeline: многозвенный конвейер сцены с поэтапной VLM-приёмкой и финальным стилем"
+  - id: registry.workflow.series
+    path: "HYAI/core/domains/picture/workflows/series.md"
+    type: workflow
+    authority: contract
+    why: "Процесс picture/series: генерация серии изображений с сохранением стиля и персонажа"
+  - id: registry.workflow.style-filter
+    path: "HYAI/core/domains/picture/workflows/style-filter.md"
+    type: workflow
+    authority: contract
+    why: "Процесс picture/style-filter: наложение фильтра стиля на готовое базовое изображение"
+  - id: registry.template.prompt-spec
+    path: "HYAI/core/domains/picture/templates/prompt-spec.md"
+    type: template
+    authority: none
+    why: "Шаблон спецификации промпта по каноническому каркасу «5+3»"
+  - id: registry.template.pipeline-manifest
+    path: "HYAI/core/domains/picture/templates/pipeline-manifest.md"
+    type: template
+    authority: none
+    why: "Шаблон карты промежуточных звеньев конвейера picture/pipeline"
+  - id: registry.template.series-anchor
+    path: "HYAI/core/domains/picture/templates/series-anchor.md"
+    type: template
+    authority: none
+    why: "Шаблон эталона консистентности серии и отложенного фильтра стиля"
+  - id: registry.template.asset-card
+    path: "HYAI/core/domains/picture/templates/asset-card.md"
+    type: template
+    authority: none
+    why: "Шаблон паспорта готового изображения и протокола VLM-приёмки"

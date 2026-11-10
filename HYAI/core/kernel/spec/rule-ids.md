@@ -5,8 +5,8 @@ type: meta
 status: approved
 authority: invariant
 visibility: internal
-version: "1.1"
-updated: "2026-10-29"
+version: "1.2"
+updated: "2026-11-10"
 ---
 
 # Идентификаторы правил
@@ -40,6 +40,9 @@ updated: "2026-10-29"
 | `SW` | домен `software` | `HYAI/core/domains/software/policy.md` | домен |
 | `DOC` | домен `docs` | `HYAI/core/domains/docs/policy.md`, `text.md` | домен |
 | `NR` | домен `narrative` | `HYAI/core/domains/narrative/*.md` | домен |
+| `PIC` | домен `picture` | `HYAI/core/domains/picture/*.md` | домен |
+| `VID` | домен `video` | `HYAI/core/domains/video/*.md` | домен |
+| `CART` | домен `cartography` | `HYAI/core/domains/cartography/*.md` | домен |
 | `PRJ` | **этот проект**: правила, которых нет в каркасе | `HYAI/meta/policies/*.md` | проект |
 
 `PRJ` существует ровно для одного случая: проект вводит ограничение, которого нет в каркасе (например, «все миграции только через `alembic`»). Такое правило живёт в `HYAI/meta/policies/`, а не в домене: домен переносим, проект — нет.

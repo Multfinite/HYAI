@@ -6,7 +6,7 @@ status: review
 authority: none
 visibility: internal
 version: "1.0"
-updated: "2026-10-28"
+updated: "2026-11-09"
 ---
 
 # `picture/pipeline`

@@ -6,7 +6,7 @@ status: approved
 authority: invariant
 visibility: internal
 version: "1.0"
-updated: "2026-10-22"
+updated: "2026-10-26"
 ---
 
 # `HYAI/meta/` — шаблон данных проекта

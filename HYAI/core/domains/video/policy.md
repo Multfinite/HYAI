@@ -5,8 +5,8 @@ type: policy
 status: review
 authority: contract
 visibility: internal
-version: "1.0"
-updated: "2026-10-29"
+version: "1.1"
+updated: "2026-11-10"
 ---
 
 # Политика домена `video`
@@ -31,3 +31,13 @@ updated: "2026-10-29"
 - `VID-POL-12` **Провенанс, конечные повторы и честная приёмка.** На каждый сегмент и seam-window записать фактический prompt/version, источник и hash refs, средство/model/mode по сообщению пользователя, способ handoff, requested/actual timing, attempt, результат и причину решения. Задать лимит повторов до старта. Технические метрики (decode, fps, размер, aspect, frame count, порядок) отделены от визуальной/аудиальной оценки; после исчерпания лимита остановиться, описать дефект и спросить следующий шаг, не выдавая результат за принятый.
 
 Правила о ходе действий и объяснении переключений домена/профиля принадлежат ядру и не копируются сюда (`P-0002`).
+
+## Машинные проверки
+
+Машинные правила [`HYAI/meta/lint/terms/video.json`](../../../meta/lint/terms/video.json) выполняют политику в `lint_terms.py --domain video` и входят в `run_checks.py`; правило, которого нет в таблице, — не действует.
+
+| Правило | Норма и что ловит |
+| --- | --- |
+| `video.unset-audio-answer` | VID-POL-02: default=yes не заменяет обязательного явного ответа пользователя
+| `video.unset-storage-policy` | VID-POL-03: место, доступ и retention media определяются заранее
+| `video.unset-continuity-handoff` | VID-POL-04: способ generation handoff нельзя предполагать

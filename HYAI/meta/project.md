@@ -6,7 +6,7 @@ status: approved
 authority: invariant
 visibility: internal
 version: "2.0"
-updated: "2026-10-22"
+updated: "2026-10-28"
 ---
 
 # Паспорт проекта

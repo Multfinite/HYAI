@@ -22,3 +22,28 @@ documents:
     type: meta
     authority: invariant
     why: "контуры доступа к коду и документации"
+  - id: registry.workflow.bugfix
+    path: "HYAI/core/domains/software/workflows/bugfix.md"
+    type: workflow
+    authority: contract
+    why: "Процесс software/bugfix: воспроизведение и исправление"
+  - id: registry.workflow.feature
+    path: "HYAI/core/domains/software/workflows/feature.md"
+    type: workflow
+    authority: contract
+    why: "Процесс software/feature: новая возможность"
+  - id: registry.workflow.refactor
+    path: "HYAI/core/domains/software/workflows/refactor.md"
+    type: workflow
+    authority: contract
+    why: "Процесс software/refactor: изменение устройства без изменения поведения"
+  - id: registry.template.module-card
+    path: "HYAI/core/domains/software/templates/module-card.md"
+    type: template
+    authority: none
+    why: "Шаблон модульной карточки: цена и отказы"
+  - id: registry.template.spec
+    path: "HYAI/core/domains/software/templates/spec.md"
+    type: template
+    authority: none
+    why: "Шаблон спецификации модуля или возможности"

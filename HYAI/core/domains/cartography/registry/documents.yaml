@@ -1,9 +1,56 @@
-version: "1.0"
+version: "1.1"
 domain: cartography
+# Три части: read_first + documents — обязательное чтение; records + toolkit — раскладка данных атласа.
 read_first:
   - "HYAI/core/domains/cartography/README.md"
   - "HYAI/core/domains/cartography/policy.md"
   - "HYAI/meta/decisions/project/P-0005-cartography-world-canon.md"
+documents:
+  - id: cartography.policy
+    path: "HYAI/core/domains/cartography/policy.md"
+    type: policy
+    authority: contract
+    why: "Правила домена cartography"
+  - id: cartography.authority
+    path: "HYAI/core/domains/cartography/authority.md"
+    type: meta
+    authority: invariant
+    why: "Домен cartography: уровни авторитетности"
+  - id: cartography.access
+    path: "HYAI/core/domains/cartography/access.md"
+    type: policy
+    authority: invariant
+    why: "Домен cartography: доступ и хранение атласов"
+  - id: cartography.architecture
+    path: "HYAI/meta/architecture/cartography.md"
+    type: architecture
+    authority: contract
+    why: "Архитектура домена cartography"
+  - id: cartography.workflow.intake
+    path: "HYAI/core/domains/cartography/workflows/intake.md"
+    type: workflow
+    authority: contract
+    why: "Intake планетарного атласа"
+  - id: cartography.workflow.body-model
+    path: "HYAI/core/domains/cartography/workflows/body-model.md"
+    type: workflow
+    authority: contract
+    why: "Модель звёздной системы и тела"
+  - id: cartography.workflow.layer-model
+    path: "HYAI/core/domains/cartography/workflows/layer-model.md"
+    type: workflow
+    authority: contract
+    why: "Создание тематического векторного слоя"
+  - id: cartography.workflow.map-production
+    path: "HYAI/core/domains/cartography/workflows/map-production.md"
+    type: workflow
+    authority: contract
+    why: "Векторная карта и интерактивный просмотр"
+  - id: cartography.workflow.audit
+    path: "HYAI/core/domains/cartography/workflows/audit.md"
+    type: workflow
+    authority: contract
+    why: "Аудит атласа и картографической выдачи"
 records:
   systems:
     path: "<atlas_root>/systems/"

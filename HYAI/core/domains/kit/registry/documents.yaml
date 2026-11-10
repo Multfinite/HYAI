@@ -20,3 +20,23 @@ documents:
     type: spec
     authority: contract
     why: "что можно переопределить, что нельзя"
+  - id: registry.workflow.domain-authoring
+    path: "HYAI/core/domains/kit/workflows/domain-authoring.md"
+    type: workflow
+    authority: contract
+    why: "Процесс kit/domain-authoring: создание домена"
+  - id: registry.workflow.profile-authoring
+    path: "HYAI/core/domains/kit/workflows/profile-authoring.md"
+    type: workflow
+    authority: contract
+    why: "Процесс kit/profile-authoring: создание профиля"
+  - id: kit.spec.rule-ids
+    path: "HYAI/core/kernel/spec/rule-ids.md"
+    type: meta
+    authority: invariant
+    why: "Идентификаторы правил: владелец, класс, номер"
+  - id: registry.architecture
+    path: "HYAI/meta/architecture/kit.md"
+    type: architecture
+    authority: contract
+    why: "Архитектура домена kit"

@@ -24,6 +24,8 @@ updated: "2026-11-10"
 
 - Согласованность picture-политики (по итогам аудита 2026-11-10): монотонная нумерация `PIC-POL-00..19`, «Материальная эпоха» — теперь раздел 7; четыре обещанные машинные проверки получили существование — линтер-правила `pic.style-plate-missing` (поле `style_plate` брифа серии, `workflows/series.md` 1.5), `pic.photoreal-chain-missing` (поле `photoreal_chain` журнала, `workflows/style-filter.md` 1.3), `pic.plain-material` (слово `plain` в промптах/брифах) и структурный чек `check_picture_refs.py` (каталоги `refs/<part>/`: README + только webp, правило `pic.body-ref-not-deleted`); `PIC-QA-07` — норма в политике, `workflows/handoff-page.md` 1.2 — её исполнительная реализация.
 
+- Регистры и спека (аудит 2026-11-10): реестры доменов — ключевые workflow и шаблоны в списке обязательного чтения; `cartography/registry/documents.yaml` 1.1 — секция `documents` рядом с раскладкой атласа; `rule-ids.md` 1.2 — владельцы `PIC`/`VID`/`CART` в таблице спеки (машинный реестр `rule-ids.yaml` полон и не менялся); разделы «Машинные проверки» в политиках picture/cartography/docs/narrative/software/video и README политик ядра — каждое правило `meta/lint/terms/*.json` названо с нормой; дрейф `updated:` в 10 файлах погашен.
+
 ## Не выпущено — 2026-11-09
 
 Домен `picture`, по итогам серии `world-age-death` (кадры 30–35) проекта Pherin.
