@@ -5,8 +5,8 @@ type: meta
 status: approved
 authority: contract
 visibility: internal
-version: "2.3"
-updated: "2026-11-09"
+version: "2.4"
+updated: "2026-11-10"
 ---
 
 # Решения
@@ -43,6 +43,7 @@ updated: "2026-11-09"
 | [`PIC-0001`](picture/PIC-0001-handoff-page.md) | picture | Форма переноса промптов и изображений в другой чат — страница по шаблону | review |
 | [`PIC-0002`](picture/PIC-0002-body-refs-and-manual-photoreal.md) | picture | Эталоны частей тела не удаляются; фотореалистичный финал делает владелец | review |
 | [`PIC-0003`](picture/PIC-0003-concept-method-gate.md) | picture | Способ генерации концепт-арта задаёт пользователь до первой генерации | review |
+| [`PIC-0004`](picture/PIC-0004-handoff-final-integrity.md) | picture | Handoff переносит только принятые финалы; замена финального ассета — четырёхшаговый протокол | review |
 
 ## Правила
 
