@@ -5,7 +5,7 @@ type: workflow
 status: review
 authority: contract
 visibility: internal
-version: "1.1"
+version: "1.2"
 updated: "2026-11-10"
 ---
 
@@ -46,6 +46,8 @@ updated: "2026-11-10"
 | `<slug>-handoff.zip` | изображения, промпты по одному, HTML, TXT, README для переноски файлов |
 
 ## 5. Проверка (`PIC-QA-07`)
+
+Норма списка проверок — `PIC-QA-07` в [`../policy.md`](../policy.md); ниже — её исполнительная реализация, при расхождении команд с нормой действует политика.
 
 ```bash
 python3 - <<'PY'
