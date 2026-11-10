@@ -4,7 +4,7 @@ metadata:
   name: picture
   title: "Генерация изображений и визуальных серий через промпт"
   status: review
-  updated: "2026-10-28"
+  updated: "2026-11-10"
   owner: maintainer
 
 # Рабочий корень данных домена picture в самом репозитории HYAI.
@@ -42,4 +42,5 @@ profiles:
 checks:
   - "python3 HYAI/tools/lint_terms.py --domain picture"
   - "python3 HYAI/tools/lint_scopes.py --domain picture"
+  - "python3 HYAI/tools/check_picture_refs.py --domain picture"
   - "python3 HYAI/tools/build_export.py --domain picture --preset public --dry-run"

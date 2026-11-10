@@ -5,8 +5,8 @@ type: meta
 status: approved
 authority: contract
 visibility: internal
-version: "1.0"
-updated: "2026-10-22"
+version: "1.1"
+updated: "2026-11-10"
 ---
 
 # История релизов
@@ -21,6 +21,8 @@ updated: "2026-10-22"
 - `workflows/handoff-page.md` 1.1: шаг 2 — манифест из принятых финалов по журналу/`stage-manifest` + `image_sha256`; §5 — хэш-сверка; STOP — не-финал / несоответствие хэша.
 - `templates/handoff-page.md` 1.1: поле `frames[].image_sha256`; приёмка — сверка финалов. `templates/prompt-spec.md` 1.4: `subject` обязан соответствовать замерам утверждённого эталона части тела.
 - `workflows/remediation.md` 1.5: хорошие 18–19 (handoff только с принятыми финалами; четырёхшаговая замена), плохие 18–19 (звено конвейера в промпте переноса; журнал не записан в момент приёмки), п.1 — кейс противоречия `subject` и эталона (кадр 33); решение `PIC-0004`.
+
+- Согласованность picture-политики (по итогам аудита 2026-11-10): монотонная нумерация `PIC-POL-00..19`, «Материальная эпоха» — теперь раздел 7; четыре обещанные машинные проверки получили существование — линтер-правила `pic.style-plate-missing` (поле `style_plate` брифа серии, `workflows/series.md` 1.5), `pic.photoreal-chain-missing` (поле `photoreal_chain` журнала, `workflows/style-filter.md` 1.3), `pic.plain-material` (слово `plain` в промптах/брифах) и структурный чек `check_picture_refs.py` (каталоги `refs/<part>/`: README + только webp, правило `pic.body-ref-not-deleted`); `PIC-QA-07` — норма в политике, `workflows/handoff-page.md` 1.2 — её исполнительная реализация.
 
 ## Не выпущено — 2026-11-09
 
