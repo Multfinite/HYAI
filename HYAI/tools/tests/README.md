@@ -5,8 +5,8 @@ type: tool
 status: approved
 authority: contract
 visibility: internal
-version: "2.1"
-updated: "2026-11-04"
+version: "2.2"
+updated: "2026-11-10"
 ---
 
 # Тесты
@@ -23,5 +23,6 @@ updated: "2026-11-04"
 | [`test_rules.py`](test_rules.py) | Идентификаторы правил: формат, владелец, дубли, висячие ссылки, `retired`; ворота выгрузки |
 | [`test_self_check.py`](test_self_check.py) | Матричный прогон по всем активным парам и сборка `AGENTS.md` |
 | [`test_handoff_page.py`](test_handoff_page.py) | Сборщик страницы переноса `picture/handoff-page`: автономный HTML, ZIP, отказ на битом манифесте |
+| [`test_eye_colour_contract.py`](test_eye_colour_contract.py) | Регрессия `PIC-QA-11`: ворота исходного цвета глаз в политиках и всех image-процессах picture |
 
 Копия каркаса для мутаций — [`_kit.py`](_kit.py).
