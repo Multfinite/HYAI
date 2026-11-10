@@ -33,7 +33,8 @@ TOOL_RULE_ID = re.compile(r"""["']([a-z][a-z0-9]+(?:-[a-z0-9]+)*\.[a-z][a-z0-9-]
 
 def defined_rules(root: Path) -> dict[str, str]:
     rules: dict[str, str] = {}
-    terms_dir = root / "HYAI/meta/lint/terms"
+    core = sh.core_dir(root)
+    terms_dir = core / "meta/lint/terms"
     for path in sorted(terms_dir.glob("*.json")) if terms_dir.exists() else []:
         data = sh.load_json(path)
         for rule in data.get("rules") or []:
@@ -43,11 +44,11 @@ def defined_rules(root: Path) -> dict[str, str]:
     # Структурные проверки несут те же id в строковых литералах скриптов
     # (например, pic.body-ref-not-deleted в check_picture_refs.py).
     file_ext = {"md", "py", "json", "yaml", "yml", "html", "txt", "js", "css", "webp", "png", "jpg"}
-    for path in sorted((root / "HYAI/tools").glob("*.py")):
+    for path in sorted((core / "tools").glob("*.py")):
         for rid in TOOL_RULE_ID.findall(path.read_text(encoding="utf-8", errors="replace")):
             if rid.split(".", 1)[1] in file_ext:
                 continue  # имя файла, а не id правила
-            rules.setdefault(rid, f"tools/{path.name}")
+            rules.setdefault(rid, f"{core.name}/tools/{path.name}")
     return rules
 
 
