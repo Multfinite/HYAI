@@ -40,3 +40,7 @@ template_kind: output
 - `refs/build/` — телосложение, посадка, пропорции.
 - `refs/<subspecies>-ear/` — уши подвидов по своим правилам.
 ````
+
+## Роли и область приёмки
+
+Для каждого референса уха указывать role (geometry/colour/shadow_layout/hair/accepted_full_frame), view, scope, source SHA и цитату. Приёмка одного ракурса не заменяет канон; цветовой донор не разрешает смену формы. Использовать [ear-review](ear-review.md).

@@ -28,3 +28,5 @@ updated: "2026-11-10"
 Копия каркаса для мутаций — [`_kit.py`](_kit.py).
 
 - [test_picture_cepi.py](test_picture_cepi.py) —29тестов структуры CEPI: маски, стадии, лимит, окружение, разрешение и доставка; без image API.
+
+- [test_picture_ear_review.py](test_picture_ear_review.py) — 26 offline-тестов ear/1: scoped approval, геометрия, opacity provenance и граница маски.

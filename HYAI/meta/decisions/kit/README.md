@@ -21,3 +21,5 @@ updated: "2026-11-01"
 | [`KIT-0004`](KIT-0004-video-domain.md) | Самостоятельный домен `video` для temporal continuity, звука и монтажа | approved |
 | [`KIT-0005`](KIT-0005-parallel-execution.md) | Общее правило параллельного выполнения и очереди удалённых задач | approved |
 | [`KIT-0006`](KIT-0006-cartography-domain.md) | Самостоятельный домен cartography для планетарного атласа и векторных карт | approved |
+
+| [KIT-0007](KIT-0007-ear-evidence-extension.md) | Совместимое доменное дополнение ear/1 без изменения общего движка | review |

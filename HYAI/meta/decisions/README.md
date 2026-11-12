@@ -52,3 +52,7 @@ updated: "2026-11-10"
 3. Уточнение вливается в исходное решение; номер-«вход» получает `status: merged` (`HYAI-DEC-09`).
 
 | [PIC-0005](picture/PIC-0005-crop-edit-paste-integrate.md) | picture | Обязательный CEPI и границы сохранности после интеграции | review |
+
+| [PIC-0006](picture/PIC-0006-ear-remediation.md) | picture | Ушная специализация CEPI и доказательства ear/1 | review |
+
+| [KIT-0007](kit/KIT-0007-ear-evidence-extension.md) | kit | Совместимое дополнение ушных доказательств ear/1 | review |

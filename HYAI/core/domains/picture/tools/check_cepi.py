@@ -17,6 +17,89 @@ def dimensions(v):
     return isinstance(v, list) and len(v) == 2 and all(type(n) is int and n > 0 for n in v)
 
 
+
+def validate_ear_review(frame, where, size):
+    """Opt-in structural evidence only. No segmentation, image or truth inference."""
+    crops = frame.get("crops")
+    required = isinstance(crops, list) and any(isinstance(c, dict) and c.get("anatomy_kind") == "ear" for c in crops)
+    if not required and "ear_review" not in frame:
+        return []
+    errors = []
+    prefix = where + ".ear_review"
+
+    def need(ok, field, message):
+        if not ok:
+            errors.append(f"{prefix}.{field}: {message}")
+
+    def text(v):
+        return isinstance(v, str) and bool(v.strip())
+
+    def obj(v):
+        return v if isinstance(v, dict) else {}
+
+    def evidence(value, field, keys):
+        for key in keys:
+            need(text(obj(value).get(key)), field + "." + key, "explicit observation or evidence reference required")
+
+    def hashes(value, field, keys):
+        for key in keys:
+            need(bool(HEX.fullmatch(str(obj(value).get(key, "")))), field + "." + key, "full sha256 required")
+
+    raw = frame.get("ear_review")
+    need(isinstance(raw, dict) and bool(raw), "record", "ear_review object required for ear crop")
+    e = obj(raw)
+    need(e.get("schema") == "ear/1", "schema", "expected ear/1")
+    roles = e.get("reference_roles")
+    need(isinstance(roles, list) and bool(roles), "reference_roles", "nonempty reference roles required")
+    for ref in roles if isinstance(roles, list) else []:
+        evidence(ref, "reference_roles", ["uri", "scope", "evidence"])
+        hashes(ref, "reference_roles", ["sha256"])
+        need(obj(ref).get("role") in ("geometry", "colour", "shadow_layout", "hair", "accepted_full_frame"),
+             "reference_roles", "unknown reference role")
+    g = obj(e.get("geometry_lock"))
+    hashes(g, "geometry_lock", ["source_sha256", "source_silhouette_sha256"])
+    box = g.get("source_box")
+    valid = isinstance(box, list) and len(box) == 4 and all(type(v) is int for v in box)
+    if valid and dimensions(size):
+        x, y, X, Y = box
+        valid = 0 <= x < X <= size[0] and 0 <= y < Y <= size[1]
+    need(valid, "geometry_lock.source_box", "integer xyxy source_box must fit source canvas")
+    need(type(g.get("no_enlargement")) is bool, "geometry_lock.no_enlargement", "explicit boolean required")
+    evidence(g, "geometry_lock", ["view_evidence", "measurement_evidence", "contour_overlay_evidence"])
+    shadow = obj(e.get("shadow"))
+    mode = shadow.get("mode")
+    need(mode in ("unchanged", "generative", "layer-opacity"), "shadow.mode", "unknown shadow mode")
+    hashes(shadow, "shadow", ["palette_source_sha256"])
+    evidence(shadow, "shadow", ["footprint_evidence", "scope_evidence"])
+    if mode == "layer-opacity":
+        layer = obj(shadow.get("layer"))
+        hashes(layer, "shadow.layer", ["base_sha256", "layer_sha256", "mask_sha256"])
+        strength = layer.get("strength")
+        need(type(strength) in (int, float) and 0 <= strength <= 1, "shadow.layer.strength", "numeric strength 0..1 required, not boolean")
+        evidence(layer, "shadow.layer", ["authorization", "evidence"])
+    evidence(e.get("mask_review"), "mask_review",
+             ["ear_skin", "hair", "seam", "source_boundary_overlay", "composite_boundary_observation"])
+    evidence(e.get("audit"), "audit", ["native_crop_evidence", "full_frame_evidence", "contour_evidence",
+                                      "hair_evidence", "colour_evidence", "shadow_evidence", "post_style_colour_evidence"])
+    approvals = e.get("approval_events")
+    need(isinstance(approvals, list), "approval_events", "list required; may be empty before owner review")
+    scopes = ("working_reference", "geometry", "colour_local", "shadow_layout", "shadow_strength", "hair_seam", "full_frame")
+    matching = []
+    output_sha = obj(frame.get("output")).get("sha256")
+    for event in approvals if isinstance(approvals, list) else []:
+        event = obj(event)
+        need(event.get("scope") in scopes, "approval_events", "unknown approval scope")
+        need(type(event.get("approved")) is bool, "approval_events", "explicit approved boolean required")
+        evidence(event, "approval_events", ["quote"])
+        hashes(event, "approval_events", ["artifact_sha256"])
+        if event.get("scope") == "full_frame" and event.get("artifact_sha256") == output_sha:
+            matching.append(event)
+    if obj(frame.get("owner_approval")).get("approved") is True:
+        need(bool(matching) and matching[-1].get("approved") is True, "approval_events",
+             "full_frame approval must target exact output sha256; local approval or later rejection cannot promote final")
+    return errors
+
+
 def validate(data):
     errors = []
 
@@ -117,6 +200,7 @@ def validate(data):
                 need(type(c.get("full_strength_required")) is bool, cw, "full_strength_required must be explicit boolean")
                 if c.get("full_strength_required") is True:
                     need(strength == 1, cw, "required full strength cannot be weakened")
+        errors.extend(validate_ear_review(f, where, size))
         comp = obj(f.get("composite"))
         if complete or comp:
             need(bool(HEX.fullmatch(str(comp.get("sha256", "")))), where + ".composite", "sha256 required")
