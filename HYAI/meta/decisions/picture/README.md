@@ -23,3 +23,5 @@ updated: "2026-11-10"
 | [`PIC-0004`](PIC-0004-handoff-final-integrity.md) | Handoff переносит только принятые финалы; замена финального ассета — четырёхшаговый протокол | review |
 
 | [PIC-0005](PIC-0005-crop-edit-paste-integrate.md) | Обязательный CEPI и границы сохранности после интеграции | review |
+
+| [PIC-0006](PIC-0006-ear-remediation.md) | Уши: геометрия, палитра, тень, волосы и scoped-приёмка | review |

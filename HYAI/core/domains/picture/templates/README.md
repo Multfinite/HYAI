@@ -32,3 +32,6 @@ updated: "2026-11-07"
 - [cepi-manifest.md](cepi-manifest.md) — Протокол CEPI: входы, маски, звенья, проверки, одобрение и доставка.
 
 - [cepi-prompts.md](cepi-prompts.md) — Промпт-каркасы local edit, full-strength style и single integrate.
+
+- [ear-review.md](ear-review.md) — `ear/1`: роли референсов, замки геометрии, тень, маски и scoped approval.
+- [ear-prompts.md](ear-prompts.md) — раздельные recipes формы, исходного цвета, тени, волос и интеграции.

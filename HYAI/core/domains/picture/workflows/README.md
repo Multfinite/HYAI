@@ -30,3 +30,5 @@ updated: "2026-11-07"
 Каркас общих стадий и ворот — ядерный ([`../../../kernel/workflows/README.md`](../../../kernel/workflows/README.md)). В любом процессе домена фильтр стиля накладывается **строго в самом конце**, когда конечное базовое изображение готово (`PIC-POL-05`).
 
 - [crop-edit-paste-integrate.md](crop-edit-paste-integrate.md) — Обязательная локальная генеративная ремедиация: crop → edit → paste → integrate.
+
+- [ear-remediation.md](ear-remediation.md) — специализация CEPI для ушей: проекция, материал, тень, волосы и область приёмки.

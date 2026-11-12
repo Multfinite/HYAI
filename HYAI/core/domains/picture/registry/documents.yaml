@@ -107,3 +107,21 @@ documents:
     type: template
     authority: none
     why: "Раздельные промпты исправления, сильного стиля и сведения"
+
+  - id: picture.workflow.ear-remediation
+    path: "HYAI/core/domains/picture/workflows/ear-remediation.md"
+    type: workflow
+    authority: contract
+    why: "Ремедиация ушей с отдельными формой, цветом, тенью и приёмкой"
+
+  - id: picture.template.ear-review
+    path: "HYAI/core/domains/picture/templates/ear-review.md"
+    type: template
+    authority: none
+    why: "Дополнение ear/1 к CEPI"
+
+  - id: picture.template.ear-prompts
+    path: "HYAI/core/domains/picture/templates/ear-prompts.md"
+    type: template
+    authority: none
+    why: "Раздельные промпты ушной ремедиации"

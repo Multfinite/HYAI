@@ -27,3 +27,5 @@ updated: "2026-11-07"
 | [`2026-11-01-cartography-domain-implementation.md`](2026-11-01-cartography-domain-implementation.md) | `kit/domain-builder` | `task` |
 | [`2026-11-07-action-output-protocol.md`](2026-11-07-action-output-protocol.md) | `kit/domain-builder` | `task` |
 | [`2026-11-07-picture-precall-context.md`](2026-11-07-picture-precall-context.md) | `kit/domain-builder` | `task` |
+
+| [2026-11-08-ear-remediation-transfer.md](2026-11-08-ear-remediation-transfer.md) | kit/domain-builder | task — опыт ушей, ear/1 и регрессия |
