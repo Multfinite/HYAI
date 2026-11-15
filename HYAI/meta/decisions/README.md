@@ -39,6 +39,7 @@ updated: "2026-11-10"
 | [`P-0004`](project/P-0004-resource-bootstrap.md) | project | Общий вход: провайдер генерации, стоимость и правила расхода | approved |
 | [`P-0005`](project/P-0005-cartography-world-canon.md) | project | Владение структурированным планетарным и пространственным каноном | approved |
 | [`P-0006`](project/P-0006-style-asked-not-assumed.md) | project | Стиль базы и стиль-фильтр выбирает пользователь, а не агент | approved |
+| [`P-0007`](project/P-0007-session-memory-via-mcp.md) | project | Передача памяти сессии агента в HYAI через MCP на любой машине | review |
 | [`KIT-0006`](kit/KIT-0006-cartography-domain.md) | kit | Самостоятельный домен cartography для планетарного атласа и векторных карт | approved |
 | [`PIC-0001`](picture/PIC-0001-handoff-page.md) | picture | Форма переноса промптов и изображений в другой чат — страница по шаблону | review |
 | [`PIC-0002`](picture/PIC-0002-body-refs-and-manual-photoreal.md) | picture | Эталоны частей тела не удаляются; фотореалистичный финал делает владелец | review |
