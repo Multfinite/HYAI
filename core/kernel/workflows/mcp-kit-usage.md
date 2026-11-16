@@ -1,3 +1,14 @@
+---
+id: kernel.workflow.mcp-kit
+title: "Процесс: работа со стеком multfinite-mcp-kit"
+type: workflow
+status: draft
+authority: contract
+visibility: internal
+version: "2.0"
+updated: "2026-11-16"
+---
+
 # Работа агента со стеком multfinite-mcp-kit (standard workflow)
 
 **Домен:** `software`, **профиль:** `software/architect` (или другой, по задаче) `[И]`.

@@ -10,7 +10,6 @@ affects_domains: [kit, software, docs, narrative]
 affects:
   - "HYAI/core/kernel/agents.md"
   - "AGENTS.md"
-  - "specs/multi-agent-machine/hyai-rule-draft.md"
 supersedes: null
 ---
 
