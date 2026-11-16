@@ -20,6 +20,7 @@ updated: "2026-10-29"
 | [`decision-consolidation.md`](decision-consolidation.md) | решения расползлись | слитые решения по `HYAI-DEC-09` |
 | [`doc-cleanup.md`](doc-cleanup.md) | документы обросли водой | сокращённые документы с сохранением норм |
 | [`parallel-execution.md`](parallel-execution.md) | есть независимые задачи или удалённые исполнители | конкурентное исполнение в подтверждённом лимите, очередь и обработка результатов по мере готовности |
+| [`mcp-kit-usage.md`](mcp-kit-usage.md) | есть настроенный стек multfinite-mcp-kit (MetaMCP + GLOBAL + LOCAL) | использование MCP-серверов (код, память, мышление) в процессе задачи |
 
 Доменные процессы: `HYAI/core/domains/<domain>/workflows/`. Профиль ссылается на процесс полем `workflow` в своём `profile.yaml`.
 
