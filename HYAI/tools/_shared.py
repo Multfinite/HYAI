@@ -371,7 +371,13 @@ def domains_for_scope(root: Path, man: dict, scope: str | None) -> dict:
 
 # ---------- файлы ----------
 
-def iter_files(root: Path, exts: Iterable[str], skip_parts: Iterable[str] = (), skip_prefixes: Iterable[str] = (), skip_names: Iterable[str] = ()) -> list[Path]:
+#: Каталоги, которых нет в исходниках: VCS, кэши, окружения и артефакты сборки.
+#: Проверки обходят их по умолчанию: содержимое `build/` — вывод компилятора, а не текст
+#: проекта, и `check_links.py` не должен считать его ссылки битыми.
+SKIP_PARTS_DEFAULT = (".git", "__pycache__", "node_modules", ".venv", "venv", "dist", "build")
+
+
+def iter_files(root: Path, exts: Iterable[str], skip_parts: Iterable[str] = SKIP_PARTS_DEFAULT, skip_prefixes: Iterable[str] = (), skip_names: Iterable[str] = ()) -> list[Path]:
     exts = {e.lower() for e in exts}
     skip_parts = set(skip_parts)
     skip_names = {n.lower() for n in skip_names}
