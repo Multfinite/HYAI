@@ -90,9 +90,9 @@ def main() -> int:
         print(f"\nконфигурация правил: ошибок: {len(config_problems)}")
         return 2
 
-    candidates = [p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in {
+    candidates = sh.iter_files(root, {
         ".md", ".py", ".ts", ".tsx", ".js", ".jsx", ".go", ".rs", ".sql", ".txt", ".yaml", ".yml", ".json"
-    } and "__pycache__" not in p.parts and ".git" not in p.parts]
+    })
 
     findings: list[dict] = []
     for path in sorted(candidates):
