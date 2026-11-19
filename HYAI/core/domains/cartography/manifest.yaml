@@ -7,6 +7,10 @@ metadata:
   updated: "2026-11-01"
   owner: maintainer
 
+# Триггер активации навыка домена: по нему оболочка сопоставляет задачу с доменом.
+skills:
+  when_to_use: "Планетарный атлас, карты и слои, системы координат, векторная картография"
+
 root_paths:
   - "HYAI/core/domains/cartography/atlases"
 

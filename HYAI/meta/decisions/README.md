@@ -57,3 +57,7 @@ updated: "2026-11-10"
 | [PIC-0006](picture/PIC-0006-ear-remediation.md) | picture | Ушная специализация CEPI и доказательства ear/1 | review |
 
 | [KIT-0007](kit/KIT-0007-ear-evidence-extension.md) | kit | Совместимое дополнение ушных доказательств ear/1 | review |
+
+| [`KIT-0008`](kit/KIT-0008-skills-projection.md) | kit | Навыки Agent Skills как генерируемая проекция доменов и профилей | approved |
+
+| [`KIT-0009`](kit/KIT-0009-tool-skills.md) | kit | Навыки внешних инструментов: по серверу и по пространству данных | approved |

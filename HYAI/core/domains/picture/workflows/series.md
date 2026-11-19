@@ -7,6 +7,7 @@ authority: contract
 visibility: internal
 version: "1.6"
 updated: "2026-11-08"
+when_to_use: "Серия кадров с общей консистентностью персонажа и стиля"
 ---
 
 # `picture/series`

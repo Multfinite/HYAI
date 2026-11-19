@@ -7,6 +7,7 @@ authority: contract
 visibility: internal
 version: "1.2"
 updated: "2026-11-10"
+when_to_use: "Перенос промптов и принятых изображений в другой чат страницей по шаблону"
 ---
 
 # `picture/handoff-page`

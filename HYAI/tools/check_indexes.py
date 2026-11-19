@@ -77,6 +77,10 @@ def governed_dirs(root: Path, man: dict) -> list[Path]:
                 continue
             if any(rel == p or rel.startswith(p + "/") for p in SKIP_PREFIXES | skip_data):
                 continue
+            # Пакет навыка Agent Skills: навигацию задаёт frontmatter `SKILL.md`, а не README
+            # каталога. Правило по файлу, а не по пути: работает и в проекте-потребителе.
+            if (path / "SKILL.md").exists():
+                continue
             if any(child.suffix.lower() in (".md", ".yaml", ".yml", ".json", ".py") for child in path.iterdir() if child.is_file()):
                 result.append(path)
     return result

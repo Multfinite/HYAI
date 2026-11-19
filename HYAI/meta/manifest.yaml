@@ -231,9 +231,30 @@ permissions:
     require_approval_for_other: true
   secrets: deny
 
+# Навыки Agent Skills: генерируемая проекция доменов и профилей в каталог, который
+# читают агентские оболочки. Источник правил — домен и AGENTS.md; сборка —
+# `python3 HYAI/tools/build_skills.py --check`.
+skills:
+  out: ".github/skills/"
+  domain_prefix: "hyai-"
+  router:
+    name: "hyai"
+    description: >-
+      Определяет домен и профиль HYAI и маршрут чтения: правила каркаса, выбор профиля,
+      доменные процессы, проверки run_checks, оформление отчётов. Используй, когда задача
+      касается устройства HYAI, его доменов, профилей или процедур.
+  templates:
+    router: "HYAI/core/shared/templates/skill-router.md"
+    domain: "HYAI/core/shared/templates/skill-domain.md"
+    procedure: "HYAI/core/shared/templates/skill-procedure.md"
+  # Авторские навыки: источники лежат деревом `<name>/SKILL.md` и копируются как есть.
+  # Это внешние инструменты, а не проекция домена, поэтому генерации из данных здесь нет.
+  authored: "HYAI/core/shared/skills/"
+
 validation:
   assemble:
     - "python3 HYAI/tools/assemble_agents.py --check"
+    - "python3 HYAI/tools/build_skills.py --check"
   core:
     - "python3 HYAI/tools/frontmatter.py --check"
     - "python3 HYAI/tools/check_links.py"
