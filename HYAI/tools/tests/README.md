@@ -22,6 +22,7 @@ updated: "2026-11-10"
 | [`test_access.py`](test_access.py) | «Роль × призма», компетенции, карта понимания, выгрузки |
 | [`test_rules.py`](test_rules.py) | Идентификаторы правил: формат, владелец, дубли, висячие ссылки, `retired`; ворота выгрузки |
 | [`test_self_check.py`](test_self_check.py) | Матричный прогон по всем активным парам и сборка `AGENTS.md` |
+| [`test_skills.py`](test_skills.py) | Навыки Agent Skills: формат имени и описания, дрейф, устаревшие, триггеры процедур, разрешимость ссылок; авторские навыки MCP — копия источника, запрет адресов, имён установок и внешних ссылок, ошибки источника |
 | [`test_handoff_page.py`](test_handoff_page.py) | Сборщик страницы переноса `picture/handoff-page`: автономный HTML, ZIP, отказ на битом манифесте |
 | [`test_eye_colour_contract.py`](test_eye_colour_contract.py) | Регрессия `PIC-QA-11`: ворота исходного цвета глаз в политиках и всех image-процессах picture |
 

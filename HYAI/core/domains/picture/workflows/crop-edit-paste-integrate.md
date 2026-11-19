@@ -7,6 +7,7 @@ authority: contract
 visibility: internal
 version: "1.0"
 updated: "2026-11-08"
+when_to_use: "Локальный дефект изображения: перерисовать участок и вставить обратно, не трогая остальной кадр"
 ---
 
 # `picture/crop-edit-paste-integrate` (CEPI)

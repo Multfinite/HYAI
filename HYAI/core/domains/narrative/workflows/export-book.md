@@ -7,6 +7,7 @@ authority: contract
 visibility: internal
 version: "1.0"
 updated: "2026-10-22"
+when_to_use: "Сборка книги или выгрузки из готовых глав по пресету доступа"
 ---
 
 # `narrative/export-book`

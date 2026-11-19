@@ -33,6 +33,7 @@ updated: "2026-10-26"
 | [`resolve_access.py`](resolve_access.py) | Вердикт «роль × призма» и карта понимания | `domains/*/schema/access.yaml` |
 | [`lint_scopes.py`](lint_scopes.py) | Секреты без носителя, закрытое в открытой выгрузке | `access.yaml` → `checks` |
 | [`build_export.py`](build_export.py) | Сборка проекций по пресетам | `access.yaml` → `export.presets` |
+| [`build_skills.py`](build_skills.py) | Сборка навыков Agent Skills, копия авторских навыков и дрейф `.github/skills/` | `skills` манифеста, `profile.yaml`, `policy.md`, `shared/templates/skill-*`, `shared/skills/*/SKILL.md` |
 | [`run_checks.py`](run_checks.py) | Конвейер: сборка + ядро + домены + проект | `validation` манифеста |
 
 ## Запуск

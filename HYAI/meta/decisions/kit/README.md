@@ -23,3 +23,7 @@ updated: "2026-11-01"
 | [`KIT-0006`](KIT-0006-cartography-domain.md) | Самостоятельный домен cartography для планетарного атласа и векторных карт | approved |
 
 | [KIT-0007](KIT-0007-ear-evidence-extension.md) | Совместимое доменное дополнение ear/1 без изменения общего движка | review |
+
+| [`KIT-0008`](KIT-0008-skills-projection.md) | Навыки Agent Skills как генерируемая проекция доменов и профилей | approved |
+
+| [`KIT-0009`](KIT-0009-tool-skills.md) | Навыки внешних инструментов: по серверу и по пространству данных | approved |

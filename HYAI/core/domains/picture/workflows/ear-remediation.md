@@ -7,6 +7,7 @@ authority: contract
 visibility: internal
 version: "1.0"
 updated: "2026-11-08"
+when_to_use: "Исправление уха на изображении: форма, палитра, тень, волосы, приёмка ear/1"
 ---
 
 
