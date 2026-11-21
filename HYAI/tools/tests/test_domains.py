@@ -169,7 +169,7 @@ class PicturePlacementAndSubmoduleSeparationTest(unittest.TestCase):
             self._consumer_tmp.cleanup()
         self.kit.close()
 
-    def _build_consumer_with_submodule(self) -> Path:
+    def _build_consumer_with_submodule(self, gitmodules: bool = False) -> Path:
         self._consumer_tmp = tempfile.TemporaryDirectory(prefix="hyai-consumer-")
         consumer = Path(self._consumer_tmp.name)
         submodule = consumer / "HYAI"
@@ -316,6 +316,11 @@ class PicturePlacementAndSubmoduleSeparationTest(unittest.TestCase):
             yaml.safe_dump(consumer_man, allow_unicode=True, sort_keys=False),
             encoding="utf-8",
         )
+        if gitmodules:
+            (consumer / ".gitmodules").write_text(
+                '[submodule "HYAI"]\n\tpath = HYAI\n\turl = <repo-url>\n',
+                encoding="utf-8",
+            )
         return consumer
 
     def _run_tool_on(self, consumer: Path, script: str, *args: str) -> subprocess.CompletedProcess[str]:
@@ -324,6 +329,8 @@ class PicturePlacementAndSubmoduleSeparationTest(unittest.TestCase):
             [sys.executable, str(tool), "--root", str(consumer), *args],
             cwd=consumer,
             text=True,
+            encoding="utf-8",
+            env=sh.child_env(),
             capture_output=True,
         )
 
@@ -476,6 +483,69 @@ class PicturePlacementAndSubmoduleSeparationTest(unittest.TestCase):
         res_man = self._run_tool_on(consumer, "check_manifest.py")
         self.assertEqual(res_man.returncode, 1)
         self.assertIn("подмодул", res_man.stdout)
+
+
+class AutonomousModeTest(unittest.TestCase):
+    """Три состояния установки HYAI: standalone, consumer/submodule, consumer/copy (`REQ-01..REQ-05`)."""
+
+    def setUp(self) -> None:
+        self.kit = KitCopy()
+
+    def tearDown(self) -> None:
+        self.kit.close()
+
+    def _consumer(self, gitmodules: bool = False) -> Path:
+        tmp = tempfile.TemporaryDirectory(prefix="hyai-mode-")
+        self.addCleanup(tmp.cleanup)
+        consumer = Path(tmp.name)
+        shutil.copytree(self.kit.root, consumer / "HYAI")
+        (consumer / "meta").mkdir(parents=True, exist_ok=True)
+        man = {
+            "apiVersion": "hyai/v1",
+            "kind": "HyaiManifest",
+            "metadata": {"name": "mode-probe", "status": "draft", "updated": "2026-11-21"},
+            "active": [{"domain": "software", "profile": "code"}],
+            "domains": {"software": "HYAI/core/domains/software/manifest.yaml"},
+            "framework": {"root": "HYAI/"},
+        }
+        (consumer / "meta" / "manifest.yaml").write_text(
+            yaml.safe_dump(man, allow_unicode=True, sort_keys=False),
+            encoding="utf-8",
+        )
+        if gitmodules:
+            (consumer / ".gitmodules").write_text(
+                '[submodule "HYAI"]\n\tpath = HYAI\n\turl = <repo-url>\n',
+                encoding="utf-8",
+            )
+        return consumer
+
+    def test_standalone_mode_is_detected(self) -> None:
+        root = self.kit.root
+        self.assertFalse(sh.is_consumer_project(root))
+        self.assertEqual(sh.resolve_mode(root), "standalone")
+        self.assertEqual(sh.manifest_path(root), root / "HYAI" / "meta" / "manifest.yaml")
+        self.assertEqual(sh.fw_root(root), root / "HYAI")
+        self.assertEqual(sh.submodule_prefixes(root, sh.manifest(root)), [])
+
+    def test_consumer_copy_mode_is_detected(self) -> None:
+        consumer = self._consumer()
+        self.assertTrue(sh.is_consumer_project(consumer))
+        self.assertEqual(sh.resolve_mode(consumer), "consumer/copy")
+        self.assertEqual(sh.fw_root(consumer), consumer / "HYAI")
+        self.assertIn("HYAI", sh.submodule_prefixes(consumer, sh.manifest(consumer)))
+
+    def test_consumer_submodule_mode_is_detected(self) -> None:
+        consumer = self._consumer(gitmodules=True)
+        self.assertEqual(sh.resolve_mode(consumer), "consumer/submodule")
+
+    def test_mode_does_not_change_path_resolution(self) -> None:
+        copy = self._consumer()
+        submodule = self._consumer(gitmodules=True)
+        self.assertEqual(sh.rel_posix(copy, sh.fw_root(copy)), sh.rel_posix(submodule, sh.fw_root(submodule)))
+        self.assertEqual(
+            sh.submodule_prefixes(copy, sh.manifest(copy)),
+            sh.submodule_prefixes(submodule, sh.manifest(submodule)),
+        )
 
 
 if __name__ == "__main__":

@@ -69,8 +69,7 @@ def main() -> int:
         return 2
 
     plan = build_plan(root, man, include_project=not args.skip_project)
-    env = os.environ.copy()
-    env[ENV_GUARD] = "1"
+    env = sh.child_env({ENV_GUARD: "1"})
 
     results: list[dict] = []
     failed = 0

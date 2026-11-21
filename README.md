@@ -126,6 +126,20 @@ git submodule add <repo-url> HYAI   # каркас целиком: core + шаб
 6. Собрать инструкции: `python3 HYAI/tools/assemble_agents.py --write`.
 7. Прогнать конвейер: `python3 HYAI/tools/run_checks.py`.
 
+## Три состояния установки
+
+Каркас работает в одном из трёх состояний; оно определяется структурой каталогов, а не флагом.
+
+| Состояние | Когда | Где данные |
+| --- | --- | --- |
+| `standalone` | репозиторий каркаса работает сам по себе (`HYAI/meta/manifest.yaml`) | `HYAI/meta/` |
+| `consumer/submodule` | каркас подключён сабмодулем в `HYAI/` | `./meta` |
+| `consumer/copy` | каркас скопирован каталогом `HYAI/` без сабмодуля | `./meta` |
+
+`consumer/submodule` и `consumer/copy` резолвят пути одинаково: `.gitmodules` различает только
+происхождение установки. Подробности и требования —
+[`HYAI/meta/architecture/autonomous-mode.md`](HYAI/meta/architecture/autonomous-mode.md).
+
 ## Быстрый старт
 
 ```bash

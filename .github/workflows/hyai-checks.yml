@@ -23,3 +23,20 @@ jobs:
         run: python3 HYAI/tools/run_checks.py --skip-project
       - name: Тесты каркаса
         run: python3 -m unittest discover -s HYAI/tools/tests -v
+
+  # REQ-AUT-02: автономный конвейер на корне без ./meta/manifest.yaml,
+  # без внешней PYTHONUTF8=1. Добавлено по одобрению владельца 2026-11-21.
+  standalone:
+    name: standalone (REQ-AUT-02)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Зависимости движков
+        run: python -m pip install --quiet pyyaml
+      - name: Standalone-раскладка (нет ./meta/manifest.yaml)
+        run: test ! -e ./meta/manifest.yaml
+      - name: Автономный конвейер проверок
+        run: python HYAI/tools/run_checks.py --skip-project

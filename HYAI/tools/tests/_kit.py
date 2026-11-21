@@ -18,12 +18,25 @@ import yaml
 ROOT = Path(__file__).resolve().parents[3]
 TOOLS = ROOT / "HYAI" / "tools"
 
+sys.path.insert(0, str(TOOLS))
+
+import _shared as sh  # noqa: E402
+
+#: Имена для пропуска при копировании. `Exports` (с большой буквы) — генерируемый каталог,
+#: а `exports` в `core/domains/cartography/atlases/` — исходные данные: на Windows
+#: `ignore_patterns("Exports")` из-за нечувствительности к регистру снимал и их.
+IGNORE_NAMES = {"__pycache__", ".git", "Exports"}
+
+
+def _ignore(_src: str, names: list[str]) -> set[str]:
+    return {name for name in names if name in IGNORE_NAMES or name.endswith(".pyc")}
+
 
 class KitCopy:
     def __init__(self) -> None:
         self._tmp = tempfile.TemporaryDirectory()
         self.root = Path(self._tmp.name) / "kit"
-        shutil.copytree(ROOT, self.root, ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".git", "Exports"))
+        shutil.copytree(ROOT, self.root, ignore=_ignore)
 
     # --- пути и чтение ---
     def path(self, rel: str) -> Path:
@@ -35,7 +48,9 @@ class KitCopy:
     def write(self, rel: str, text: str) -> Path:
         path = self.path(rel)
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(text, encoding="utf-8")
+        # Байты, а не write_text: на Windows текстовый режим переводит `\n` в `\r\n`,
+        # и тесты пробелов на конце строки перестают видеть хвостовые пробелы.
+        path.write_bytes(text.encode("utf-8"))
         return path
 
     def append(self, rel: str, text: str) -> None:
@@ -52,13 +67,13 @@ class KitCopy:
     def run(self, tool: str, *args: str) -> subprocess.CompletedProcess:
         return subprocess.run(
             [sys.executable, str(TOOLS / tool), "--root", str(self.root), *args],
-            capture_output=True, text=True, encoding="utf-8",
+            capture_output=True, text=True, encoding="utf-8", env=sh.child_env(),
         )
 
     def unittest(self) -> subprocess.CompletedProcess:
         return subprocess.run(
             [sys.executable, "-m", "unittest", "discover", "-s", str(self.root / "AI" / "tests")],
-            capture_output=True, text=True, encoding="utf-8", cwd=str(self.root),
+            capture_output=True, text=True, encoding="utf-8", cwd=str(self.root), env=sh.child_env(),
         )
 
     def close(self) -> None:

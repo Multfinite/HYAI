@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import fnmatch
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -17,6 +18,21 @@ from typing import Any, Iterable
 import yaml
 
 DEFAULT_ROOT = Path.cwd().resolve()
+
+
+def child_env(extra: dict | None = None) -> dict:
+    """Окружение дочерних Python-процессов с принудительным UTF-8.
+
+    На Windows дочерний Python при захваченном stdout пишет в кодировке консоли
+    (cp1251), и родитель, читающий UTF-8, падает на первом же русском символе.
+    `PYTHONUTF8=1` делает вывод предсказуемым, `PYTHONIOENCODING` подстрахует потоки.
+    """
+    env = os.environ.copy()
+    env["PYTHONUTF8"] = "1"
+    env.setdefault("PYTHONIOENCODING", "utf-8")
+    if extra:
+        env.update(extra)
+    return env
 
 
 def core_dir(root: Path) -> Path:
@@ -75,6 +91,26 @@ def manifest(root: Path) -> dict:
 def is_consumer_project(root: Path) -> bool:
     """True, когда каркас подключён к внешнему проекту (манифест лежит в ./meta/manifest.yaml)."""
     return (root / MANIFEST_RELS[0]).exists()
+
+
+def resolve_mode(root: Path) -> str:
+    """Состояние установки: `standalone`, `consumer/submodule` или `consumer/copy`.
+
+    Состояние выводится из файловой структуры, а не из поля конфигурации:
+    нет `./meta/manifest.yaml` — автономный репозиторий каркаса; иначе каркас
+    подключён к проекту. `.gitmodules` отличает сабмодуль от копии только как
+    признак происхождения: резолвинг путей от него не зависит.
+    """
+    if not is_consumer_project(root):
+        return "standalone"
+    rel = str(((manifest(root).get("framework") or {}).get("root") or "").replace("\\", "/").strip("/"))
+    gitmodules = root / ".gitmodules"
+    if gitmodules.is_file() and rel:
+        text = gitmodules.read_text(encoding="utf-8", errors="replace")
+        for match in re.finditer(r"^\s*path\s*=\s*(\S+)\s*$", text, re.M):
+            if match.group(1).replace("\\", "/").strip("/") == rel:
+                return "consumer/submodule"
+    return "consumer/copy"
 
 
 def fw_root(root: Path) -> Path:
