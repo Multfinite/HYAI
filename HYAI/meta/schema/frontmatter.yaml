@@ -87,7 +87,9 @@ skip_prefixes:
   - HYAI/core/intermediate
   # Генерируемое дерево Agent Skills: собирает HYAI/tools/build_skills.py, поля HYAI
   # у файлов навыка отсутствуют намеренно — это вход агентской оболочки, а не документ.
-  - .github/skills
+  - .claude/skills
+  # Агентские профили: вход агентской оболочки, не документ HYAI.
+  - .claude/agents
 
 # Файлы, которые не являются самостоятельными документами (фрагменты сборки и
 # генерируемые входы агентских оболочек: `SKILL.md` собирает HYAI/tools/build_skills.py).

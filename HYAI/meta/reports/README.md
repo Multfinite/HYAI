@@ -49,6 +49,7 @@ updated: "2026-11-07"
 | [`2026-11-07-action-output-protocol.md`](kit/2026-11-07-action-output-protocol.md) | `kit` | `kit/domain-builder` | `task` |
 | [`2026-11-07-body-refs-and-manual-photoreal.md`](picture/2026-11-07-body-refs-and-manual-photoreal.md) | `picture` | `picture/pipeline` | `task` |
 | [`2026-11-07-picture-precall-context.md`](kit/2026-11-07-picture-precall-context.md) | `kit` | `kit/domain-builder` | `task` |
+| [`2026-11-23-literary-agents-and-claude-skills.md`](kit/2026-11-23-literary-agents-and-claude-skills.md) | `kit` | `kit/domain-builder` | `task` |
 
 Новый отчёт обязан появиться в этой таблице (`HYAI-ART-13`): `check_report.py` сверяет индекс с файловой системой.
 

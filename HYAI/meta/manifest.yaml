@@ -235,7 +235,7 @@ permissions:
 # читают агентские оболочки. Источник правил — домен и AGENTS.md; сборка —
 # `python3 HYAI/tools/build_skills.py --check`.
 skills:
-  out: ".github/skills/"
+  out: ".claude/skills/"
   domain_prefix: "hyai-"
   router:
     name: "hyai"

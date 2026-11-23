@@ -47,7 +47,7 @@ updated: "2026-10-28"
 | Вопрос | Файл |
 | --- | --- |
 | Как агенту начать работу | [`AGENTS.md`](AGENTS.md) — генерируется из [`HYAI/core/kernel/agents.md`](HYAI/core/kernel/agents.md) |
-| Какие навыки поставляет каркас | [`.github/skills/hyai/SKILL.md`](.github/skills/hyai/SKILL.md) — собирается [`build_skills.py`](HYAI/tools/build_skills.py) |
+| Какие навыки поставляет каркас | [`.claude/skills/hyai/SKILL.md`](.claude/skills/hyai/SKILL.md) — собирается [`build_skills.py`](HYAI/tools/build_skills.py) |
 | Какой домен и профиль выбрать | [`HYAI/core/kernel/routing.md`](HYAI/core/kernel/routing.md) |
 | Что за проект | [`HYAI/meta/project.md`](HYAI/meta/project.md) |
 | Что нельзя делать никогда | [`HYAI/core/kernel/policies/permissions.md`](HYAI/core/kernel/policies/permissions.md) |
@@ -76,14 +76,14 @@ updated: "2026-10-28"
 
 ## Навыки агента (Agent Skills)
 
-Каркас поставляет `.github/skills/` — проекцию активных доменов и процедур в открытый стандарт
+Каркас поставляет `.claude/skills/` — проекцию активных доменов и процедур в открытый стандарт
 [Agent Skills](https://agentskills.io). `hyai` определяет домен и профиль, `hyai-<domain>` даёт
 профили, классы правил и проверки домена, `hyai-<domain>-<procedure>` активирует процесс с
 собственным триггером.
 
 | Что | Где |
 | --- | --- |
-| Каталог навыков | `.github/skills/` — генерируется, правки не вносятся |
+| Каталог навыков | `.claude/skills/` — генерируется, правки не вносятся |
 | Сборка и дрейф | `python3 HYAI/tools/build_skills.py --check` / `--write` |
 | Форма навыка | `HYAI/core/shared/templates/skill-*.md` |
 | Источники данных | `active` и `skills` манифеста, `profile.yaml`, `policy.md`, `when_to_use` процессов |

@@ -17,7 +17,7 @@ updated: "2026-10-22"
 | --- | --- | --- |
 | Профиль разбора `analysis` (общая часть) | [`profiles/analysis/`](profiles/analysis/profile.yaml) | `software/analysis`, `docs/analysis`, `narrative/analysis` |
 | Шаблон отчёта разбора | [`templates/analysis-report.md`](templates/analysis-report.md) | `report.templates.analysis` манифеста |
-| Авторские навыки внешних инструментов | [`skills/`](skills/) | `skills.authored` манифеста → `.github/skills/` |
+| Авторские навыки внешних инструментов | [`skills/`](skills/) | `skills.authored` манифеста → `.claude/skills/` |
 
 ## Почему профиль `analysis` остаётся в каждом домене
 
@@ -40,7 +40,7 @@ checklist:
 
 [`skills/`](skills/) — не проекция домена, а самостоятельный источник: знание о том, как
 пользоваться конкретным MCP-сервером, нельзя вывести из профилей и политик проекта. Каталог
-`<name>/SKILL.md` копируется в `.github/skills/` сборщиком
+`<name>/SKILL.md` копируется в `.claude/skills/` сборщиком
 [`build_skills.py`](../../tools/build_skills.py), поэтому дрейф и устаревшие навыки ловятся так же,
 как у генерируемых.
 

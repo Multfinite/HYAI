@@ -16,7 +16,7 @@ affects:
   - "HYAI/meta/manifest.yaml"
   - "HYAI/meta/schema/frontmatter.yaml"
   - ".github/workflows/hyai-checks.yml"
-  - ".github/skills"
+  - ".claude/skills"
   - "README.md"
   - "CHANGELOG.md"
 supersedes: null
@@ -26,7 +26,7 @@ supersedes: null
 
 ## Решение
 
-Каркас поставляет каталог навыков Agent Skills (`.github/skills/`) как **генерируемую проекцию**
+Каркас поставляет каталог навыков Agent Skills (`.claude/skills/`) как **генерируемую проекцию**
 активных доменов и процессов. Источник правил не переезжает: `AGENTS.md`, `policy.md`,
 `access.md`, `profile.yaml` и проверки остаются единственным местом, где норма живёт.
 
@@ -64,7 +64,7 @@ Agent Skills добавляют ровно один новый носитель 
 
 - Каталог навыков версионируется и проверяется на дрейф в `validation.assemble` и в CI, как
   `AGENTS.md`.
-- Схема frontmatter исключает `.github/skills` из проверки документов: `SKILL.md` — вход
+- Схема frontmatter исключает `.claude/skills` из проверки документов: `SKILL.md` — вход
   агентской оболочки, а не документ HYAI; поля `id/title/visibility` ему не принадлежат.
 - Формулировки навыков живут в `HYAI/core/shared/templates/skill-*.md` — это форма, а не норма,
   поэтому уточняются без решения `KIT-*`.
@@ -72,3 +72,8 @@ Agent Skills добавляют ровно один новый носитель 
   домена, а не каркаса.
 - Сокращение `AGENTS.md` этим решением не выполняется: навигация дублируется намеренно, пока
   новый вход не проверен на живых задачах. Отдельное решение должно снять дубль.
+
+## Уточнение (2026-11-23)
+
+Каталог навыков переехал в `.claude/skills/` (был `.github/skills/`); агентские профили лежат в
+`.claude/agents/`. Норма решения не изменилась.
