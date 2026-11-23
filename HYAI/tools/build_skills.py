@@ -322,7 +322,7 @@ def router_files(source: Source, domains: list[str]) -> dict[str, str]:
 
 
 def authored_files(source: Source) -> dict[str, str]:
-    """Копия авторских навыков: `<dir>/<name>/SKILL.md` → `.github/skills/<name>/SKILL.md`."""
+    """Копия авторских навыков: `<dir>/<name>/SKILL.md` → `.claude/skills/<name>/SKILL.md`."""
     rel = str(source.cfg.get("authored") or "")
     if not rel:
         return {}
