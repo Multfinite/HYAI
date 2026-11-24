@@ -90,6 +90,9 @@ skip_prefixes:
   - .claude/skills
   # Агентские профили: вход агентской оболочки, не документ HYAI.
   - .claude/agents
+  # Локальная копия .claude для OpenCode: те же входы агентской оболочки.
+  - .opencode/skills
+  - .opencode/agents
 
 # Файлы, которые не являются самостоятельными документами (фрагменты сборки и
 # генерируемые входы агентских оболочек: `SKILL.md` собирает HYAI/tools/build_skills.py).
