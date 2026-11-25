@@ -1,0 +1,126 @@
+# Источник матрицы агентов: архетип × зона ответственности × тип работы.
+# Правки вносятся сюда и в документы рядом; генерация:
+#   python3 HYAI/tools/build_agents.py --write
+version: 1
+
+archetypes:
+  developer:
+    name: Разработчик
+    summary: Реализует решения по принятым контрактам, пишет код и тесты.
+  architect:
+    name: Архитектор / инженер ПО
+    summary: Проектирует структуру, контракты и принимает технические решения.
+  researcher:
+    name: Исследователь
+    summary: Добывает проверенные факты и обоснования, не подменяет решения.
+  seeker:
+    name: Поисковик
+    summary: Находит и проверяет внешние источники по конкретному вопросу.
+  coordinator:
+    name: Координатор
+    summary: Декомпозирует цели, распределяет задачи и контролирует передачу контекста.
+  planner:
+    name: Планировщик
+    summary: Декомпозирует задачи по уровням и отделам, держит план работ.
+
+zones:
+  high:
+    name: Верхний уровень
+    behavior: domains/high-head.md
+  head:
+    name: Отдел (глава)
+    behavior: domains/head.md
+  sub:
+    name: Подотдел
+    behavior: domains/head.md
+  self:
+    name: Сам (рядовой)
+    behavior: domains/executor.md
+
+work_types:
+  synthesis:
+    name: Синтез
+    description: Прямая работа по профессии.
+  analysis:
+    name: Анализ
+    description: Ревью и проверка результатов других агентов.
+  fix:
+    name: Исправление ошибок
+    description: Точечное устранение найденных дефектов.
+  audit:
+    name: Аудит
+    description: Независимая финальная проверка соответствующего уровня.
+
+roles:
+  - id: kvu
+    name: КВУ — координатор верхнего уровня
+    archetype: coordinator
+    zone: high
+    work: synthesis
+    summary: Общение с пользователем, задачи верхнего уровня, контроль передачи контекста.
+  - id: pvu
+    name: ПВУ — планировщик верхнего уровня
+    archetype: planner
+    zone: high
+    work: synthesis
+    summary: Декомпозиция задач по отделам, консультации с КУО и ПУО.
+  - id: avu
+    name: АВУ — аудитор верхнего уровня
+    archetype: researcher
+    zone: high
+    work: audit
+    summary: Проверка общего результата строго после аудита отделов.
+  - id: seeker-general
+    name: ПОИСКОВИК ОБЩИЙ
+    archetype: seeker
+    zone: high
+    work: synthesis
+    summary: Поиск и проверка внешних источников для верхнего уровня.
+  - id: kuo
+    name: КУО — координатор уровня отдела
+    archetype: coordinator
+    zone: head
+    work: synthesis
+    summary: Координация своего отдела и запросы информации в других отделах.
+  - id: puo
+    name: ПУО — планировщик уровня отдела
+    archetype: planner
+    zone: head
+    work: synthesis
+    summary: Планирование работ отдела и эскалация ГЛАВЕ ОТДЕЛА.
+  - id: head
+    name: ГЛАВА ОТДЕЛА
+    archetype: architect
+    zone: head
+    work: synthesis
+    summary: Финальное слово в отделе, включается только при провале рядовых.
+  - id: executor
+    name: РЯДОВОЙ
+    archetype: developer
+    zone: self
+    work: synthesis
+    summary: Прямая работа по профессии внутри отдела.
+  - id: reviewer
+    name: РЕВЬЮЕР — рядовой в режиме анализа
+    archetype: developer
+    zone: self
+    work: analysis
+    summary: Проверка результатов другого рядового.
+  - id: fixer
+    name: БАГ-ФИКСЕР — рядовой в режиме исправления
+    archetype: developer
+    zone: self
+    work: fix
+    summary: Исправление дефектов, найденных в работе другого рядового.
+  - id: auditor-dept
+    name: АУДИТОР ОТДЕЛА
+    archetype: researcher
+    zone: head
+    work: audit
+    summary: Независимый аудит отдела перед отчётом вверх.
+  - id: seeker-dept
+    name: ПОИСКОВИК ОТДЕЛА
+    archetype: seeker
+    zone: head
+    work: synthesis
+    summary: Поиск и проверка источников строго по темам своего отдела.
