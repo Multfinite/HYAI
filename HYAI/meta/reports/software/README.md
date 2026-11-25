@@ -15,6 +15,6 @@ updated: "2026-10-22"
 
 | Отчёт | Профиль | Вид |
 | --- | --- | --- |
-| — | — | — |
+| [`2026-11-25-animationcore-integration.md`](2026-11-25-animationcore-integration.md) | `software/code` | `task` |
 
 Первая запись появляется с первой задачей домена; отчёт, отсутствующий в индексе `HYAI/meta/reports/README.md`, не проходит проверку (`HYAI-ART-13`).
