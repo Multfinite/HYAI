@@ -71,7 +71,7 @@ decisions:
 | S3+S5 review | Reviewer / QA / Bug Fixer | PASS; special ask по `ownsGunRender(...,true)` — оправдан |
 | S4 review | QA / Bug Fixer / Reviewer | PASS, P0 нет; 3×P1, P1-3 закрыт `bdff120` |
 | S7 review | QA / Bug Fixer | PASS, P0 нет; 2×P1 (doc/стенд) |
-| S6 review | QA / Bug Fixer | PASS, `HYAI-PERM-N01` нарушений нет; P1 `BreathSource` закрыт `cca77a0` |
+| S6 review | Reviewer / QA / Bug Fixer | PASS у всех; `HYAI-PERM-N01` нарушений нет; P1 `BreathSource` закрыт `cca77a0` |
 | run_checks | `python HYAI/HYAI/tools/run_checks.py --json` | измерено `18` проверок / `7` падений; все вне кода S1–S7 (assembly drift, frontmatter untracked-файлов, битые ссылки в чужих mods-доках, `affects` у untracked-копий `SW-0030/31`, индексы, `PIC-ERA-01`/`TZ-AC-*`, trailing whitespace в `mods/epicfight/bin`). Плановый baseline указан 4 — расхождение зафиксировано |
 
 ## Открытые вопросы
