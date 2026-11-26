@@ -9,10 +9,8 @@ status: review
 authority: none
 visibility: internal
 date: "2026-11-25"
-workflow: software/task
-decisions:
-  - SW-0030
-  - SW-0031
+workflow: task
+decisions: []
 ---
 
 # AnimationCore: интеграция срезов S0–S7
