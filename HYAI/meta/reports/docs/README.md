@@ -15,6 +15,6 @@ updated: "2026-10-22"
 
 | Отчёт | Профиль | Вид |
 | --- | --- | --- |
-| — | — | — |
+| [`2026-11-26-uml-14-diagrams.md`](2026-11-26-uml-14-diagrams.md) | `docs/diagrams` | `task` |
 
 Отчёт, которого нет в индексе `HYAI/meta/reports/README.md`, не проходит проверку (`HYAI-ART-13`).

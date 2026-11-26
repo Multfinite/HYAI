@@ -15,9 +15,9 @@ description: "Документы: ТЗ, спецификации, докумен
 
 | Класс | Правил |
 | --- | --- |
-| `DOC-POL` | 15 |
+| `DOC-POL` | 34 |
 
-Правил домена: 15.
+Правил домена: 34.
 
 Разделы политики:
 
@@ -25,9 +25,10 @@ description: "Документы: ТЗ, спецификации, докумен
 - 2. Читатель
 - 3. Согласованность
 - 4. Диаграммы
-- 5. Комментарии в коде
-- 6. Чистка текста
-- 7. Машинные проверки
+- 5. UML-диаграммы UML 2.5
+- 6. Комментарии в коде
+- 7. Чистка текста
+- 8. Машинные проверки
 
 Индекс по идентификаторам — [`references/rules.md`](references/rules.md); полный текст —
 [`policy.md`](../../../HYAI/core/domains/docs/policy.md).
@@ -56,6 +57,7 @@ description: "Документы: ТЗ, спецификации, докумен
 - [`HYAI/meta/project.md`](../../../HYAI/meta/project.md)
 - [`HYAI/meta/architecture/docs.md`](../../../HYAI/meta/architecture/docs.md)
 - [`HYAI/core/domains/docs/policy.md`](../../../HYAI/core/domains/docs/policy.md)
+- [`HYAI/core/domains/docs/uml.md`](../../../HYAI/core/domains/docs/uml.md)
 
 ## Границы
 

@@ -31,6 +31,7 @@ updated: "2026-10-22"
 | [`manifest.yaml`](manifest.yaml) | Каталоги домена, профили, проверки |
 | [`policy.md`](policy.md) | Правила `DOC-POL-01..15` |
 | [`text.md`](text.md) | Правила чистки документов `DOC-TXT-01..14`: требование, читатель, вода |
+| [`uml.md`](uml.md) | Регламент UML 2.5: 14 диаграмм, правила `DOC-POL-16..34` |
 | [`authority.md`](authority.md) | Уровни `normative / descriptive / illustrative / informative` |
 | [`schema/`](schema/README.md) | Машинные словари уровней и контуров |
 | [`access.md`](access.md) | Контуры доступа к документам |

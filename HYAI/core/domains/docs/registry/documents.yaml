@@ -4,6 +4,7 @@ read_first:
   - "HYAI/meta/project.md"
   - "HYAI/meta/architecture/docs.md"
   - "HYAI/core/domains/docs/policy.md"
+  - "HYAI/core/domains/docs/uml.md"
 documents:
   - id: doc.text
     path: "HYAI/core/domains/docs/text.md"
@@ -20,6 +21,11 @@ documents:
     type: meta
     authority: invariant
     why: "чем normative отличается от descriptive"
+  - id: doc.uml
+    path: "HYAI/core/domains/docs/uml.md"
+    type: reference
+    authority: contract
+    why: "регламент UML 2.5: общий каркас и 14 типов диаграмм (DOC-POL-16..34)"
   - id: doc.templates
     path: "HYAI/core/domains/docs/templates/README.md"
     type: meta
