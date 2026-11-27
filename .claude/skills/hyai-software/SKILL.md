@@ -46,7 +46,7 @@ description: "Разработка программного обеспечени
 
 - `python3 HYAI/tools/lint_terms.py --domain software`
 
-Перед завершением — `python3 HYAI/tools/run_checks.py`.
+Перед завершением — проверки по зоне правки (`HYAI-INT-31`); полный конвейер — только по необходимости.
 
 ## Читать первым
 

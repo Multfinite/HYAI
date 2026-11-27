@@ -27,3 +27,4 @@ updated: "2026-11-01"
 | [`KIT-0008`](KIT-0008-skills-projection.md) | Навыки Agent Skills как генерируемая проекция доменов и профилей | approved |
 
 | [`KIT-0009`](KIT-0009-tool-skills.md) | Навыки внешних инструментов: по серверу и по пространству данных | approved |
+| [`KIT-0010`](KIT-0010-run-checks-scope.md) | Проверки соразмерны правке: полный run_checks только по необходимости | approved |
