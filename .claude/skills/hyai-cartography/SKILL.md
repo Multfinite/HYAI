@@ -43,7 +43,7 @@ description: "Планетарные атласы и векторная карт
 - `python3 HYAI/tools/lint_terms.py --domain cartography`
 - `python3 HYAI/tools/lint_scopes.py --domain cartography`
 
-Перед завершением — `python3 HYAI/tools/run_checks.py`.
+Перед завершением — проверки по зоне правки (`HYAI-INT-31`); полный конвейер — только по необходимости.
 
 ## Читать первым
 

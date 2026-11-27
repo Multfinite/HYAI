@@ -57,7 +57,7 @@ description: "Литература: мир, хронология, текст. П
 - `python3 HYAI/tools/lint_scopes.py --domain narrative`
 - `python3 HYAI/tools/build_export.py --domain narrative --preset public --dry-run`
 
-Перед завершением — `python3 HYAI/tools/run_checks.py`.
+Перед завершением — проверки по зоне правки (`HYAI-INT-31`); полный конвейер — только по необходимости.
 
 ## Читать первым
 

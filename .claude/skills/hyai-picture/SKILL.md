@@ -60,7 +60,7 @@ description: "Генерация изображений и визуальных 
 - `python3 HYAI/tools/build_export.py --domain picture --preset public --dry-run`
 - `python3 HYAI/core/domains/picture/tools/check_cepi.py --discover`
 
-Перед завершением — `python3 HYAI/tools/run_checks.py`.
+Перед завершением — проверки по зоне правки (`HYAI-INT-31`); полный конвейер — только по необходимости.
 
 ## Читать первым
 

@@ -28,5 +28,6 @@ updated: "2026-11-23"
 | [`2026-11-07-action-output-protocol.md`](2026-11-07-action-output-protocol.md) | `kit/domain-builder` | `task` |
 | [`2026-11-07-picture-precall-context.md`](2026-11-07-picture-precall-context.md) | `kit/domain-builder` | `task` |
 | [`2026-11-23-literary-agents-and-claude-skills.md`](2026-11-23-literary-agents-and-claude-skills.md) | `kit/domain-builder` | `task` |
+| [`2026-11-27-run-checks-scope.md`](2026-11-27-run-checks-scope.md) | `kit/domain-builder` | `task` |
 
 | [2026-11-08-ear-remediation-transfer.md](2026-11-08-ear-remediation-transfer.md) | kit/domain-builder | task — опыт ушей, ear/1 и регрессия |

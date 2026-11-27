@@ -44,7 +44,7 @@ description: "Каркас: создание доменов и профилей.
 - `python3 HYAI/tools/check_domains.py`
 - `python3 HYAI/tools/check_manifest.py`
 
-Перед завершением — `python3 HYAI/tools/run_checks.py`.
+Перед завершением — проверки по зоне правки (`HYAI-INT-31`); полный конвейер — только по необходимости.
 
 ## Читать первым
 
